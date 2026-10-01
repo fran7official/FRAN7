@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =====================================================
+         ÍCONE DA ABA DO NAVEGADOR — FRAN7
+    ===================================================== -->
+
+    <link rel="icon" type="image/png" href="logoo.png.png">
+    <link rel="shortcut icon" type="image/png" href="logoo.png.png">
+    <link rel="apple-touch-icon" href="logoo.png.png">
+
+    <title>FRAN7| LOJA</title>
+
+    <style>
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            color-scheme: light dark;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease;
+        }
+
+        /* =====================================================
+           TELA DE CARREGAMENTO
+        ===================================================== */
+
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 99999;
+
+            transition:
+                opacity 0.8s ease,
+                visibility 0.8s ease;
+        }
+
+        #loading-screen.saindo {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            width: 180px;
+            max-width: 65vw;
+
+            filter: brightness(0);
+
+            animation:
+                logoZoom
+                5s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes logoZoom {
+
+            0% {
+                opacity: 0.70;
+                transform: scale(0.88);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+
+            100% {
+                opacity: 0.70;
+                transform: scale(0.88);
+            }
+
+        }
+
+        /* =====================================================
+           TEMA ESCURO
+        ===================================================== */
+
+        @media (prefers-color-scheme: dark) {
+
+            body {
+                background: #000;
+                color: #fff;
+            }
+
+            header {
+                background: rgba(0,0,0,0.90);
+                border-bottom: 1px solid #151515;
+            }
+
+            .logo {
+                filter: brightness(0) invert(1);
+            }
+
+            .menu {
+                background: rgba(10,10,10,0.98);
+                border-color: #333;
+            }
+
+            .menu a {
+                color: #fff;
+            }
+
+            .menu a:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .link-utilizador {
+                color: #fff;
+            }
+
+            .link-utilizador:hover {
+                border-color: #444;
+                background: #111;
+            }
+
+            .botao-parceria {
+                color: #fff;
+            }
+
+            .menu-btn {
+                color: #fff;
+            }
+
+            .hero {
+                background:
+                    radial-gradient(
+                        circle at center,
+                        #1b1b1b 0%,
+                        #050505 55%
+                    );
+            }
+
+            .hero-label {
+                color: #999;
+            }
+
+            .hero p {
+                color: #aaa;
+            }
+
+            .imagem-colecao {
+                border-color: #292929;
+
+                box-shadow:
+                    0 25px 80px
+                    rgba(0,0,0,0.55);
+            }
+
+            .botao {
+                border-color: #fff;
+                color: #fff;
+            }
+
+            .botao:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .categorias,
+            .produtos,
+            .catalogo {
+                border-color: #1c1c1c;
+            }
+
+            .categoria {
+                border-color: #2c2c2c;
+
+                background:
+                    linear-gradient(
+                        145deg,
+                        #111,
+                        #080808
+                    );
+            }
+
+            .categoria:hover {
+                border-color: #fff;
+            }
+
+            .categoria span {
+                color: #777;
+            }
+
+            .produto {
+                background: #0d0d0d;
+                border-color: #252525;
+            }
+
+            .produto:hover {
+                border-color: #555;
+            }
+
+            .produto-imagem {
+                background:
+                    linear-gradient(
+                        135deg,
+                        #191919,
+                        #090909
+                    );
+
+                color: #fff;
+            }
+
+            .produto-tag {
+                color: #777;
+            }
+
+            .produto-info p {
+                color: #888;
+            }
+
+            .botao-produto {
+                color: #fff;
+                border-color: #444;
+            }
+
+            .botao-produto:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .catalogo {
+                background: #080808;
+            }
+
+            .catalogo p {
+                color: #999;
+            }
+
+            .redes {
+                border-color: #222;
+            }
+
+            .redes p {
+                color: #888;
+            }
+
+            footer {
+                border-color: #222;
+                color: #666;
+            }
+
+            .overlay-registo {
+                background:
+                    rgba(0,0,0,0.70);
+            }
+
+            .aviso-registo {
+                background:
+                    linear-gradient(
+                        145deg,
+                        #151515,
+                        #050505
+                    );
+
+                border-color: #3a3a3a;
+            }
+
+            .fechar-aviso {
+                background: #202020;
+                color: #fff;
+            }
+
+            .fechar-aviso:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .icone-registo {
+                border-color: #555;
+                background: #101010;
+            }
+
+            .aviso-registo p {
+                color: #999;
+            }
+
+            .btn-registar {
+                background: #fff;
+                color: #000;
+            }
+
+            .btn-continuar {
+                color: #777;
+            }
+
+            .btn-continuar:hover {
+                color: #fff;
+            }
+
+        }
+
+        /* =====================================================
+           TEMA CLARO
+        ===================================================== */
+
+        @media (prefers-color-scheme: light) {
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            header {
+                background: rgba(255,255,255,0.94);
+                border-bottom: 1px solid #ddd;
+            }
+
+            .logo {
+                filter: brightness(0);
+            }
+
+            .menu {
+                background: #fff;
+                border-color: #ddd;
+
+                box-shadow:
+                    0 20px 60px
+                    rgba(0,0,0,0.12);
+            }
+
+            .menu a {
+                color: #000;
+            }
+
+            .menu a:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .link-utilizador {
+                color: #000;
+            }
+
+            .link-utilizador:hover {
+                border-color: #ddd;
+                background: #f5f5f5;
+            }
+
+            .botao-parceria {
+                color: #000;
+            }
+
+            .menu-btn {
+                color: #000;
+            }
+
+            .hero {
+                background:
+                    radial-gradient(
+                        circle at center,
+                        #f5f5f5 0%,
+                        #fff 60%
+                    );
+            }
+
+            .hero-label {
+                color: #777;
+            }
+
+            .hero p {
+                color: #666;
+            }
+
+            .imagem-colecao {
+                border-color: #ddd;
+
+                box-shadow:
+                    0 25px 80px
+                    rgba(0,0,0,0.12);
+            }
+
+            .botao {
+                border-color: #000;
+                color: #000;
+            }
+
+            .botao:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .categorias,
+            .produtos,
+            .catalogo {
+                border-color: #ddd;
+            }
+
+            .categoria {
+                border-color: #ddd;
+                background: #fff;
+            }
+
+            .categoria:hover {
+                border-color: #000;
+                background: #f2f2f2;
+            }
+
+            .categoria span {
+                color: #777;
+            }
+
+            .produto {
+                background: #fff;
+                border-color: #ddd;
+            }
+
+            .produto:hover {
+                border-color: #999;
+            }
+
+            .produto-imagem {
+                background: #f5f5f5;
+                color: #000;
+            }
+
+            .produto-tag {
+                color: #777;
+            }
+
+            .produto-info p {
+                color: #666;
+            }
+
+            .botao-produto {
+                color: #000;
+                border-color: #bbb;
+            }
+
+            .botao-produto:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .catalogo {
+                background: #fff;
+            }
+
+            .catalogo p {
+                color: #666;
+            }
+
+            .redes {
+                border-color: #ddd;
+            }
+
+            .redes p {
+                color: #666;
+            }
+
+            footer {
+                border-color: #ddd;
+                color: #777;
+            }
+
+            .overlay-registo {
+                background:
+                    rgba(255,255,255,0.70);
+            }
+
+            .aviso-registo {
+                background:
+                    linear-gradient(
+                        145deg,
+                        #fff,
+                        #f5f5f5
+                    );
+
+                border-color: #ddd;
+
+                box-shadow:
+                    0 30px 100px
+                    rgba(0,0,0,0.18);
+            }
+
+            .fechar-aviso {
+                background: #eee;
+                color: #000;
+            }
+
+            .fechar-aviso:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .icone-registo {
+                border-color: #ccc;
+                background: #f5f5f5;
+            }
+
+            .aviso-registo p {
+                color: #666;
+            }
+
+            .btn-registar {
+                background: #000;
+                color: #fff;
+            }
+
+            .btn-continuar {
+                color: #777;
+            }
+
+            .btn-continuar:hover {
+                color: #000;
+            }
+
+        }
+
+        /* =====================================================
+           CABEÇALHO
+        ===================================================== */
+
+        header {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 20px 40px;
+
+            z-index: 1000;
+
+            backdrop-filter: blur(15px);
+        }
+
+        /* =====================================================
+           LOGOTIPO
+        ===================================================== */
+
+        .logo {
+
+            content: url("images/logo.png.png");
+
+            position: absolute;
+
+            top: 20px;
+            left: 40px;
+
+            width: 150px;
+            height: auto;
+
+            display: block;
+
+            z-index: 1001;
+
+            animation:
+                entradaLogo
+                1.5s
+                ease-out;
+        }
+
+        @keyframes entradaLogo {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* =====================================================
+           ÁREA DO UTILIZADOR
+        ===================================================== */
+
+        .area-utilizador {
+            position: absolute;
+
+            right: 125px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .link-utilizador {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 10px 13px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 0.5px;
+
+            border: 1px solid transparent;
+            border-radius: 30px;
+
+            transition: 0.3s ease;
+
+            white-space: nowrap;
+        }
+
+        .icone-utilizador {
+            font-size: 19px;
+        }
+
+        /* =====================================================
+           CORAÇÃO
+        ===================================================== */
+
+        .botao-parceria {
+            position: absolute;
+
+            right: 72px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            z-index: 1002;
+        }
+
+        .icone-amigos {
+            font-size: 27px;
+
+            animation:
+                movimentoAmigos
+                1.5s
+                ease-in-out
+                infinite;
+        }
+
+        .notificacao-parceria {
+            position: absolute;
+
+            top: -2px;
+            right: -1px;
+
+            width: 19px;
+            height: 19px;
+
+            background: #00d26a;
+            color: #fff;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+            font-weight: 900;
+
+            box-shadow:
+                0 0 0 2px #000,
+                0 0 12px
+                rgba(0,210,106,0.7);
+        }
+
+        @keyframes movimentoAmigos {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+
+        }
+
+        /* =====================================================
+           BOTÃO MENU
+        ===================================================== */
+
+        .menu-btn {
+            position: absolute;
+
+            right: 25px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            background: transparent;
+
+            border: 0;
+
+            font-size: 32px;
+
+            cursor: pointer;
+
+            z-index: 1002;
+
+            transition: 0.3s;
+        }
+
+        .menu-btn:hover {
+            transform:
+                translateY(-50%)
+                scale(1.1);
+        }
+
+        /* =====================================================
+           MENU
+        ===================================================== */
+
+        .menu {
+            display: none;
+
+            position: absolute;
+
+            right: 25px;
+            top: 75px;
+
+            width: 235px;
+
+            border: 1px solid;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.6);
+        }
+
+        .menu.aberto {
+            display: block;
+
+            animation:
+                menuEntrada
+                0.25s
+                ease-out;
+        }
+
+        @keyframes menuEntrada {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(-10px)
+                    scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+        .menu a {
+            display: block;
+
+            text-decoration: none;
+
+            padding: 17px 20px;
+
+            transition: 0.25s;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 100vh;
+
+            padding:
+                140px 25px 90px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .hero-label {
+            font-size: 13px;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 20px;
+
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 19px;
+
+            line-height: 1.7;
+
+            max-width: 650px;
+
+            margin:
+                0 auto 38px;
+        }
+
+        .imagem-colecao {
+            width: 100%;
+            max-width: 700px;
+
+            height: 800px;
+
+            object-fit: cover;
+
+            display: block;
+
+            margin:
+                0 auto 40px;
+
+            border-radius: 25px;
+
+            transition: 0.5s;
+        }
+
+        .imagem-colecao:hover {
+            transform: scale(1.015);
+        }
+
+        .botao {
+            display: inline-block;
+
+            padding:
+                16px 36px;
+
+            border:
+                1px solid;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            transition: 0.3s;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           SEÇÕES
+        ===================================================== */
+
+        .categorias,
+        .produtos,
+        .catalogo {
+            padding:
+                110px 25px;
+
+            border-top:
+                1px solid;
+        }
+
+        .titulo {
+            text-align: center;
+
+            font-size: 42px;
+
+            margin-bottom: 55px;
+
+            letter-spacing: 2px;
+        }
+
+        .subtitulo {
+            text-align: center;
+
+            margin-top: -35px;
+
+            margin-bottom: 50px;
+        }
+
+        /* =====================================================
+           CATEGORIAS
+        ===================================================== */
+
+        .categorias-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 20px;
+        }
+
+        .categoria {
+            min-height: 210px;
+
+            border:
+                1px solid;
+
+            border-radius: 22px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            transition:
+                0.35s;
+
+            cursor: pointer;
+        }
+
+        .categoria:hover {
+            transform:
+                translateY(-8px);
+        }
+
+        .categoria span {
+            display: block;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 12px;
+        }
+
+        .categoria h3 {
+            font-size: 26px;
+        }
+
+        /* =====================================================
+           PRODUTOS
+        ===================================================== */
+
+        .produtos-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 25px;
+        }
+
+        .produto {
+            border:
+                1px solid;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            transition:
+                0.35s;
+        }
+
+        .produto:hover {
+            transform:
+                translateY(-8px);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.35);
+        }
+
+        .produto-imagem {
+            height: 300px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 13px;
+
+            overflow: hidden;
+        }
+
+        .produto-imagem img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+        .produto-info {
+            padding: 25px;
+        }
+
+        .produto-tag {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .produto-info h3 {
+            margin-bottom: 10px;
+
+            font-size: 21px;
+        }
+
+        .produto-info p {
+            margin-bottom: 18px;
+        }
+
+        .preco {
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .botao-produto {
+            display: inline-block;
+
+            padding:
+                12px 23px;
+
+            border:
+                1px solid;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition:
+                0.3s;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           CATÁLOGO
+        ===================================================== */
+
+        .catalogo {
+            text-align: center;
+        }
+
+        .catalogo p {
+            margin:
+                15px auto 35px;
+
+            max-width: 650px;
+
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           REDES / CONTACTOS
+        ===================================================== */
+
+        .redes {
+            padding:
+                80px 25px;
+
+            border-top:
+                1px solid;
+
+            text-align: center;
+        }
+
+        .redes h2 {
+            font-size: 32px;
+
+            margin-bottom: 12px;
+        }
+
+        .redes p {
+            margin-bottom: 35px;
+        }
+
+        .redes-grid {
+            max-width: 850px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 18px;
+        }
+
+        .rede {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            min-height: 65px;
+
+            border-radius: 15px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition:
+                0.3s;
+        }
+
+        .rede:hover {
+            transform:
+                translateY(-5px);
+        }
+
+        .rede-instagram {
+            background:
+                linear-gradient(
+                    45deg,
+                    #feda75,
+                    #fa7e1e,
+                    #d62976,
+                    #962fbf,
+                    #4f5bd5
+                );
+        }
+
+        .rede-whatsapp {
+            background: #25D366;
+        }
+
+        .rede-email {
+            background: #EA4335;
+        }
+
+        .icone {
+            font-size: 24px;
+        }
+
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        .slogan-final {
+            text-align: center;
+
+            padding:
+                70px 20px 35px;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            letter-spacing: 6px;
+        }
+
+        footer {
+            border-top:
+                1px solid;
+
+            padding:
+                45px 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           NOTIFICAÇÃO DE REGISTO
+        ===================================================== */
+
+        .overlay-registo {
+            position: fixed;
+
+            inset: 0;
+
+            backdrop-filter:
+                blur(8px);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 5000;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                0.4s ease;
+        }
+
+        .overlay-registo.ativo {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .aviso-registo {
+            position: relative;
+
+            width: 100%;
+
+            max-width: 480px;
+
+            border:
+                1px solid;
+
+            border-radius: 28px;
+
+            padding:
+                42px 32px;
+
+            text-align: center;
+
+            transform:
+                translateY(35px)
+                scale(0.94);
+
+            transition:
+                0.45s
+                cubic-bezier(
+                    .2,.8,.2,1
+                );
+        }
+
+        .overlay-registo.ativo
+        .aviso-registo {
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+        .fechar-aviso {
+            position: absolute;
+
+            top: 14px;
+            right: 16px;
+
+            width: 38px;
+            height: 38px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            transition:
+                0.3s;
+        }
+
+        .fechar-aviso:hover {
+            transform:
+                rotate(90deg);
+        }
+
+        .icone-registo {
+            width: 72px;
+            height: 72px;
+
+            margin:
+                0 auto 22px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+
+            border:
+                1px solid;
+
+            animation:
+                pulsarRegisto
+                2s
+                infinite;
+        }
+
+        @keyframes pulsarRegisto {
+
+            0% {
+                box-shadow:
+                    0 0 0 0
+                    rgba(255,255,255,0.15);
+            }
+
+            70% {
+                box-shadow:
+                    0 0 0 15px
+                    rgba(255,255,255,0);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 0 0
+                    rgba(255,255,255,0);
+            }
+
+        }
+
+        .aviso-registo h2 {
+            font-size: 27px;
+
+            margin-bottom: 15px;
+        }
+
+        .aviso-registo p {
+            line-height: 1.7;
+
+            font-size: 15px;
+
+            margin-bottom: 28px;
+        }
+
+        .botoes-aviso {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .btn-registar {
+            display: block;
+
+            width: 100%;
+
+            padding:
+                15px;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition:
+                0.3s;
+        }
+
+        .btn-registar:hover {
+            transform:
+                translateY(-3px);
+        }
+
+        .btn-continuar {
+            border: 0;
+
+            background: transparent;
+
+            padding: 12px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .area-utilizador {
+                right: 105px;
+            }
+
+            .link-utilizador {
+                padding:
+                    8px 7px;
+            }
+
+            .categorias-grid,
+            .produtos-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                height: 90px;
+
+                padding:
+                    14px 18px;
+            }
+
+            .logo {
+                width: 120px;
+
+                top: 15px;
+                left: 18px;
+            }
+
+            .area-utilizador {
+                right: 105px;
+
+                gap: 3px;
+            }
+
+            .link-utilizador {
+                font-size: 0;
+
+                padding: 9px;
+            }
+
+            .link-utilizador
+            .icone-utilizador {
+                font-size: 20px;
+            }
+
+            .botao-parceria {
+                right: 60px;
+            }
+
+            .menu-btn {
+                right: 15px;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .imagem-colecao {
+                height: 380px;
+            }
+
+            .categorias-grid,
+            .produtos-grid,
+            .redes-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .titulo {
+                font-size: 34px;
+            }
+
+            .slogan-final {
+                font-size: 16px;
+
+                letter-spacing: 3px;
+            }
+
+        }
+
+        /* =====================================================
+           REDUÇÃO DE MOVIMENTO
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .loading-logo,
+            .logo,
+            .icone-amigos,
+            .icone-registo {
+                animation: none !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         CARREGAMENTO
+    ===================================================== -->
+
+    <div id="loading-screen">
+
+        <img
+            src="images/logo.png.png"
+            alt="FRAN7"
+            class="loading-logo"
+        >
+
+    </div>
+
+    <!-- =====================================================
+         CABEÇALHO
+    ===================================================== -->
+
+    <header>
+
+        <img
+            src="images/logo.png.png"
+            alt="FRAN7"
+            class="logo"
+        >
+
+        <!-- UTILIZADOR -->
+
+        <div class="area-utilizador">
+
+            <!-- CADASTRO -->
+
+            <a
+                href="registo.html"
+                class="link-utilizador"
+                title="Registar-se"
+            >
+
+                <span class="icone-utilizador">
+                    👤
+                </span>
+
+                <span>
+                    Registar-se
+                </span>
+
+            </a>
+
+            <!-- LOGIN -->
+
+            <a
+                href="login.html"
+                class="link-utilizador"
+                title="Iniciar sessão"
+            >
+
+                <span class="icone-utilizador">
+                    ↪
+                </span>
+
+                <span>
+                    Iniciar sessão
+                </span>
+
+            </a>
+
+        </div>
+
+        <!-- =================================================
+             CORAÇÃO
+        ================================================== -->
+
+        <a
+            href="http://www.youtube.com/@AdelinoSabino-ez5zp"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="botao-parceria"
+            aria-label="Voz Visionárias Podcast"
+        >
+
+            <span class="icone-amigos">
+                ♡
+            </span>
+
+            <span class="notificacao-parceria">
+                1
+            </span>
+
+        </a>
+
+        <!-- MENU -->
+
+        <button
+            class="menu-btn"
+            onclick="abrirMenu()"
+            aria-label="Abrir menu"
+        >
+            ⋮
+        </button>
+
+        <nav
+            class="menu"
+            id="menu"
+        >
+
+            <!-- VOLTAR PARA A PÁGINA PRINCIPAL -->
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <!-- ÁREAS PROTEGIDAS -->
+
+            <a
+                href="#categorias"
+                data-protegido="true"
+            >
+                Categorias
+            </a>
+
+            <a
+                href="#produtos"
+                data-protegido="true"
+            >
+                Produtos
+            </a>
+
+            <a
+                href="#catalogo"
+                data-protegido="true"
+            >
+                Catálogo
+            </a>
+
+            <!-- CONTACTOS LIVRES -->
+
+            <a href="#contactos">
+                Contactos
+            </a>
+
+            <!-- CADASTRO -->
+
+            <a href="registo.html">
+                Registar-se
+            </a>
+
+            <!-- LOGIN -->
+
+            <a href="login.html">
+                Iniciar sessão
+            </a>
+
+        </nav>
+
+    </header>
+
+    <!-- =====================================================
+         INÍCIO
+    ===================================================== -->
+
+    <section
+        class="hero"
+        id="inicio"
+    >
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                FRAN7 — BUILD YOUR LEGACY
+            </div>
+
+            <p>
+                Uma coleção criada para acompanhar
+                o teu estilo, a tua energia e a tua evolução.
+            </p>
+
+            <img
+                src="images/colecao.jpg.jpeg"
+                alt="Coleção FRAN7"
+                class="imagem-colecao"
+            >
+
+            <a
+                href="#produtos"
+                class="botao"
+                data-protegido="true"
+            >
+                EXPLORAR COLEÇÃO
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         CATEGORIAS
+    ===================================================== -->
+
+    <section
+        class="categorias"
+        id="categorias"
+    >
+
+        <h2 class="titulo">
+            CATEGORIAS
+        </h2>
+
+        <p class="subtitulo">
+            Encontra o teu próximo estilo.
+        </p>
+
+        <div class="categorias-grid">
+
+            <div
+                class="categoria"
+                data-protegido="true"
+            >
+
+                <div>
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        ROUPAS
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div
+                class="categoria"
+                data-protegido="true"
+            >
+
+                <div>
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        SAPATOS
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div
+                class="categoria"
+                data-protegido="true"
+            >
+
+                <div>
+
+                    <span>
+                        03
+                    </span>
+
+                    <h3>
+                        ACESSÓRIOS
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         PRODUTOS
+    ===================================================== -->
+
+    <section
+        class="produtos"
+        id="produtos"
+    >
+
+        <h2 class="titulo">
+            DESTAQUES
+        </h2>
+
+        <p class="subtitulo">
+            Peças selecionadas da FRAN7.
+        </p>
+
+        <div class="produtos-grid">
+
+            <!-- PRODUTO 1 -->
+
+            <div
+                class="produto"
+                data-protegido="true"
+            >
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="images/1.jpg.jpeg"
+                        alt="T-shirt FRAN7"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <div class="produto-tag">
+                        FRAN7 COLLECTION
+                    </div>
+
+                    <h3>
+                        PRODUTO FRAN7
+                    </h3>
+
+                    <p>
+                        Nova coleção
+                    </p>
+
+                    <div class="preco">
+                        8.500 Kz
+                    </div>
+
+                    <a
+                        href="#"
+                        class="botao-produto"
+                        data-protegido="true"
+                    >
+                        VER PRODUTO
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- PRODUTO 2 -->
+
+            <div
+                class="produto"
+                data-protegido="true"
+            >
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="images/2.jpg.jpeg"
+                        alt="T-shirt FRAN7"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <div class="produto-tag">
+                        FRAN7 COLLECTION
+                    </div>
+
+                    <h3>
+                        PRODUTO FRAN7
+                    </h3>
+
+                    <p>
+                        Nova coleção
+                    </p>
+
+                    <div class="preco">
+                        7.000 Kz
+                    </div>
+
+                    <a
+                        href="#"
+                        class="botao-produto"
+                        data-protegido="true"
+                    >
+                        VER PRODUTO
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- PRODUTO 3 -->
+
+            <div
+                class="produto"
+                data-protegido="true"
+            >
+
+                <div class="produto-imagem">
+
+                    IMAGEM DO PRODUTO
+
+                </div>
+
+                <div class="produto-info">
+
+                    <div class="produto-tag">
+                        FRAN7 COLLECTION
+                    </div>
+
+                    <h3>
+                        PRODUTO FRAN7
+                    </h3>
+
+                    <p>
+                        Nova coleção
+                    </p>
+
+                    <div class="preco">
+                        7.000 Kz
+                    </div>
+
+                    <a
+                        href="#"
+                        class="botao-produto"
+                        data-protegido="true"
+                    >
+                        VER PRODUTO
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         CATÁLOGO
+    ===================================================== -->
+
+    <section
+        class="catalogo"
+        id="catalogo"
+    >
+
+        <h2 class="titulo">
+            DESCUBRA A FRAN7
+        </h2>
+
+        <p>
+            Explora os nossos produtos e descobre
+            os próximos lançamentos da FRAN7.
+        </p>
+
+        <a
+            href="#produtos"
+            class="botao"
+            data-protegido="true"
+        >
+            VER CATÁLOGO
+        </a>
+
+    </section>
+
+    <!-- =====================================================
+         CONTACTOS
+    ===================================================== -->
+
+    <section
+        class="redes"
+        id="contactos"
+    >
+
+        <h2>
+            FALA CONNOSCO
+        </h2>
+
+        <p>
+            Encontra a FRAN7 nas nossas plataformas.
+        </p>
+
+        <div class="redes-grid">
+
+            <a
+                href="https://instagram.com/fran7.official"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rede rede-instagram"
+            >
+
+                <span class="icone">
+                    ◎
+                </span>
+
+                <span>
+                    Instagram
+                </span>
+
+            </a>
+
+            <a
+                href="https://wa.me/244973560521"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rede rede-whatsapp"
+            >
+
+                <span class="icone">
+                    ◉
+                </span>
+
+                <span>
+                    WhatsApp
+                </span>
+
+            </a>
+
+            <a
+                href="mailto:fran7officiall@EMAIL.COM"
+                class="rede rede-email"
+            >
+
+                <span class="icone">
+                    ✉
+                </span>
+
+                <span>
+                    E-mail
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         RODAPÉ
+    ===================================================== -->
+
+    <div class="slogan-final">
+        BUILD YOUR LEGACY
+    </div>
+
+    <footer>
+
+        © 2026
+        <strong>FRAN7</strong>
+        —
+        Todos os direitos reservados.
+
+    </footer>
+
+    <!-- =====================================================
+         AVISO DE REGISTO / LOGIN
+    ===================================================== -->
+
+    <div
+        class="overlay-registo"
+        id="overlayRegisto"
+    >
+
+        <div class="aviso-registo">
+
+            <button
+                class="fechar-aviso"
+                onclick="fecharAviso()"
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+
+            <div class="icone-registo">
+                👤
+            </div>
+
+            <h2>
+                Bem-vindo à FRAN7
+            </h2>
+
+            <p>
+                Cria a tua conta FRAN7 para continuar.
+                O cadastro é necessário para explorar
+                produtos, categorias, catálogo e outras
+                funcionalidades da loja.
+            </p>
+
+            <div class="botoes-aviso">
+
+                <!--
+                    CADASTRO
+                    Vai diretamente para registo.html
+                -->
+
+                <a
+                    href="registo.html"
+                    class="btn-registar"
+                >
+                    REGISTAR-SE AGORA
+                </a>
+
+                <!--
+                    LOGIN
+                    Vai diretamente para login.html
+                -->
+
+                <a
+                    href="login.html"
+                    class="btn-continuar"
+                    style="
+                        text-decoration:none;
+                        display:block;
+                    "
+                >
+                    Já tenho uma conta
+                </a>
+
+                <!--
+                    CONTINUAR NA PÁGINA PRINCIPAL
+                -->
+
+                <button
+                    class="btn-continuar"
+                    onclick="fecharAviso()"
+                >
+                    Continuar a explorar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           MENU
+        ===================================================== */
+
+        function abrirMenu() {
+
+            const menu =
+                document.getElementById("menu");
+
+            menu.classList.toggle("aberto");
+
+        }
+
+        /* =====================================================
+           AVISO DE REGISTO / LOGIN
+        ===================================================== */
+
+        function mostrarAviso() {
+
+            const aviso =
+                document.getElementById(
+                    "overlayRegisto"
+                );
+
+            aviso.classList.add(
+                "ativo"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+        function fecharAviso() {
+
+            const aviso =
+                document.getElementById(
+                    "overlayRegisto"
+                );
+
+            aviso.classList.remove(
+                "ativo"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+        /* =====================================================
+           ELEMENTOS PROTEGIDOS
+
+           Ao tentar entrar em categorias,
+           produtos, catálogo etc., aparece
+           a opção de REGISTAR-SE ou LOGIN.
+        ===================================================== */
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const elemento =
+                    event.target.closest(
+                        "[data-protegido='true']"
+                    );
+
+                if (!elemento) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                const menu =
+                    document.getElementById(
+                        "menu"
+                    );
+
+                if (menu) {
+
+                    menu.classList.remove(
+                        "aberto"
+                    );
+
+                }
+
+                mostrarAviso();
+
+            },
+            true
+        );
+
+        /* =====================================================
+           CARREGAMENTO
+
+           A página principal é o index.html.
+           Depois do carregamento, aparece o
+           aviso com REGISTAR-SE / LOGIN.
+        ===================================================== */
+
+        window.addEventListener(
+            "load",
+            function() {
+
+                setTimeout(
+                    function() {
+
+                        const loading =
+                            document.getElementById(
+                                "loading-screen"
+                            );
+
+                        loading.classList.add(
+                            "saindo"
+                        );
+
+                        setTimeout(
+                            function() {
+
+                                mostrarAviso();
+
+                            },
+                            900
+                        );
+
+                    },
+                    4000
+                );
+
+            }
+        );
+
+        /* =====================================================
+           CLICAR FORA DO AVISO
+        ===================================================== */
+
+        document
+            .getElementById("overlayRegisto")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        fecharAviso();
+
+                    }
+
+                }
+            );
+
+        /* =====================================================
+           ESC
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    fecharAviso();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
+```

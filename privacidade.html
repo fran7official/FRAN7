@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =====================================================
+         ÍCONE DA ABA DO NAVEGADOR — FRAN7
+    ===================================================== -->
+
+    <link rel="icon" href="logoo.png.png" type="image/png">
+    <link rel="shortcut icon" href="logoo.png.png" type="image/png">
+    <link rel="apple-touch-icon" href="logoo.png.png">
+
+    <title>Política de Privacidade | FRAN7</title>
+
+    <style>
+
+        /* =====================================================
+           CONFIGURAÇÃO GERAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --fundo: #ffffff;
+            --texto: #111111;
+            --texto-secundario: #666666;
+            --borda: #dddddd;
+            --fundo-caixa: #ffffff;
+            --fundo-carregamento: #ffffff;
+            --sombra: rgba(0, 0, 0, 0.12);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+
+            background: var(--fundo);
+            color: var(--texto);
+
+            transition:
+                background-color 0.4s ease,
+                color 0.4s ease;
+        }
+
+        /* =====================================================
+           TEMA AUTOMÁTICO DO DISPOSITIVO
+        ===================================================== */
+
+        @media (prefers-color-scheme: dark) {
+
+            :root {
+                --fundo: #000000;
+                --texto: #ffffff;
+                --texto-secundario: #999999;
+                --borda: #292929;
+                --fundo-caixa: #0d0d0d;
+                --fundo-carregamento: #050505;
+                --sombra: rgba(0, 0, 0, 0.55);
+            }
+
+        }
+
+        /* =====================================================
+           LOGOTIPO AUTOMÁTICO
+        ===================================================== */
+
+        .logo img,
+        #loading-logo {
+            transition:
+                filter 0.4s ease,
+                transform 0.4s ease;
+        }
+
+        /*
+           MODO CLARO
+           Logo transparente fica escuro.
+        */
+
+        @media (prefers-color-scheme: light) {
+
+            .logo img,
+            #loading-logo {
+                filter: brightness(0);
+            }
+
+        }
+
+        /*
+           MODO ESCURO
+           Logo transparente fica branco.
+        */
+
+        @media (prefers-color-scheme: dark) {
+
+            .logo img,
+            #loading-logo {
+                filter: brightness(0) invert(1);
+            }
+
+        }
+
+        /* =====================================================
+           TELA DE CARREGAMENTO FRAN7
+        ===================================================== */
+
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: var(--fundo-carregamento);
+
+            transition:
+                background-color 0.4s ease,
+                opacity 1s ease,
+                visibility 1s ease;
+
+            animation: loadingExit 1s ease forwards;
+            animation-delay: 4s;
+        }
+
+        #loading-logo {
+            width: 180px;
+            max-width: 55vw;
+
+            animation: fran7Zoom 2s ease-in-out infinite;
+        }
+
+        @keyframes fran7Zoom {
+
+            0% {
+                transform: scale(0.88);
+                opacity: 0.65;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.88);
+                opacity: 0.65;
+            }
+
+        }
+
+        @keyframes loadingExit {
+
+            0% {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+        }
+
+        /* =====================================================
+           CONTEÚDO
+        ===================================================== */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            padding: 60px 0;
+        }
+
+        /* =====================================================
+           LOGO PRINCIPAL
+        ===================================================== */
+
+        .logo {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo img {
+            width: 120px;
+            max-width: 100%;
+        }
+
+        /* =====================================================
+           TÍTULO
+        ===================================================== */
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .date {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 14px;
+            color: var(--texto-secundario);
+
+            transition: color 0.4s ease;
+        }
+
+        /* =====================================================
+           TEXTOS
+        ===================================================== */
+
+        h2 {
+            font-size: 21px;
+            margin-top: 35px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin: 10px 0 20px 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* =====================================================
+           CONTACTO
+        ===================================================== */
+
+        .contacto {
+            margin-top: 30px;
+            padding: 25px;
+
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+
+            background: var(--fundo-caixa);
+
+            transition:
+                background-color 0.4s ease,
+                border-color 0.4s ease;
+        }
+
+        /* =====================================================
+           BOTÃO VOLTAR
+        ===================================================== */
+
+        .voltar {
+            display: inline-block;
+
+            margin-top: 45px;
+            padding: 12px 25px;
+
+            border: 1px solid var(--borda);
+            border-radius: 30px;
+
+            color: var(--texto);
+            text-decoration: none;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .voltar:hover {
+            transform: translateY(-2px);
+            background: var(--texto);
+            color: var(--fundo);
+        }
+
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        footer {
+            text-align: center;
+
+            border-top: 1px solid var(--borda);
+
+            padding: 25px;
+
+            font-size: 13px;
+
+            margin-top: 50px;
+
+            color: var(--texto-secundario);
+
+            transition:
+                color 0.4s ease,
+                border-color 0.4s ease;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 40px 0;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+
+            #loading-logo {
+                width: 150px;
+            }
+
+            .logo img {
+                width: 110px;
+            }
+
+        }
+
+        /* =====================================================
+           REDUÇÃO DE MOVIMENTO
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =================================
+         TELA DE CARREGAMENTO FRAN7
+    ================================== -->
+
+    <div id="loading-screen">
+
+        <img
+            id="loading-logo"
+            src="logo.png.png"
+            alt="FRAN7"
+        >
+
+    </div>
+
+
+    <!-- =================================
+         CONTEÚDO DA POLÍTICA
+    ================================== -->
+
+    <main class="container">
+
+        <!-- LOGOTIPO -->
+
+        <div class="logo">
+
+            <img
+                src="logo.png.png"
+                alt="FRAN7"
+            >
+
+        </div>
+
+
+        <h1>Política de Privacidade</h1>
+
+        <div class="date">
+            Última atualização: 30 de setembro de 2026
+        </div>
+
+
+        <p>
+            A FRAN7 valoriza a privacidade dos seus clientes e visitantes
+            e compromete-se a proteger os dados pessoais fornecidos através
+            do nosso website.
+        </p>
+
+        <p>
+            Esta Política de Privacidade explica quais dados podemos recolher,
+            como os utilizamos, como os protegemos e quais são os direitos
+            dos utilizadores.
+        </p>
+
+
+        <h2>1. Dados que recolhemos</h2>
+
+        <p>
+            Ao utilizar o nosso website, poderemos recolher:
+        </p>
+
+        <ul>
+
+            <li>
+                Endereço de e-mail;
+            </li>
+
+            <li>
+                Número de telefone;
+            </li>
+
+            <li>
+                Dia e mês de nascimento;
+            </li>
+
+            <li>
+                Informações fornecidas voluntariamente através dos nossos formulários;
+            </li>
+
+            <li>
+                Informações técnicas necessárias ao funcionamento do website.
+            </li>
+
+        </ul>
+
+
+        <h2>2. Para que utilizamos os seus dados</h2>
+
+        <p>
+            Os dados fornecidos poderão ser utilizados para:
+        </p>
+
+        <ul>
+
+            <li>
+                Enviar novidades sobre a nossa marca;
+            </li>
+
+            <li>
+                Informar sobre novos lançamentos;
+            </li>
+
+            <li>
+                Enviar promoções e campanhas especiais;
+            </li>
+
+            <li>
+                Melhorar os nossos produtos, serviços e experiência no website;
+            </li>
+
+            <li>
+                Responder a pedidos ou contactos realizados pelo utilizador;
+            </li>
+
+            <li>
+                Cumprir obrigações legais aplicáveis.
+            </li>
+
+        </ul>
+
+
+        <h2>3. Consentimento</h2>
+
+        <p>
+            Ao fornecer os seus dados através dos formulários do website,
+            o utilizador declara que tomou conhecimento desta Política de
+            Privacidade e, quando necessário, autoriza o tratamento dos
+            seus dados para as finalidades apresentadas.
+        </p>
+
+
+        <h2>4. Partilha de dados</h2>
+
+        <p>
+            A FRAN7 não vende nem comercializa os dados pessoais dos seus
+            utilizadores.
+        </p>
+
+        <p>
+            Os dados poderão ser partilhados apenas quando necessário para
+            o funcionamento dos serviços, para cumprimento de obrigações
+            legais ou quando permitido pela legislação aplicável.
+        </p>
+
+
+        <h2>5. Segurança dos dados</h2>
+
+        <p>
+            Adotamos medidas técnicas e organizativas adequadas para proteger
+            os dados pessoais contra acesso não autorizado, alteração,
+            divulgação, perda ou utilização indevida.
+        </p>
+
+
+        <h2>6. Conservação dos dados</h2>
+
+        <p>
+            Os dados pessoais serão conservados apenas durante o período
+            necessário para cumprir as finalidades para as quais foram
+            recolhidos, salvo quando a conservação seja necessária por
+            obrigação legal.
+        </p>
+
+
+        <h2>7. Direitos do utilizador</h2>
+
+        <p>
+            Nos termos da legislação aplicável, o titular dos dados pode
+            exercer direitos relacionados com:
+        </p>
+
+        <ul>
+
+            <li>
+                Acesso aos seus dados pessoais;
+            </li>
+
+            <li>
+                Informação sobre a utilização dos seus dados;
+            </li>
+
+            <li>
+                Retificação de dados incorretos ou incompletos;
+            </li>
+
+            <li>
+                Atualização dos seus dados;
+            </li>
+
+            <li>
+                Eliminação dos dados, quando aplicável;
+            </li>
+
+            <li>
+                Oposição ao tratamento dos dados, nos termos legais.
+            </li>
+
+        </ul>
+
+
+        <h2>8. Cookies</h2>
+
+        <p>
+            O nosso website poderá utilizar cookies e tecnologias semelhantes
+            para garantir o funcionamento adequado do site, melhorar a
+            experiência de utilização e, quando aplicável, analisar a
+            utilização do website.
+        </p>
+
+
+        <h2>9. Alterações a esta Política</h2>
+
+        <p>
+            Esta Política de Privacidade poderá ser atualizada periodicamente
+            para refletir alterações nos nossos serviços, no website ou na
+            legislação aplicável.
+        </p>
+
+
+        <h2>10. Contacto</h2>
+
+        <div class="contacto">
+
+            <p>
+                <strong>FRAN7</strong>
+            </p>
+
+            <p>
+                E-mail: fran7officiall@gmail.com
+            </p>
+
+            <p>
+                Telefone: 973560521
+            </p>
+
+            <p>
+                Localização: Angola
+            </p>
+
+        </div>
+
+
+        <!-- VOLTAR AO INÍCIO -->
+
+        <a href="inicio.html" class="voltar">
+            ← Voltar ao início
+        </a>
+
+    </main>
+
+
+    <!-- =================================
+         RODAPÉ
+    ================================== -->
+
+    <footer>
+
+        © 2026 FRAN7 — Todos os direitos reservados.
+
+    </footer>
+
+
+    <!-- =================================
+         SCRIPT
+    ================================== -->
+
+    <script>
+
+        /*
+         * Remove a tela de carregamento
+         * depois da animação.
+         */
+
+        window.addEventListener("load", function () {
+
+            setTimeout(function () {
+
+                const loadingScreen =
+                    document.getElementById("loading-screen");
+
+                if (loadingScreen) {
+                    loadingScreen.remove();
+                }
+
+            }, 5000);
+
+        });
+
+
+        /*
+         * O navegador deteta automaticamente
+         * quando o utilizador muda o tema
+         * do dispositivo.
+         *
+         * Não é necessário recarregar a página.
+         */
+
+        const temaDispositivo =
+            window.matchMedia("(prefers-color-scheme: dark)");
+
+        temaDispositivo.addEventListener("change", function () {
+
+            /*
+             * O CSS com prefers-color-scheme
+             * atualiza automaticamente todas
+             * as cores e o logotipo.
+             */
+
+        });
+
+    </script>
+
+</body>
+</html>

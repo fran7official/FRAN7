@@ -1,0 +1,3773 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =====================================================
+         ÍCONE DA ABA DO NAVEGADOR — FRAN7
+    ===================================================== -->
+
+    <link rel="icon" type="image/png" href="logoo.png.png">
+    <link rel="shortcut icon" type="image/png" href="logoo.png.png">
+    <link rel="apple-touch-icon" href="logoo.png.png">
+
+    <title>FRAN7 | LOJA</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            color-scheme: light dark;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* =====================================================
+           CARREGAMENTO
+        ===================================================== */
+
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #loading-screen.saindo {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            width: 180px;
+            max-width: 65vw;
+            filter: brightness(0);
+            animation: logoZoom 10s ease-in-out infinite;
+        }
+
+        @keyframes logoZoom {
+            0% {
+                opacity: .70;
+                transform: scale(.88);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+
+            100% {
+                opacity: .70;
+                transform: scale(.88);
+            }
+        }
+
+        /* =====================================================
+           TEMA ESCURO
+        ===================================================== */
+
+        @media (prefers-color-scheme: dark) {
+
+            body {
+                background: #000;
+                color: #fff;
+            }
+
+            header {
+                background: rgba(0,0,0,.90);
+                border-bottom: 1px solid #151515;
+            }
+
+            .logo {
+                filter: brightness(0) invert(1);
+            }
+
+            .menu {
+                background: rgba(10,10,10,.98);
+                border-color: #333;
+            }
+
+            .menu a {
+                color: #fff;
+            }
+
+            .menu a:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .botao-parceria,
+            .menu-btn,
+            .botao-carrinho,
+            .botao-perfil {
+                color: #fff;
+            }
+
+            .hero {
+                background:
+                    radial-gradient(
+                        circle at center,
+                        #1b1b1b 0%,
+                        #050505 55%
+                    );
+            }
+
+            .hero-label {
+                color: #999;
+            }
+
+            .hero p {
+                color: #aaa;
+            }
+
+            .imagem-colecao {
+                border-color: #292929;
+                box-shadow: 0 25px 80px rgba(0,0,0,.55);
+            }
+
+            .botao {
+                border-color: #fff;
+                color: #fff;
+            }
+
+            .botao:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .categorias,
+            .produtos,
+            .catalogo {
+                border-color: #1c1c1c;
+            }
+
+            .categoria {
+                border-color: #2c2c2c;
+                background: linear-gradient(145deg,#111,#080808);
+            }
+
+            .categoria:hover {
+                border-color: #fff;
+            }
+
+            .categoria span {
+                color: #777;
+            }
+
+            .produto {
+                background: #0d0d0d;
+                border-color: #252525;
+            }
+
+            .produto:hover {
+                border-color: #555;
+            }
+
+            .produto-imagem {
+                background:
+                    linear-gradient(
+                        135deg,
+                        #191919,
+                        #090909
+                    );
+                color: #fff;
+            }
+
+            .produto-tag {
+                color: #777;
+            }
+
+            .produto-info p {
+                color: #888;
+            }
+
+            .botao-produto {
+                color: #fff;
+                border-color: #444;
+            }
+
+            .botao-produto:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .catalogo {
+                background: #080808;
+            }
+
+            .catalogo p {
+                color: #999;
+            }
+
+            .redes {
+                border-color: #222;
+            }
+
+            .redes p {
+                color: #888;
+            }
+
+            footer {
+                border-color: #222;
+                color: #666;
+            }
+
+            .carrinho-overlay {
+                background: rgba(0,0,0,.72);
+            }
+
+            .carrinho {
+                background: #0b0b0b;
+                border-color: #292929;
+            }
+
+            .carrinho-cabecalho,
+            .carrinho-total {
+                border-color: #292929;
+            }
+
+            .carrinho-item {
+                border-color: #292929;
+                background: #111;
+            }
+
+            .carrinho-item-imagem {
+                background: #191919;
+            }
+
+            .carrinho-item-info p {
+                color: #888;
+            }
+
+            .quantidade {
+                border-color: #444;
+            }
+
+            .quantidade button {
+                color: #fff;
+            }
+
+            .carrinho-fechar {
+                background: #202020;
+                color: #fff;
+            }
+
+            .carrinho-fechar:hover {
+                background: #fff;
+                color: #000;
+            }
+
+            .botao-finalizar {
+                background: #fff;
+                color: #000;
+            }
+
+            .carrinho-vazio {
+                color: #888;
+            }
+
+            .notificacao-carrinho {
+                background: #101010;
+                border: 1px solid #303030;
+                color: #fff;
+            }
+
+            .perfil-painel {
+                background: #0d0d0d;
+                color: #fff;
+                border: 1px solid #333;
+            }
+
+            .perfil-painel > button {
+                background: #222;
+                color: #fff;
+            }
+
+            .perfil-dado {
+                background: #151515;
+                border-color: #303030;
+            }
+
+            .perfil-dado-label {
+                color: #888;
+            }
+        }
+
+        /* =====================================================
+           TEMA CLARO
+        ===================================================== */
+
+        @media (prefers-color-scheme: light) {
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            header {
+                background: rgba(255,255,255,.94);
+                border-bottom: 1px solid #ddd;
+            }
+
+            .logo {
+                filter: brightness(0);
+            }
+
+            .menu {
+                background: #fff;
+                border-color: #ddd;
+                box-shadow: 0 20px 60px rgba(0,0,0,.12);
+            }
+
+            .menu a {
+                color: #000;
+            }
+
+            .menu a:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .botao-parceria,
+            .menu-btn,
+            .botao-carrinho,
+            .botao-perfil {
+                color: #000;
+            }
+
+            .hero {
+                background:
+                    radial-gradient(
+                        circle at center,
+                        #f5f5f5 0%,
+                        #fff 60%
+                    );
+            }
+
+            .hero-label {
+                color: #777;
+            }
+
+            .hero p {
+                color: #666;
+            }
+
+            .imagem-colecao {
+                border-color: #ddd;
+                box-shadow: 0 25px 80px rgba(0,0,0,.12);
+            }
+
+            .botao {
+                border-color: #000;
+                color: #000;
+            }
+
+            .botao:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .categorias,
+            .produtos,
+            .catalogo {
+                border-color: #ddd;
+            }
+
+            .categoria {
+                border-color: #ddd;
+                background: #fff;
+            }
+
+            .categoria:hover {
+                border-color: #000;
+                background: #f2f2f2;
+            }
+
+            .categoria span {
+                color: #777;
+            }
+
+            .produto {
+                background: #fff;
+                border-color: #ddd;
+            }
+
+            .produto:hover {
+                border-color: #999;
+            }
+
+            .produto-imagem {
+                background: #f5f5f5;
+                color: #000;
+            }
+
+            .produto-tag {
+                color: #777;
+            }
+
+            .produto-info p {
+                color: #666;
+            }
+
+            .botao-produto {
+                color: #000;
+                border-color: #bbb;
+            }
+
+            .botao-produto:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .catalogo {
+                background: #fff;
+            }
+
+            .catalogo p {
+                color: #666;
+            }
+
+            .redes {
+                border-color: #ddd;
+            }
+
+            .redes p {
+                color: #666;
+            }
+
+            footer {
+                border-color: #ddd;
+                color: #777;
+            }
+
+            .carrinho-overlay {
+                background: rgba(255,255,255,.72);
+            }
+
+            .carrinho {
+                background: #fff;
+                border-color: #ddd;
+                box-shadow: -20px 0 60px rgba(0,0,0,.12);
+            }
+
+            .carrinho-cabecalho,
+            .carrinho-total {
+                border-color: #ddd;
+            }
+
+            .carrinho-item {
+                border-color: #ddd;
+                background: #f8f8f8;
+            }
+
+            .carrinho-item-imagem {
+                background: #eee;
+            }
+
+            .carrinho-item-info p {
+                color: #666;
+            }
+
+            .quantidade {
+                border-color: #ccc;
+            }
+
+            .quantidade button {
+                color: #000;
+            }
+
+            .carrinho-fechar {
+                background: #eee;
+                color: #000;
+            }
+
+            .carrinho-fechar:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            .botao-finalizar {
+                background: #000;
+                color: #fff;
+            }
+
+            .carrinho-vazio {
+                color: #777;
+            }
+
+            .notificacao-carrinho {
+                background: #fff;
+                border: 1px solid #ddd;
+                color: #000;
+            }
+
+            .perfil-painel {
+                background: #fff;
+                color: #000;
+                border: 1px solid #ddd;
+            }
+
+            .perfil-painel > button {
+                background: #eee;
+                color: #000;
+            }
+
+            .perfil-dado {
+                background: #f7f7f7;
+                border-color: #ddd;
+            }
+
+            .perfil-dado-label {
+                color: #777;
+            }
+        }
+
+        /* =====================================================
+           CABEÇALHO
+        ===================================================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 20px 40px;
+
+            z-index: 1000;
+
+            backdrop-filter: blur(15px);
+        }
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+            content: url("images/logo.png.png");
+
+            position: absolute;
+
+            top: 20px;
+            left: 40px;
+
+            width: 150px;
+            height: auto;
+
+            z-index: 1001;
+
+            animation:
+                entradaLogo
+                1.5s
+                ease-out;
+        }
+
+        @keyframes entradaLogo {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =====================================================
+           ÍCONES DO CABEÇALHO
+        ===================================================== */
+
+        .botao-parceria,
+        .botao-carrinho,
+        .botao-perfil,
+        .menu-btn {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        /* =====================================================
+           CORAÇÃO
+        ===================================================== */
+
+        .botao-parceria {
+            position: absolute;
+            right: 125px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;
+            cursor: pointer;
+
+            z-index: 1002;
+
+            border: 0;
+            background: transparent;
+            color: inherit;
+        }
+
+        .icone-amigos {
+            font-size: 27px;
+
+            animation:
+                movimentoAmigos
+                1.5s
+                ease-in-out
+                infinite;
+        }
+
+        .notificacao-parceria {
+            position: absolute;
+
+            top: -2px;
+            right: -1px;
+
+            min-width: 19px;
+            height: 19px;
+
+            padding: 0 5px;
+
+            background: #00d26a;
+            color: #fff;
+
+            border-radius: 50%;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .notificacao-parceria.visivel {
+            display: flex;
+        }
+
+        @keyframes movimentoAmigos {
+
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* =====================================================
+           PERFIL
+        ===================================================== */
+
+        .botao-perfil {
+            position: absolute;
+
+            right: 75px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 44px;
+            height: 44px;
+
+            border: 0;
+            background: transparent;
+            color: inherit;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            z-index: 1002;
+        }
+
+        .icone-perfil {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #888;
+        }
+
+        .icone-perfil svg {
+            width: 34px;
+            height: 34px;
+            display: block;
+        }
+
+        .notificacao-perfil {
+            position: absolute;
+
+            top: -2px;
+            right: -1px;
+
+            width: 18px;
+            height: 18px;
+
+            border-radius: 50%;
+
+            background: #e60000;
+            color: #fff;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .notificacao-perfil.visivel {
+            display: flex;
+        }
+
+        /* =====================================================
+           CARRINHO
+        ===================================================== */
+
+        .botao-carrinho {
+            position: absolute;
+
+            right: 175px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 44px;
+            height: 44px;
+
+            border: 0;
+            background: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            z-index: 1002;
+        }
+
+        .contador-carrinho {
+            position: absolute;
+
+            top: -2px;
+            right: -1px;
+
+            min-width: 19px;
+            height: 19px;
+
+            padding: 0 5px;
+
+            background: #e60000;
+            color: #fff;
+
+            border-radius: 50%;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .contador-carrinho.visivel {
+            display: flex;
+        }
+
+        /* =====================================================
+           MENU
+        ===================================================== */
+
+        .menu-btn {
+            position: absolute;
+
+            right: 25px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            background: transparent;
+            border: 0;
+
+            font-size: 32px;
+
+            cursor: pointer;
+
+            z-index: 1002;
+
+            transition: .3s;
+        }
+
+        .menu-btn:hover {
+            transform:
+                translateY(-50%)
+                scale(1.1);
+        }
+
+        .menu {
+            display: none;
+
+            position: absolute;
+
+            right: 25px;
+            top: 75px;
+
+            width: 235px;
+
+            border: 1px solid;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.6);
+        }
+
+        .menu.aberto {
+            display: block;
+
+            animation:
+                menuEntrada
+                .25s
+                ease-out;
+        }
+
+        @keyframes menuEntrada {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(-10px)
+                    scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        .menu a {
+            display: block;
+
+            text-decoration: none;
+
+            padding: 17px 20px;
+
+            transition: .25s;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 100vh;
+
+            padding:
+                140px 25px 90px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .hero-label {
+            font-size: 13px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 19px;
+            line-height: 1.7;
+
+            max-width: 650px;
+
+            margin:
+                0 auto 38px;
+        }
+
+        .imagem-colecao {
+            width: 100vw;
+            max-width: 900px;
+
+            height: 1000px;
+
+            object-fit: cover;
+
+            display: block;
+
+            margin:
+                8px auto 100px;
+
+            border-radius: 25px;
+
+            transition: .10s;
+        }
+
+        .imagem-colecao:hover {
+            transform: scale(1.015);
+        }
+
+        .botao {
+            display: inline-block;
+
+            padding:
+                16px 36px;
+
+            border:
+                1px solid;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            transition: .3s;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           SEÇÕES
+        ===================================================== */
+
+        .categorias,
+        .produtos,
+        .catalogo {
+            padding:
+                110px 25px;
+
+            border-top:
+                1px solid;
+        }
+
+        .titulo {
+            text-align: center;
+
+            font-size: 42px;
+
+            margin-bottom: 55px;
+
+            letter-spacing: 2px;
+        }
+
+        .subtitulo {
+            text-align: center;
+
+            margin-top: -35px;
+            margin-bottom: 50px;
+        }
+
+        /* =====================================================
+           CATEGORIAS
+        ===================================================== */
+
+        .categorias-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 20px;
+        }
+
+        .categoria {
+            min-height: 210px;
+
+            border:
+                1px solid;
+
+            border-radius: 22px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            transition: .35s;
+
+            cursor: pointer;
+        }
+
+        .categoria:hover {
+            transform:
+                translateY(-8px);
+        }
+
+        .categoria span {
+            display: block;
+
+            font-size: 12px;
+            letter-spacing: 3px;
+
+            margin-bottom: 12px;
+        }
+
+        .categoria h3 {
+            font-size: 26px;
+        }
+
+        /* =====================================================
+           DESTAQUES
+        ===================================================== */
+
+        .destaques-social {
+            padding: 70px 25px 45px;
+            border-top: 1px solid;
+        }
+
+        .destaques-social-inner {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .destaques-social .titulo {
+            margin-bottom: 18px;
+        }
+
+        .destaques-social .subtitulo {
+            margin-top: 0;
+            margin-bottom: 35px;
+        }
+
+        .destaques-grid {
+            display: flex;
+            gap: 28px;
+            overflow-x: auto;
+            padding: 8px 5px 18px;
+            scrollbar-width: thin;
+            scroll-snap-type: x proximity;
+        }
+
+        .destaque-item {
+            flex: 0 0 115px;
+            text-align: center;
+            scroll-snap-align: start;
+        }
+
+        .destaque-circulo {
+            width: 108px;
+            height: 108px;
+            margin: 0 auto 11px;
+            padding: 3px;
+            border: 2px solid;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .destaque-circulo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .destaque-placeholder {
+            font-size: 11px;
+            opacity: .55;
+            line-height: 1.35;
+        }
+
+        .destaque-nome {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           COMENTÁRIOS
+        ===================================================== */
+
+        .comentarios-produto {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(128,128,128,.28);
+        }
+
+        .comentarios-produto h4 {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .comentario-form {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+        }
+
+        .comentario-form input {
+            min-width: 0;
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #999;
+            border-radius: 22px;
+            background: transparent;
+            color: inherit;
+            outline: none;
+        }
+
+        .comentario-form button {
+            padding: 0 15px;
+            border: 1px solid currentColor;
+            border-radius: 22px;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .lista-comentarios {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .comentario {
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(128,128,128,.10);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .comentario strong {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 3px;
+            opacity: .65;
+        }
+
+        /* =====================================================
+           PRODUTOS
+        ===================================================== */
+
+        .produtos-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 25px;
+        }
+
+        .produto {
+            border:
+                1px solid;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            transition: .35s;
+        }
+
+        .produto:hover {
+            transform:
+                translateY(-8px);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,.35);
+        }
+
+        .produto-imagem {
+            height: 300px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 13px;
+
+            overflow: hidden;
+        }
+
+        .produto-imagem img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+        .produto-info {
+            padding: 25px;
+        }
+
+        .produto-tag {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+        .produto-info h3 {
+            margin-bottom: 10px;
+
+            font-size: 21px;
+        }
+
+        .produto-info p {
+            margin-bottom: 18px;
+        }
+
+        .preco {
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .botao-produto {
+            display: inline-block;
+
+            padding:
+                12px 23px;
+
+            border:
+                1px solid;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: .3s;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           FAVORITOS
+        ===================================================== */
+
+        .favorito-produto {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            margin-top: 16px;
+        }
+
+        .botao-favorito {
+            width: 48px;
+            height: 48px;
+
+            border: 0;
+            background: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            font-size: 32px;
+
+            transition:
+                transform .2s ease;
+        }
+
+        .botao-favorito:hover {
+            transform: scale(1.18);
+        }
+
+        .coracao {
+            color: #000000;
+
+            line-height: 1;
+
+            transition:
+                color .25s ease,
+                transform .25s ease;
+        }
+
+        .botao-favorito.ativo .coracao {
+            color: #e60000;
+
+            transform: scale(1.15);
+        }
+
+        .botao-favorito:active {
+            transform: scale(.9);
+        }
+
+        /* =====================================================
+           CATÁLOGO
+        ===================================================== */
+
+        .catalogo {
+            text-align: center;
+        }
+
+        .catalogo p {
+            margin:
+                15px auto 35px;
+
+            max-width: 650px;
+
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           CONTACTOS
+        ===================================================== */
+
+        .redes {
+            padding:
+                80px 25px;
+
+            border-top:
+                1px solid;
+
+            text-align: center;
+        }
+
+        .redes h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .redes p {
+            margin-bottom: 35px;
+        }
+
+        .redes-grid {
+            max-width: 850px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 18px;
+        }
+
+        .rede {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            min-height: 65px;
+
+            border-radius: 15px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: .3s;
+        }
+
+        .rede:hover {
+            transform:
+                translateY(-5px);
+        }
+
+        .rede-instagram {
+            background:
+                linear-gradient(
+                    45deg,
+                    #feda75,
+                    #fa7e1e,
+                    #d62976,
+                    #962fbf,
+                    #4f5bd5
+                );
+        }
+
+        .rede-whatsapp {
+            background: #25D366;
+        }
+
+        .rede-email {
+            background: #EA4335;
+        }
+
+        .icone {
+            font-size: 24px;
+        }
+
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        .slogan-final {
+            text-align: center;
+
+            padding:
+                70px 20px 35px;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            letter-spacing: 6px;
+        }
+
+        footer {
+            border-top:
+                1px solid;
+
+            padding:
+                45px 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           CARRINHO
+        ===================================================== */
+
+        .carrinho-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            display: flex;
+            justify-content: flex-end;
+
+            opacity: 0;
+            visibility: hidden;
+
+            z-index: 10000;
+
+            transition:
+                opacity .3s ease,
+                visibility .3s ease;
+        }
+
+        .carrinho-overlay.aberto {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .carrinho {
+            width: 100%;
+            max-width: 450px;
+
+            height: 100%;
+
+            border-left: 1px solid;
+
+            padding: 25px;
+
+            display: flex;
+            flex-direction: column;
+
+            transform: translateX(100%);
+
+            transition:
+                transform .35s ease;
+        }
+
+        .carrinho-overlay.aberto .carrinho {
+            transform: translateX(0);
+        }
+
+        .carrinho-cabecalho {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid;
+
+            margin-bottom: 20px;
+        }
+
+        .carrinho-cabecalho h2 {
+            font-size: 25px;
+        }
+
+        .carrinho-fechar {
+            width: 40px;
+            height: 40px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            font-size: 23px;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .carrinho-fechar:hover {
+            transform: rotate(90deg);
+        }
+
+        .notificacao-carrinho {
+            display: block;
+
+            padding: 14px 16px;
+
+            margin-bottom: 18px;
+
+            border-radius: 14px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform:
+                translateY(-8px);
+
+            transition:
+                opacity .45s ease,
+                transform .45s ease,
+                visibility .45s ease;
+        }
+
+        .notificacao-carrinho.visivel {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translateY(0);
+        }
+
+        .carrinho-conteudo {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .carrinho-item {
+            display: flex;
+
+            gap: 15px;
+
+            padding: 15px;
+
+            margin-bottom: 12px;
+
+            border: 1px solid;
+
+            border-radius: 16px;
+        }
+
+        .carrinho-item-imagem {
+            width: 80px;
+            height: 80px;
+
+            flex-shrink: 0;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carrinho-item-imagem img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+        .carrinho-item-info {
+            flex: 1;
+        }
+
+        .carrinho-item-info h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .carrinho-item-info p {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .quantidade {
+            display: flex;
+
+            align-items: center;
+
+            width: fit-content;
+
+            border: 1px solid;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .quantidade button {
+            width: 30px;
+            height: 28px;
+
+            border: 0;
+
+            background: transparent;
+
+            font-size: 17px;
+
+            cursor: pointer;
+        }
+
+        .quantidade span {
+            min-width: 28px;
+
+            text-align: center;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .carrinho-item-preco {
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .carrinho-vazio {
+            text-align: center;
+
+            padding: 60px 20px;
+
+            font-size: 15px;
+        }
+
+        .carrinho-rodape {
+            padding-top: 20px;
+        }
+
+        .carrinho-total {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            border-top: 1px solid;
+
+            padding: 20px 0;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .botao-finalizar {
+            width: 100%;
+
+            border: 0;
+
+            padding: 16px;
+
+            border-radius: 50px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: .3s;
+        }
+
+        .botao-finalizar:hover {
+            transform:
+                translateY(-3px);
+        }
+
+        /* =====================================================
+           PERFIL
+        ===================================================== */
+
+        .perfil-overlay {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0,0,0,.72);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            z-index: 20000;
+
+            transition: .25s;
+
+            padding: 20px;
+        }
+
+        .perfil-overlay.aberto {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .perfil-painel {
+            position: relative;
+
+            width: 100%;
+            max-width: 430px;
+
+            border-radius: 24px;
+
+            padding: 35px;
+
+            text-align: center;
+        }
+
+        .perfil-painel > button {
+            position: absolute;
+
+            right: 15px;
+            top: 12px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            width: 34px;
+            height: 34px;
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+        .perfil-avatar {
+            width: 100px;
+            height: 100px;
+
+            margin: 10px auto 18px;
+
+            border: 2px solid #aaa;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #888;
+        }
+
+        .perfil-avatar svg {
+            width: 58px;
+            height: 58px;
+        }
+
+        .perfil-painel h2 {
+            margin-bottom: 8px;
+        }
+
+        .perfil-painel > p {
+            opacity: .65;
+            margin-bottom: 25px;
+        }
+
+        /* =====================================================
+           DADOS DO PERFIL
+        ===================================================== */
+
+        .perfil-dados {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .perfil-dado {
+            padding: 14px 16px;
+            border: 1px solid;
+            border-radius: 14px;
+        }
+
+        .perfil-dado-label {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .perfil-dado-valor {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* =====================================================
+           REDUÇÃO DE MOVIMENTO
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .loading-logo,
+            .logo,
+            .icone-amigos {
+                animation: none !important;
+            }
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 750px) {
+
+            .destaques-grid {
+                gap: 20px;
+            }
+
+            .destaque-item {
+                flex-basis: 95px;
+            }
+
+            .destaque-circulo {
+                width: 88px;
+                height: 88px;
+            }
+
+            .comentario-form {
+                grid-template-columns: 1fr;
+            }
+
+            .comentario-form button {
+                min-height: 38px;
+            }
+
+            .botao-carrinho {
+                right: 165px;
+            }
+
+            .botao-parceria {
+                right: 120px;
+            }
+
+            .botao-perfil {
+                right: 75px;
+            }
+
+            .menu-btn {
+                right: 25px;
+            }
+
+            .perfil-painel {
+                padding: 30px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         CARREGAMENTO
+    ===================================================== -->
+
+    <div id="loading-screen">
+
+        <img
+            src="images/logo.png.png"
+            alt="FRAN7"
+            class="loading-logo"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ===================================================== -->
+
+    <header>
+
+        <img
+            src="images/logo.png.png"
+            alt="FRAN7"
+            class="logo"
+        >
+
+        <!-- CARRINHO -->
+
+        <button
+            class="botao-carrinho"
+            onclick="abrirCarrinho()"
+            aria-label="Abrir carrinho"
+        >
+
+            🛒
+
+            <span
+                class="contador-carrinho"
+                id="contadorCarrinho"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <!-- CORAÇÃO -->
+
+        <button
+            type="button"
+            class="botao-parceria"
+            onclick="abrirFavoritos()"
+            aria-label="Ver favoritos"
+            title="Favoritos"
+        >
+
+            <span
+                class="icone-amigos"
+                id="iconeCoracaoTopo"
+            >
+                ♡
+            </span>
+
+            <span
+                class="notificacao-parceria"
+                id="contadorFavoritos"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <!-- PERFIL -->
+
+        <button
+            class="botao-perfil"
+            onclick="abrirPerfil()"
+            aria-label="Abrir perfil"
+            title="Meu perfil"
+        >
+
+            <span
+                class="icone-perfil"
+                aria-hidden="true"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="3.2"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    />
+
+                    <path
+                        d="M5.5 20C5.9 16.3 8.2 14.2 12 14.2C15.8 14.2 18.1 16.3 18.5 20"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+            </span>
+
+            <span
+                class="notificacao-perfil"
+                id="notificacaoPerfil"
+            >
+                !
+            </span>
+
+        </button>
+
+
+        <!-- MENU -->
+
+        <button
+            class="menu-btn"
+            onclick="abrirMenu()"
+            aria-label="Abrir menu"
+        >
+            ⋮
+        </button>
+
+
+        <nav
+            class="menu"
+            id="menu"
+        >
+
+            <a
+                href="#inicio"
+                onclick="irParaInicio(event)"
+            >
+                Início
+            </a>
+
+            <a href="#categorias">
+                Categorias
+            </a>
+
+            <a href="#produtos">
+                Produtos
+            </a>
+
+            <a href="#catalogo">
+                Catálogo
+            </a>
+
+            <a href="#contactos">
+                Contactos
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         INÍCIO
+    ===================================================== -->
+
+    <section
+        class="hero"
+        id="inicio"
+    >
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                FRAN7 — BUILD YOUR LEGACY
+            </div>
+
+            <p>
+                Uma coleção criada para acompanhar
+                o teu estilo, a tua energia e a tua evolução.
+            </p>
+
+            <img
+                src="images/colecao.jpg.jpeg"
+                alt="Coleção FRAN7"
+                class="imagem-colecao"
+            >
+
+            <a
+                href="#produtos"
+                class="botao"
+            >
+                EXPLORAR COLEÇÃO
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CATEGORIAS
+    ===================================================== -->
+
+    <section
+        class="categorias"
+        id="categorias"
+    >
+
+        <h2 class="titulo">
+            CATEGORIAS
+        </h2>
+
+        <p class="subtitulo">
+            Encontra o teu próximo estilo.
+        </p>
+
+        <div class="categorias-grid">
+
+            <div class="categoria">
+                <div>
+                    <span>01</span>
+                    <h3>ROUPAS</h3>
+                </div>
+            </div>
+
+            <div class="categoria">
+                <div>
+                    <span>02</span>
+                    <h3>SAPATOS</h3>
+                </div>
+            </div>
+
+            <div class="categoria">
+                <div>
+                    <span>03</span>
+                    <h3>ACESSÓRIOS</h3>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PRODUTOS
+    ===================================================== -->
+
+    <section
+        class="produtos"
+        id="produtos"
+    >
+
+        <h2 class="titulo">
+            DESTAQUES
+        </h2>
+
+        <p class="subtitulo">
+            Peças selecionadas da FRAN7.
+        </p>
+
+        <div class="produtos-grid">
+
+            <!-- PRODUTO 1 -->
+
+            <div class="produto">
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="images/1.jpg.jpeg"
+                        alt="T-shirt FRAN7"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <div class="produto-tag">
+                        FRAN7 COLLECTION
+                    </div>
+
+                    <h3>
+                        PRODUTO FRAN7
+                    </h3>
+
+                    <p>
+                        Nova coleção
+                    </p>
+
+                    <div class="preco">
+                        8.500 Kz
+                    </div>
+
+                    <a
+                        href="#"
+                        class="botao-produto"
+                        onclick="adicionarAoCarrinho(event,'PRODUTO FRAN7',8500,'images/1.jpg.jpeg')"
+                    >
+                        COMPRAR
+                    </a>
+
+                    <div class="favorito-produto">
+
+                        <button
+                            class="botao-favorito"
+                            onclick="alternarFavorito(this)"
+                            aria-label="Adicionar aos favoritos"
+                            aria-pressed="false"
+                        >
+
+                            <span class="coracao">
+                                ♡
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    <div class="comentarios-produto">
+
+                        <h4>
+                            💬 COMENTÁRIOS
+                        </h4>
+
+                        <form
+                            class="comentario-form"
+                            onsubmit="adicionarComentario(event, 1); return false;"
+                        >
+
+                            <input
+                                id="comentarioInput1"
+                                type="text"
+                                maxlength="180"
+                                placeholder="O que achaste deste produto?"
+                                required
+                            >
+
+                            <button type="submit">
+                                PUBLICAR
+                            </button>
+
+                        </form>
+
+                        <div
+                            class="lista-comentarios"
+                            id="listaComentarios1"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUTO 2 -->
+
+            <div class="produto">
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="images/2.jpg.jpeg"
+                        alt="T-shirt FRAN7"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <div class="produto-tag">
+                        FRAN7 COLLECTION
+                    </div>
+
+                    <h3>
+                        PRODUTO FRAN7
+                    </h3>
+
+                    <p>
+                        Nova coleção
+                    </p>
+
+                    <div class="preco">
+                        7.000 Kz
+                    </div>
+
+                    <a
+                        href="#"
+                        class="botao-produto"
+                        onclick="adicionarAoCarrinho(event,'PRODUTO FRAN7 2',7000,'images/2.jpg.jpeg')"
+                    >
+                        COMPRAR
+                    </a>
+
+                    <div class="favorito-produto">
+
+                        <button
+                            class="botao-favorito"
+                            onclick="alternarFavorito(this)"
+                            aria-label="Adicionar aos favoritos"
+                            aria-pressed="false"
+                        >
+
+                            <span class="coracao">
+                                ♡
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    <div class="comentarios-produto">
+
+                        <h4>
+                            💬 COMENTÁRIOS
+                        </h4>
+
+                        <form
+                            class="comentario-form"
+                            onsubmit="adicionarComentario(event, 2); return false;"
+                        >
+
+                            <input
+                                id="comentarioInput2"
+                                type="text"
+                                maxlength="180"
+                                placeholder="O que achaste deste produto?"
+                                required
+                            >
+
+                            <button type="submit">
+                                PUBLICAR
+                            </button>
+
+                        </form>
+
+                        <div
+                            class="lista-comentarios"
+                            id="listaComentarios2"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUTO 3 -->
+
+            <div class="produto">
+
+                <div class="produto-imagem">
+
+                    <img
+                        src="images/3.jpg.jpeg"
+                        alt="T-shirt FRAN7"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <div class="produto-tag">
+                        FRAN7 COLLECTION
+                    </div>
+
+                    <h3>
+                        PRODUTO FRAN7
+                    </h3>
+
+                    <p>
+                        Nova coleção
+                    </p>
+
+                    <div class="preco">
+                        7.000 Kz
+                    </div>
+
+                    <a
+                        href="#"
+                        class="botao-produto"
+                        onclick="adicionarAoCarrinho(event,'PRODUTO FRAN7 3',7000,'')"
+                    >
+                        COMPRAR
+                    </a>
+
+                    <div class="favorito-produto">
+
+                        <button
+                            class="botao-favorito"
+                            onclick="alternarFavorito(this)"
+                            aria-label="Adicionar aos favoritos"
+                            aria-pressed="false"
+                        >
+
+                            <span class="coracao">
+                                ♡
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    <div class="comentarios-produto">
+
+                        <h4>
+                            💬 COMENTÁRIOS
+                        </h4>
+
+                        <form
+                            class="comentario-form"
+                            onsubmit="adicionarComentario(event, 3); return false;"
+                        >
+
+                            <input
+                                id="comentarioInput3"
+                                type="text"
+                                maxlength="180"
+                                placeholder="O que achaste deste produto?"
+                                required
+                            >
+
+                            <button type="submit">
+                                PUBLICAR
+                            </button>
+
+                        </form>
+
+                        <div
+                            class="lista-comentarios"
+                            id="listaComentarios3"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CATÁLOGO
+    ===================================================== -->
+
+    <section
+        class="catalogo"
+        id="catalogo"
+    >
+
+        <h2 class="titulo">
+            DESCUBRA A FRAN7
+        </h2>
+
+        <p>
+            Explora os nossos produtos e descobre
+            os próximos lançamentos da FRAN7.
+        </p>
+
+        <a
+            href="#produtos"
+            class="botao"
+        >
+            VER CATÁLOGO
+        </a>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACTOS
+    ===================================================== -->
+
+    <section
+        class="redes"
+        id="contactos"
+    >
+
+        <h2>
+            INFORMAÇÕES E CONTACTO
+        </h2>
+
+        <p>
+            Encontra a FRAN7 nas nossas plataformas.
+        </p>
+
+        <div class="redes-grid">
+
+            <a
+                href="https://instagram.com/fran7.official"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rede rede-instagram"
+            >
+
+                <span class="icone">
+                    ◎
+                </span>
+
+                <span>
+                    Instagram
+                </span>
+
+            </a>
+
+            <a
+                href="https://wa.me/244973560521"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rede rede-whatsapp"
+            >
+
+                <span class="icone">
+                    ◉
+                </span>
+
+                <span>
+                    WhatsApp
+                </span>
+
+            </a>
+
+            <a
+                href="mailto:fran7officiall@EMAIL.COM"
+                class="rede rede-email"
+            >
+
+                <span class="icone">
+                    ✉
+                </span>
+
+                <span>
+                    E-mail
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RODAPÉ
+    ===================================================== -->
+
+    <div class="slogan-final">
+        BUILD YOUR LEGACY
+    </div>
+
+    <footer>
+
+        © 2026
+        <strong>FRAN7</strong>
+        —
+        Todos os direitos reservados.
+
+    </footer>
+
+
+    <!-- =====================================================
+         CARRINHO
+    ===================================================== -->
+
+    <div
+        class="carrinho-overlay"
+        id="carrinhoOverlay"
+    >
+
+        <div class="carrinho">
+
+            <div class="carrinho-cabecalho">
+
+                <h2>
+                    MEU CARRINHO
+                </h2>
+
+                <button
+                    class="carrinho-fechar"
+                    onclick="fecharCarrinho()"
+                    aria-label="Fechar carrinho"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                class="notificacao-carrinho"
+                id="notificacaoCarrinho"
+            >
+                ✓ Produto adicionado ao carrinho
+            </div>
+
+            <div
+                class="carrinho-conteudo"
+                id="carrinhoConteudo"
+            >
+
+                <div
+                    class="carrinho-vazio"
+                    id="carrinhoVazio"
+                >
+                    O teu carrinho está vazio.
+                </div>
+
+            </div>
+
+            <div class="carrinho-rodape">
+
+                <div class="carrinho-total">
+
+                    <span>
+                        TOTAL
+                    </span>
+
+                    <span id="carrinhoTotal">
+                        0 Kz
+                    </span>
+
+                </div>
+
+                <button
+                    class="botao-finalizar"
+                    onclick="finalizarCompra()"
+                >
+                    FINALIZAR COMPRA
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PERFIL
+    ===================================================== -->
+
+    <div
+        class="perfil-overlay"
+        id="perfilOverlay"
+    >
+
+        <div class="perfil-painel">
+
+            <button
+                onclick="fecharPerfil()"
+                aria-label="Fechar perfil"
+            >
+                ×
+            </button>
+
+            <div class="perfil-avatar">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="3.2"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    />
+
+                    <path
+                        d="M5.5 20C5.9 16.3 8.2 14.2 12 14.2C15.8 14.2 18.1 16.3 18.5 20"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+            </div>
+
+            <h2 id="perfilTitulo">
+                MEU PERFIL
+            </h2>
+
+            <p id="perfilMensagem">
+                Bem-vindo à FRAN7.
+            </p>
+
+
+            <!-- DADOS DO UTILIZADOR -->
+
+            <div class="perfil-dados">
+
+                <div class="perfil-dado">
+
+                    <span class="perfil-dado-label">
+                        Nome
+                    </span>
+
+                    <span
+                        class="perfil-dado-valor"
+                        id="perfilNome"
+                    >
+                        Não informado
+                    </span>
+
+                </div>
+
+
+                <div class="perfil-dado">
+
+                    <span class="perfil-dado-label">
+                        E-mail
+                    </span>
+
+                    <span
+                        class="perfil-dado-valor"
+                        id="perfilEmail"
+                    >
+                        Não informado
+                    </span>
+
+                </div>
+
+
+                <div class="perfil-dado">
+
+                    <span class="perfil-dado-label">
+                        Telefone
+                    </span>
+
+                    <span
+                        class="perfil-dado-valor"
+                        id="perfilTelefone"
+                    >
+                        Não informado
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           INÍCIO
+        ===================================================== */
+
+        function irParaInicio(event) {
+
+            event.preventDefault();
+
+            const menu =
+                document.getElementById("menu");
+
+            if (menu) {
+                menu.classList.remove("aberto");
+            }
+
+            const inicio =
+                document.getElementById("inicio");
+
+            if (inicio) {
+
+                inicio.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        }
+
+
+        /* =====================================================
+           COMENTÁRIOS
+        ===================================================== */
+
+        function escaparComentario(texto) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = texto;
+
+            return div.innerHTML;
+
+        }
+
+
+        function obterComentarios(id) {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(
+                        "fran7_comentarios_" + id
+                    )
+                ) || [];
+
+            } catch (erro) {
+
+                return [];
+
+            }
+
+        }
+
+
+        function mostrarComentarios(id) {
+
+            const lista =
+                document.getElementById(
+                    "listaComentarios" + id
+                );
+
+            if (!lista) return;
+
+            const comentarios =
+                obterComentarios(id);
+
+            if (!comentarios.length) {
+
+                lista.innerHTML =
+                    '<div class="comentario"><strong>FRAN7</strong>Ainda não há comentários. Sê o primeiro a dar a tua opinião.</div>';
+
+                return;
+
+            }
+
+            lista.innerHTML =
+                comentarios.map(function(c) {
+
+                    return '<div class="comentario"><strong>Cliente FRAN7</strong>' +
+                        escaparComentario(c) +
+                        '</div>';
+
+                }).join("");
+
+        }
+
+
+        function adicionarComentario(event, id) {
+
+            event.preventDefault();
+
+            const input =
+                document.getElementById(
+                    "comentarioInput" + id
+                );
+
+            if (!input) return;
+
+            const texto =
+                input.value.trim();
+
+            if (!texto) return;
+
+            const comentarios =
+                obterComentarios(id);
+
+            comentarios.unshift(texto);
+
+            localStorage.setItem(
+                "fran7_comentarios_" + id,
+                JSON.stringify(
+                    comentarios.slice(0, 30)
+                )
+            );
+
+            input.value = "";
+
+            mostrarComentarios(id);
+
+        }
+
+
+        [1, 2, 3].forEach(mostrarComentarios);
+
+
+        /* =====================================================
+           FAVORITOS
+        ===================================================== */
+
+        function obterQuantidadeFavoritos() {
+
+            return document.querySelectorAll(
+                ".botao-favorito.ativo"
+            ).length;
+
+        }
+
+
+        function atualizarFavoritosCabecalho() {
+
+            const contador =
+                document.getElementById(
+                    "contadorFavoritos"
+                );
+
+            const icone =
+                document.getElementById(
+                    "iconeCoracaoTopo"
+                );
+
+            if (!contador || !icone) return;
+
+            const quantidade =
+                obterQuantidadeFavoritos();
+
+            contador.textContent =
+                quantidade;
+
+            if (quantidade > 0) {
+
+                contador.classList.add(
+                    "visivel"
+                );
+
+                icone.textContent = "♥";
+
+            } else {
+
+                contador.classList.remove(
+                    "visivel"
+                );
+
+                icone.textContent = "♡";
+
+            }
+
+        }
+
+
+        function alternarFavorito(botao) {
+
+            const ativo =
+                botao.classList.toggle("ativo");
+
+            const coracao =
+                botao.querySelector(".coracao");
+
+            botao.setAttribute(
+                "aria-pressed",
+                ativo
+            );
+
+            if (ativo) {
+
+                coracao.textContent = "♥";
+
+                botao.setAttribute(
+                    "aria-label",
+                    "Remover dos favoritos"
+                );
+
+            } else {
+
+                coracao.textContent = "♡";
+
+                botao.setAttribute(
+                    "aria-label",
+                    "Adicionar aos favoritos"
+                );
+
+            }
+
+            atualizarFavoritosCabecalho();
+
+        }
+
+
+        function abrirFavoritos() {
+
+            const primeiroFavorito =
+                document.querySelector(
+                    ".botao-favorito.ativo"
+                );
+
+            if (primeiroFavorito) {
+
+                primeiroFavorito.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            } else {
+
+                const produtos =
+                    document.getElementById(
+                        "produtos"
+                    );
+
+                if (produtos) {
+
+                    produtos.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+
+            }
+
+        }
+
+
+        /* =====================================================
+           MENU
+        ===================================================== */
+
+        function abrirMenu() {
+
+            const menu =
+                document.getElementById("menu");
+
+            if (menu) {
+
+                menu.classList.toggle("aberto");
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CARRINHO
+        ===================================================== */
+
+        let carrinho = [];
+
+
+        function adicionarAoCarrinho(
+            event,
+            nome,
+            preco,
+            imagem
+        ) {
+
+            event.preventDefault();
+
+            const produtoExistente =
+                carrinho.find(
+                    item =>
+                        item.nome === nome
+                );
+
+            if (produtoExistente) {
+
+                produtoExistente.quantidade++;
+
+            } else {
+
+                carrinho.push({
+
+                    nome: nome,
+                    preco: preco,
+                    imagem: imagem,
+                    quantidade: 1
+
+                });
+
+            }
+
+            atualizarCarrinho();
+
+            abrirCarrinho();
+
+            mostrarNotificacao();
+
+        }
+
+
+        function abrirCarrinho() {
+
+            const overlay =
+                document.getElementById(
+                    "carrinhoOverlay"
+                );
+
+            if (!overlay) return;
+
+            overlay.classList.add("aberto");
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function fecharCarrinho() {
+
+            const overlay =
+                document.getElementById(
+                    "carrinhoOverlay"
+                );
+
+            if (!overlay) return;
+
+            overlay.classList.remove("aberto");
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        function atualizarCarrinho() {
+
+            const conteudo =
+                document.getElementById(
+                    "carrinhoConteudo"
+                );
+
+            const vazio =
+                document.getElementById(
+                    "carrinhoVazio"
+                );
+
+            const contador =
+                document.getElementById(
+                    "contadorCarrinho"
+                );
+
+            const totalElemento =
+                document.getElementById(
+                    "carrinhoTotal"
+                );
+
+            conteudo.innerHTML = "";
+
+            if (carrinho.length === 0) {
+
+                conteudo.appendChild(vazio);
+
+                contador.textContent = "0";
+
+                contador.classList.remove(
+                    "visivel"
+                );
+
+                totalElemento.textContent =
+                    "0 Kz";
+
+                return;
+
+            }
+
+            let total = 0;
+            let quantidadeTotal = 0;
+
+            carrinho.forEach(
+                function(item,index) {
+
+                    total +=
+                        item.preco *
+                        item.quantidade;
+
+                    quantidadeTotal +=
+                        item.quantidade;
+
+                    const produto =
+                        document.createElement(
+                            "div"
+                        );
+
+                    produto.className =
+                        "carrinho-item";
+
+                    let imagemHTML = "";
+
+                    if (item.imagem) {
+
+                        imagemHTML = `
+                            <img
+                                src="${item.imagem}"
+                                alt="${item.nome}"
+                            >
+                        `;
+
+                    } else {
+
+                        imagemHTML = `
+                            IMAGEM
+                        `;
+
+                    }
+
+                    produto.innerHTML = `
+
+                        <div class="carrinho-item-imagem">
+                            ${imagemHTML}
+                        </div>
+
+                        <div class="carrinho-item-info">
+
+                            <h3>
+                                ${item.nome}
+                            </h3>
+
+                            <p>
+                                ${formatarPreco(item.preco)}
+                            </p>
+
+                            <div class="quantidade">
+
+                                <button
+                                    onclick="alterarQuantidade(${index},-1)"
+                                >
+                                    −
+                                </button>
+
+                                <span>
+                                    ${item.quantidade}
+                                </span>
+
+                                <button
+                                    onclick="alterarQuantidade(${index},1)"
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="carrinho-item-preco">
+
+                            ${formatarPreco(
+                                item.preco *
+                                item.quantidade
+                            )}
+
+                        </div>
+
+                    `;
+
+                    conteudo.appendChild(
+                        produto
+                    );
+
+                }
+            );
+
+            contador.textContent =
+                quantidadeTotal;
+
+            contador.classList.add(
+                "visivel"
+            );
+
+            totalElemento.textContent =
+                formatarPreco(total);
+
+        }
+
+
+        function alterarQuantidade(
+            index,
+            valor
+        ) {
+
+            carrinho[index].quantidade +=
+                valor;
+
+            if (
+                carrinho[index].quantidade <= 0
+            ) {
+
+                carrinho.splice(
+                    index,
+                    1
+                );
+
+            }
+
+            atualizarCarrinho();
+
+        }
+
+
+        function formatarPreco(valor) {
+
+            return valor.toLocaleString(
+                "pt-AO"
+            ) + " Kz";
+
+        }
+
+
+        /* =====================================================
+           NOTIFICAÇÃO
+        ===================================================== */
+
+        function mostrarNotificacao() {
+
+            const notificacao =
+                document.getElementById(
+                    "notificacaoCarrinho"
+                );
+
+            clearTimeout(
+                window.timerNotificacaoCarrinho
+            );
+
+            notificacao.classList.remove(
+                "visivel"
+            );
+
+            requestAnimationFrame(
+                function() {
+
+                    notificacao.classList.add(
+                        "visivel"
+                    );
+
+                }
+            );
+
+            window.timerNotificacaoCarrinho =
+                setTimeout(
+                    function() {
+
+                        notificacao.classList.remove(
+                            "visivel"
+                        );
+
+                    },
+                    2500
+                );
+
+        }
+
+
+        /* =====================================================
+           FINALIZAR COMPRA
+        ===================================================== */
+
+        function finalizarCompra() {
+
+            if (carrinho.length === 0) {
+
+                alert(
+                    "O teu carrinho está vazio."
+                );
+
+                return;
+
+            }
+
+            alert(
+                "Os produtos estão no teu carrinho. Vamos preparar a finalização da compra."
+            );
+
+        }
+
+
+        /* =====================================================
+           PERFIL — LER DADOS
+        ===================================================== */
+
+        function obterDadoPerfil(chaves) {
+
+            for (let i = 0; i < chaves.length; i++) {
+
+                const valor =
+                    localStorage.getItem(chaves[i]);
+
+                if (
+                    valor !== null &&
+                    valor.trim() !== ""
+                ) {
+
+                    return valor.trim();
+
+                }
+
+            }
+
+            return "Não informado";
+
+        }
+
+
+        function atualizarDadosPerfil() {
+
+            /*
+             * Aceita vários nomes de chaves para facilitar
+             * a ligação com a página de cadastro.
+             */
+
+            const nome =
+                obterDadoPerfil([
+                    "fran7_nome",
+                    "nome",
+                    "nomeUsuario",
+                    "usuarioNome",
+                    "userName",
+                    "nomeCompleto"
+                ]);
+
+            const email =
+                obterDadoPerfil([
+                    "fran7_email",
+                    "email",
+                    "usuarioEmail",
+                    "userEmail"
+                ]);
+
+            const telefone =
+                obterDadoPerfil([
+                    "fran7_telefone",
+                    "telefone",
+                    "numero",
+                    "numeroTelefone",
+                    "telefoneUsuario",
+                    "userPhone"
+                ]);
+
+
+            const elementoNome =
+                document.getElementById(
+                    "perfilNome"
+                );
+
+            const elementoEmail =
+                document.getElementById(
+                    "perfilEmail"
+                );
+
+            const elementoTelefone =
+                document.getElementById(
+                    "perfilTelefone"
+                );
+
+
+            if (elementoNome) {
+
+                elementoNome.textContent =
+                    nome;
+
+            }
+
+            if (elementoEmail) {
+
+                elementoEmail.textContent =
+                    email;
+
+            }
+
+            if (elementoTelefone) {
+
+                elementoTelefone.textContent =
+                    telefone;
+
+            }
+
+
+            const titulo =
+                document.getElementById(
+                    "perfilTitulo"
+                );
+
+            const mensagem =
+                document.getElementById(
+                    "perfilMensagem"
+                );
+
+
+            if (
+                titulo &&
+                nome !== "Não informado"
+            ) {
+
+                titulo.textContent =
+                    nome;
+
+            } else if (titulo) {
+
+                titulo.textContent =
+                    "MEU PERFIL";
+
+            }
+
+
+            if (
+                mensagem &&
+                nome !== "Não informado"
+            ) {
+
+                mensagem.textContent =
+                    "Bem-vindo de volta à FRAN7.";
+
+            } else if (mensagem) {
+
+                mensagem.textContent =
+                    "Bem-vindo à FRAN7.";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ABRIR PERFIL
+        ===================================================== */
+
+        function abrirPerfil() {
+
+            atualizarDadosPerfil();
+
+            const el =
+                document.getElementById(
+                    "perfilOverlay"
+                );
+
+            if (el) {
+
+                el.classList.add("aberto");
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+
+        }
+
+
+        function fecharPerfil() {
+
+            const el =
+                document.getElementById(
+                    "perfilOverlay"
+                );
+
+            if (el) {
+
+                el.classList.remove("aberto");
+
+                document.body.style.overflow =
+                    "";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CARREGAMENTO
+        ===================================================== */
+
+        window.addEventListener(
+            "load",
+            function() {
+
+                atualizarFavoritosCabecalho();
+
+                atualizarDadosPerfil();
+
+                setTimeout(
+                    function() {
+
+                        const loading =
+                            document.getElementById(
+                                "loading-screen"
+                            );
+
+                        loading.classList.add(
+                            "saindo"
+                        );
+
+                    },
+                    4000
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           FECHAR MENU FORA
+        ===================================================== */
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const menu =
+                    document.getElementById(
+                        "menu"
+                    );
+
+                const botao =
+                    document.querySelector(
+                        ".menu-btn"
+                    );
+
+                if (!menu || !botao) {
+                    return;
+                }
+
+                if (
+                    !menu.contains(event.target) &&
+                    !botao.contains(event.target)
+                ) {
+
+                    menu.classList.remove(
+                        "aberto"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           FECHAR CARRINHO FORA
+        ===================================================== */
+
+        document
+            .getElementById("carrinhoOverlay")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        fecharCarrinho();
+
+                    }
+
+                }
+            );
+
+
+        /* =====================================================
+           FECHAR PERFIL FORA
+        ===================================================== */
+
+        document
+            .getElementById("perfilOverlay")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        fecharPerfil();
+
+                    }
+
+                }
+            );
+
+
+        /* =====================================================
+           ESC
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    fecharCarrinho();
+                    fecharPerfil();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
+```

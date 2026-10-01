@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =====================================================
+         ÍCONE DA ABA DO NAVEGADOR — FRAN7
+    ===================================================== -->
+
+    <link rel="icon" type="image/png" href="logoo.png.png">
+    <link rel="shortcut icon" type="image/png" href="logoo.png.png">
+    <link rel="apple-touch-icon" href="logoo.png.png">
+
+    <title>REGISTRO | FRAN7</title>
+
+    <style>
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px 40px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        .logo {
+            width: 150px;
+            animation: entradaLogo 2s ease-out;
+        }
+
+        @keyframes entradaLogo {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu-btn {
+            position: absolute;
+            right: 40px;
+            top: 30px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 38px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .menu {
+            display: none;
+            position: absolute;
+            top: 85px;
+            right: 40px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 15px;
+            width: 240px;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .menu a,
+        .menu button {
+            display: block;
+            width: 100%;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            background: none;
+            border: 0;
+            text-align: left;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+
+        .menu a:hover,
+        .menu button:hover {
+            background: #222;
+        }
+
+        .menu.aberto {
+            display: block;
+        }
+
+        /* =========================
+           ÁREA PRINCIPAL
+        ========================= */
+
+        .cadastro {
+            min-height: 100vh;
+            padding: 150px 20px 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #222;
+        }
+
+        .cadastro-box {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .cadastro h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cadastro p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        /* =========================
+           ESCOLHA LOGIN / CADASTRO
+        ========================= */
+
+        .alternador {
+            display: flex;
+            width: 100%;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+            border-radius: 50px;
+            padding: 4px;
+            background: #080808;
+        }
+
+        .alternador button {
+            flex: 1;
+            padding: 13px;
+            border: 0;
+            border-radius: 50px;
+            background: transparent;
+            color: #888;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .alternador button.ativo {
+            background: #fff;
+            color: #000;
+        }
+
+        /* =========================
+           CAMPOS
+        ========================= */
+
+        .campo {
+            width: 100%;
+            background: #111;
+            border: 1px solid #444;
+            border-radius: 12px;
+            color: white;
+            padding: 17px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            outline: none;
+            transition:
+                border-color .25s,
+                transform .25s,
+                box-shadow .25s;
+        }
+
+        .campo:focus {
+            border-color: white;
+            transform: translateY(-1px);
+            box-shadow:
+                0 8px 25px rgba(255,255,255,.05);
+        }
+
+        .campo::placeholder {
+            color: #888;
+        }
+
+        .campo.campo-erro {
+            border-color: #fff;
+            animation: campoErro .45s ease;
+        }
+
+        @keyframes campoErro {
+
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-7px);
+            }
+
+            50% {
+                transform: translateX(7px);
+            }
+
+            75% {
+                transform: translateX(-4px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* =========================
+           CAMPO PASSWORD
+        ========================= */
+
+        .campo-password {
+            position: relative;
+            width: 100%;
+        }
+
+        .campo-password .campo {
+            padding-right: 55px;
+        }
+
+        .mostrar-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .mostrar-password:hover {
+            color: #fff;
+        }
+
+        /* =========================
+           CONSENTIMENTO
+        ========================= */
+
+        .consentimento {
+            margin: 18px 0 22px;
+            text-align: left;
+            padding: 18px;
+            border: 1px solid #333;
+            border-radius: 14px;
+            background: rgba(255,255,255,.025);
+            transition:
+                border-color .25s,
+                background .25s;
+        }
+
+        .consentimento.erro {
+            border-color: #fff;
+            animation: consentimentoErro .45s ease;
+        }
+
+        @keyframes consentimentoErro {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-3px);
+            }
+        }
+
+        .consentimento-principal {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .consentimento-principal input {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: #fff;
+        }
+
+        .consentimento-texto {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .consentimento-texto strong {
+            color: #fff;
+        }
+
+        .texto-privacidade {
+            margin: 12px 0 0 32px;
+            color: #888;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           BOTÕES
+        ========================= */
+
+        .botao-cadastro,
+        .botao-login {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: .3s;
+        }
+
+        .botao-cadastro:hover,
+        .botao-login:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .botao-cadastro:active,
+        .botao-login:active {
+            transform: scale(.98);
+        }
+
+        /* =========================
+           LINK TROCAR
+        ========================= */
+
+        .trocar-formulario {
+            margin-top: 22px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .trocar-formulario button {
+            background: none;
+            border: 0;
+            color: #fff;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* =========================
+           NOTIFICAÇÃO
+        ========================= */
+
+        .notificacao {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.78);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .notificacao.ativa {
+            display: flex;
+            animation: fundoNotificacao .25s ease;
+        }
+
+        @keyframes fundoNotificacao {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .notificacao-box {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            padding: 42px 32px 32px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #080808
+                );
+            border: 1px solid #3a3a3a;
+            border-radius: 26px;
+            text-align: center;
+            box-shadow:
+                0 30px 90px rgba(0,0,0,.8);
+            animation:
+                aparecer
+                .35s
+                cubic-bezier(.2,.8,.2,1);
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform:
+                    scale(.82)
+                    translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    scale(1)
+                    translateY(0);
+            }
+        }
+
+        .icone-sucesso {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 22px;
+            border: 1px solid #555;
+            background: #fff;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .notificacao-box h2 {
+            margin: 0 0 12px;
+            font-size: 27px;
+            letter-spacing: .5px;
+        }
+
+        .notificacao-box p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .botao-notificacao {
+            width: 100%;
+            padding: 16px;
+            background: #fff;
+            color: #000;
+            border: 0;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .botao-notificacao:hover {
+            transform:
+                translateY(-2px)
+                scale(1.01);
+            background: #e8e8e8;
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        footer {
+            border-top: 1px solid #222;
+            padding: 40px 20px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* =========================
+           LOADING FRAN7
+        ========================= */
+
+        #fran7-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999999;
+            transition:
+                opacity 1s ease,
+                visibility 1s ease;
+        }
+
+        #fran7-loader img {
+            display: block;
+            width: 220px;
+            height: auto;
+            animation:
+                fran7LogoPulse
+                2.5s
+                ease-in-out
+                infinite;
+        }
+
+        #fran7-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        @keyframes fran7LogoPulse {
+
+            0% {
+                opacity: .35;
+                transform: scale(.90);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: .35;
+                transform: scale(.90);
+            }
+        }
+
+        /* =========================
+           MENU ANIMADO
+        ========================= */
+
+        .menu.aberto a,
+        .menu.aberto button {
+            animation:
+                menuAtenao
+                1.8s
+                ease-in-out
+                infinite;
+        }
+
+        .menu.aberto a:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .menu.aberto a:nth-child(2) {
+            animation-delay: .25s;
+        }
+
+        .menu.aberto a:nth-child(3) {
+            animation-delay: .5s;
+        }
+
+        .menu.aberto a:nth-child(4) {
+            animation-delay: .75s;
+        }
+
+        @keyframes menuAtenao {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(10px);
+            }
+        }
+
+        /* =========================
+           MODO CLARO
+        ========================= */
+
+        @media (prefers-color-scheme: light) {
+
+            html,
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            header {
+                background:
+                    rgba(255,255,255,.94)
+                    !important;
+            }
+
+            .logo {
+                filter: invert(1) !important;
+            }
+
+            .menu-btn {
+                color: #000 !important;
+            }
+
+            .menu {
+                background: #fff !important;
+                border-color: #000 !important;
+            }
+
+            .menu a,
+            .menu button {
+                color: #000 !important;
+            }
+
+            .menu a:hover,
+            .menu button:hover {
+                background: #000 !important;
+                color: #fff !important;
+            }
+
+            .cadastro {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            .cadastro h2 {
+                color: #000 !important;
+            }
+
+            .cadastro p {
+                color: #000 !important;
+            }
+
+            .alternador {
+                background: #f5f5f5;
+                border-color: #ccc;
+            }
+
+            .alternador button {
+                color: #555;
+            }
+
+            .alternador button.ativo {
+                background: #000;
+                color: #fff;
+            }
+
+            .campo {
+                background: #fff !important;
+                color: #000 !important;
+                border-color: #000 !important;
+            }
+
+            .campo::placeholder {
+                color: #555 !important;
+            }
+
+            .mostrar-password {
+                color: #555;
+            }
+
+            .mostrar-password:hover {
+                color: #000;
+            }
+
+            .consentimento {
+                background: #f7f7f7 !important;
+                border-color: #ccc !important;
+            }
+
+            .consentimento-texto {
+                color: #222 !important;
+            }
+
+            .consentimento-texto strong {
+                color: #000 !important;
+            }
+
+            .texto-privacidade {
+                color: #555 !important;
+            }
+
+            .botao-cadastro,
+            .botao-login {
+                background: #fff !important;
+                color: #000 !important;
+                border-color: #000 !important;
+            }
+
+            .botao-cadastro:hover,
+            .botao-login:hover {
+                background: #000 !important;
+                color: #fff !important;
+            }
+
+            .trocar-formulario button {
+                color: #000;
+            }
+
+            .notificacao {
+                background:
+                    rgba(255,255,255,.75)
+                    !important;
+            }
+
+            .notificacao-box {
+                background: #fff !important;
+                color: #000 !important;
+                border-color: #000 !important;
+            }
+
+            .icone-sucesso {
+                background: #000 !important;
+                color: #fff !important;
+            }
+
+            .notificacao-box h2 {
+                color: #000 !important;
+            }
+
+            .notificacao-box p {
+                color: #000 !important;
+            }
+
+            .botao-notificacao {
+                background: #000 !important;
+                color: #fff !important;
+            }
+
+            footer {
+                background: #fff !important;
+                color: #000 !important;
+                border-color: #000 !important;
+            }
+
+            #fran7-loader {
+                background: #fff !important;
+            }
+
+            #fran7-loader img {
+                filter: invert(1) !important;
+            }
+        }
+
+        /* =========================
+           MODO ESCURO
+        ========================= */
+
+        @media (prefers-color-scheme: dark) {
+
+            html,
+            body {
+                background: #000 !important;
+                color: #fff !important;
+            }
+
+            header {
+                background:
+                    rgba(0,0,0,.94)
+                    !important;
+            }
+
+            .logo {
+                filter: none !important;
+            }
+
+            .menu-btn {
+                color: #fff !important;
+            }
+
+            .menu {
+                background: #000 !important;
+                border-color: #fff !important;
+            }
+
+            .menu a,
+            .menu button {
+                color: #fff !important;
+            }
+
+            .menu a:hover,
+            .menu button:hover {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            .cadastro {
+                background: #000 !important;
+                color: #fff !important;
+            }
+
+            .cadastro h2 {
+                color: #fff !important;
+            }
+
+            .cadastro p {
+                color: #fff !important;
+            }
+
+            .alternador {
+                background: #080808;
+                border-color: #333;
+            }
+
+            .alternador button {
+                color: #777;
+            }
+
+            .alternador button.ativo {
+                background: #fff;
+                color: #000;
+            }
+
+            .campo {
+                background: #000 !important;
+                color: #fff !important;
+                border-color: #fff !important;
+            }
+
+            .campo::placeholder {
+                color: #aaa !important;
+            }
+
+            .mostrar-password {
+                color: #aaa;
+            }
+
+            .mostrar-password:hover {
+                color: #fff;
+            }
+
+            .consentimento {
+                background:
+                    rgba(255,255,255,.025)
+                    !important;
+                border-color: #333 !important;
+            }
+
+            .consentimento-texto {
+                color: #ddd !important;
+            }
+
+            .consentimento-texto strong {
+                color: #fff !important;
+            }
+
+            .texto-privacidade {
+                color: #888 !important;
+            }
+
+            .botao-cadastro,
+            .botao-login {
+                background: #000 !important;
+                color: #fff !important;
+                border-color: #fff !important;
+            }
+
+            .botao-cadastro:hover,
+            .botao-login:hover {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            .trocar-formulario button {
+                color: #fff;
+            }
+
+            .notificacao {
+                background:
+                    rgba(0,0,0,.75)
+                    !important;
+            }
+
+            .notificacao-box {
+                background: #000 !important;
+                color: #fff !important;
+                border-color: #fff !important;
+            }
+
+            .icone-sucesso {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            .notificacao-box h2 {
+                color: #fff !important;
+            }
+
+            .notificacao-box p {
+                color: #fff !important;
+            }
+
+            .botao-notificacao {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            footer {
+                background: #000 !important;
+                color: #fff !important;
+                border-color: #fff !important;
+            }
+
+            #fran7-loader {
+                background: #000 !important;
+            }
+
+            #fran7-loader img {
+                filter: none !important;
+            }
+        }
+
+        /* =========================
+           TELEMÓVEL
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                height: 80px;
+                padding: 15px 20px;
+            }
+
+            .logo {
+                width: 100px;
+            }
+
+            .menu-btn {
+                right: 20px;
+                top: 24px;
+                font-size: 32px;
+            }
+
+            .menu {
+                right: 20px;
+                top: 70px;
+            }
+
+            .cadastro h2 {
+                font-size: 30px;
+            }
+
+            .notificacao-box {
+                padding: 35px 25px;
+            }
+
+            .consentimento {
+                padding: 15px;
+            }
+        }
+
+        /* =========================
+           REDUZIR ANIMAÇÕES
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================
+         TELA INICIAL FRAN7
+    ========================= -->
+
+    <div id="fran7-loader">
+
+        <img
+            src="images/logo.png.png"
+            alt="FRAN7"
+        >
+
+    </div>
+
+
+    <!-- =========================
+         CABEÇALHO
+    ========================= -->
+
+    <header>
+
+        <img
+            src="images/logo.png.png"
+            alt="FRAN7"
+            class="logo"
+        >
+
+        <button
+            class="menu-btn"
+            id="statusCadastro"
+            onclick="abrirMenu()"
+            aria-label="Abrir menu"
+        >
+            ⋮
+        </button>
+
+        <nav
+            class="menu"
+            id="menu"
+        >
+
+            <a
+                href="inicio.html"
+                onclick="abrirInicio(event)"
+            >
+                Início
+            </a>
+
+            <a
+                href="#"
+                onclick="mostrarFormularioLogin()"
+            >
+                Entrar / Cadastrar
+            </a>
+
+            <a
+                href="inicio.html"
+                onclick="abrirProdutos(event)"
+            >
+                Produtos
+            </a>
+
+            <a
+                href="#"
+                onclick="abrirContacto(event)"
+            >
+                Contacto
+            </a>
+
+            <button
+                id="botaoSair"
+                onclick="sairDaConta()"
+                style="display:none;"
+            >
+                Sair da conta
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         LOGIN / CADASTRO
+    ========================= -->
+
+    <section
+        class="cadastro"
+        id="cadastro"
+    >
+
+        <div class="cadastro-box">
+
+            <h2 id="tituloFormulario">
+                BEM VINDO(A) À FRAN7
+            </h2>
+
+            <p id="descricaoFormulario">
+                Entre na sua conta ou crie uma nova conta
+                para acompanhar as novidades da FRAN7.
+            </p>
+
+
+            <!-- =========================
+                 ALTERNADOR
+            ========================= -->
+
+            <div class="alternador">
+
+                <button
+                    id="botaoModoLogin"
+                    class="ativo"
+                    onclick="mostrarFormularioLogin()"
+                >
+                    ENTRAR
+                </button>
+
+                <button
+                    id="botaoModoCadastro"
+                    onclick="mostrarFormularioCadastro()"
+                >
+                    CADASTRAR
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 FORMULÁRIO LOGIN
+            ========================= -->
+
+            <form
+                id="formLogin"
+                onsubmit="fazerLogin(event)"
+            >
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    class="campo"
+                    placeholder="Digite o seu e-mail"
+                    autocomplete="email"
+                >
+
+                <div class="campo-password">
+
+                    <input
+                        type="password"
+                        id="loginSenha"
+                        class="campo"
+                        placeholder="Digite a sua palavra-passe"
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar-password"
+                        onclick="mostrarSenha('loginSenha', this)"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-login"
+                >
+                    ENTRAR
+                </button>
+
+
+                <div class="trocar-formulario">
+
+                    Ainda não tem uma conta?
+
+                    <button
+                        type="button"
+                        onclick="mostrarFormularioCadastro()"
+                    >
+                        Criar conta
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- =========================
+                 FORMULÁRIO CADASTRO
+            ========================= -->
+
+            <form
+                id="formCadastro"
+                onsubmit="fazerCadastro(event)"
+                style="display:none;"
+            >
+
+                <!-- E-MAIL -->
+
+                <input
+                    type="email"
+                    id="email"
+                    class="campo"
+                    placeholder="Digite o seu e-mail"
+                    autocomplete="email"
+                >
+
+
+                <!-- TELEFONE -->
+
+                <input
+                    type="tel"
+                    id="telefone"
+                    class="campo"
+                    placeholder="Número de telefone (opcional)"
+                    inputmode="tel"
+                    autocomplete="tel"
+                >
+
+
+                <!-- ANIVERSÁRIO -->
+
+                <input
+                    type="text"
+                    id="aniversario"
+                    class="campo"
+                    placeholder="Data de aniversário — DD/MM"
+                    maxlength="5"
+                    inputmode="numeric"
+                    autocomplete="bday"
+                >
+
+
+                <!-- PALAVRA-PASSE -->
+
+                <div class="campo-password">
+
+                    <input
+                        type="password"
+                        id="senhaCadastro"
+                        class="campo"
+                        placeholder="Crie uma palavra-passe"
+                        autocomplete="new-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar-password"
+                        onclick="mostrarSenha('senhaCadastro', this)"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+
+                <!-- CONFIRMAR PALAVRA-PASSE -->
+
+                <div class="campo-password">
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        class="campo"
+                        placeholder="Confirme a palavra-passe"
+                        autocomplete="new-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar-password"
+                        onclick="mostrarSenha('confirmarSenha', this)"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+
+                <!-- CONSENTIMENTO -->
+
+                <div
+                    class="consentimento"
+                    id="consentimentoBox"
+                >
+
+                    <label
+                        class="consentimento-principal"
+                    >
+
+                        <input
+                            type="checkbox"
+                            id="aceiteTermos"
+                        >
+
+                        <span class="consentimento-texto">
+
+                            <strong>
+                                Li e concordo
+                            </strong>
+
+                            com o Aviso de Privacidade
+                            e autorizo a FRAN7 a utilizar
+                            os dados fornecidos para gerir
+                            o meu cadastro e enviar
+                            comunicações relacionadas
+                            com a marca.
+
+                        </span>
+
+                    </label>
+
+
+                    <div class="texto-privacidade">
+
+                        Ao concluir o cadastro,
+                        você poderá receber informações
+                        sobre novidades, lançamentos,
+                        produtos, ofertas e outras
+                        comunicações da FRAN7.
+
+                        O telefone é opcional.
+
+                        <br>
+                        <br>
+
+                        Os seus dados serão tratados
+                        de acordo com as regras de
+                        privacidade aplicáveis.
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    type="submit"
+                    class="botao-cadastro"
+                >
+                    CRIAR CONTA
+                </button>
+
+
+                <div class="trocar-formulario">
+
+                    Já possui uma conta?
+
+                    <button
+                        type="button"
+                        onclick="mostrarFormularioLogin()"
+                    >
+                        Entrar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NOTIFICAÇÃO
+    ========================= -->
+
+    <div
+        class="notificacao"
+        id="notificacao"
+    >
+
+        <div class="notificacao-box">
+
+            <div
+                class="icone-sucesso"
+                id="iconeNotificacao"
+            >
+                ✓
+            </div>
+
+            <h2 id="tituloNotificacao">
+                FRAN7
+            </h2>
+
+            <p id="textoNotificacao">
+                Mensagem
+            </p>
+
+            <button
+                class="botao-notificacao"
+                id="botaoNotificacao"
+                onclick="fecharNotificacao()"
+            >
+                CONTINUAR
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================= -->
+
+    <footer id="contacto">
+
+        © 2026 FRAN7 —
+        Todos os direitos reservados.
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================
+           TELA INICIAL FRAN7
+        ========================= */
+
+        window.addEventListener(
+            "load",
+            function () {
+
+                setTimeout(
+                    function () {
+
+                        const loader =
+                            document.getElementById(
+                                "fran7-loader"
+                            );
+
+                        if (loader) {
+
+                            loader.classList.add(
+                                "hidden"
+                            );
+
+                            setTimeout(
+                                function () {
+
+                                    loader.remove();
+
+                                },
+                                1000
+                            );
+                        }
+
+
+                        setTimeout(
+                            function () {
+
+                                const menu =
+                                    document.getElementById(
+                                        "menu"
+                                    );
+
+                                if (menu) {
+
+                                    menu.classList.add(
+                                        "aberto"
+                                    );
+
+                                }
+
+                            },
+                            1850
+                        );
+
+                    },
+                    1800
+                );
+
+                atualizarMenu();
+
+            }
+        );
+
+
+        /* =========================
+           DATA DE ANIVERSÁRIO
+        ========================= */
+
+        const aniversarioCampo =
+            document.getElementById(
+                "aniversario"
+            );
+
+        if (aniversarioCampo) {
+
+            aniversarioCampo.addEventListener(
+                "input",
+                function () {
+
+                    let valor =
+                        this.value
+                            .replace(
+                                /[^0-9]/g,
+                                ""
+                            )
+                            .slice(
+                                0,
+                                4
+                            );
+
+                    if (valor.length > 2) {
+
+                        valor =
+                            valor.slice(0, 2)
+                            + "/"
+                            + valor.slice(2);
+
+                    }
+
+                    this.value = valor;
+
+                }
+            );
+        }
+
+
+        /* =========================
+           ABRIR MENU
+        ========================= */
+
+        function abrirMenu() {
+
+            const menu =
+                document.getElementById(
+                    "menu"
+                );
+
+            if (!menu) {
+                return;
+            }
+
+            menu.classList.toggle(
+                "aberto"
+            );
+        }
+
+
+        /* =========================
+           MOSTRAR LOGIN
+        ========================= */
+
+        function mostrarFormularioLogin() {
+
+            document.getElementById(
+                "formLogin"
+            ).style.display = "block";
+
+            document.getElementById(
+                "formCadastro"
+            ).style.display = "none";
+
+            document.getElementById(
+                "botaoModoLogin"
+            ).classList.add("ativo");
+
+            document.getElementById(
+                "botaoModoCadastro"
+            ).classList.remove("ativo");
+
+            document.getElementById(
+                "tituloFormulario"
+            ).textContent =
+                "BEM VINDO(A) DE VOLTA";
+
+            document.getElementById(
+                "descricaoFormulario"
+            ).textContent =
+                "Entre na sua conta FRAN7 para continuar.";
+
+            document.getElementById(
+                "cadastro"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+            fecharMenu();
+
+        }
+
+
+        /* =========================
+           MOSTRAR CADASTRO
+        ========================= */
+
+        function mostrarFormularioCadastro() {
+
+            document.getElementById(
+                "formLogin"
+            ).style.display = "none";
+
+            document.getElementById(
+                "formCadastro"
+            ).style.display = "block";
+
+            document.getElementById(
+                "botaoModoLogin"
+            ).classList.remove("ativo");
+
+            document.getElementById(
+                "botaoModoCadastro"
+            ).classList.add("ativo");
+
+            document.getElementById(
+                "tituloFormulario"
+            ).textContent =
+                "CRIAR CONTA FRAN7";
+
+            document.getElementById(
+                "descricaoFormulario"
+            ).textContent =
+                "Cadastre os seus dados para criar a sua conta FRAN7.";
+
+            document.getElementById(
+                "cadastro"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+            fecharMenu();
+
+        }
+
+
+        /* =========================
+           FECHAR MENU
+        ========================= */
+
+        function fecharMenu() {
+
+            const menu =
+                document.getElementById(
+                    "menu"
+                );
+
+            if (menu) {
+
+                menu.classList.remove(
+                    "aberto"
+                );
+
+            }
+        }
+
+
+        /* =========================
+           MOSTRAR / ESCONDER SENHA
+        ========================= */
+
+        function mostrarSenha(
+            id,
+            botao
+        ) {
+
+            const campo =
+                document.getElementById(id);
+
+            if (!campo) {
+                return;
+            }
+
+            if (campo.type === "password") {
+
+                campo.type = "text";
+
+                botao.textContent = "◉";
+
+            } else {
+
+                campo.type = "password";
+
+                botao.textContent = "◉";
+
+            }
+        }
+
+
+        /* =========================
+           NOTIFICAÇÃO
+        ========================= */
+
+        function mostrarNotificacao(
+            titulo,
+            texto,
+            botao,
+            acao,
+            erro = false
+        ) {
+
+            document.getElementById(
+                "tituloNotificacao"
+            ).textContent = titulo;
+
+            document.getElementById(
+                "textoNotificacao"
+            ).textContent = texto;
+
+            document.getElementById(
+                "botaoNotificacao"
+            ).textContent = botao;
+
+            document.getElementById(
+                "botaoNotificacao"
+            ).onclick = acao;
+
+            const notificacao =
+                document.getElementById(
+                    "notificacao"
+                );
+
+            notificacao.classList.toggle(
+                "erro",
+                erro
+            );
+
+            const icone =
+                document.getElementById(
+                    "iconeNotificacao"
+                );
+
+            icone.textContent =
+                erro
+                    ? "!"
+                    : "✓";
+
+            notificacao.classList.add(
+                "ativa"
+            );
+        }
+
+
+        /* =========================
+           FECHAR NOTIFICAÇÃO
+        ========================= */
+
+        function fecharNotificacao() {
+
+            const notificacao =
+                document.getElementById(
+                    "notificacao"
+                );
+
+            notificacao.classList.remove(
+                "ativa"
+            );
+        }
+
+
+        /* =========================
+           ERRO DE CAMPO
+        ========================= */
+
+        function marcarErroCampo(campo) {
+
+            if (!campo) {
+                return;
+            }
+
+            campo.classList.add(
+                "campo-erro"
+            );
+
+            setTimeout(
+                function () {
+
+                    campo.classList.remove(
+                        "campo-erro"
+                    );
+
+                },
+                600
+            );
+        }
+
+
+        /* =========================
+           FAZER CADASTRO
+        ========================= */
+
+        function fazerCadastro(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim().toLowerCase();
+
+
+            const telefone =
+                document.getElementById(
+                    "telefone"
+                ).value.trim();
+
+
+            const aniversario =
+                document.getElementById(
+                    "aniversario"
+                ).value.trim();
+
+
+            const senha =
+                document.getElementById(
+                    "senhaCadastro"
+                ).value;
+
+
+            const confirmarSenha =
+                document.getElementById(
+                    "confirmarSenha"
+                ).value;
+
+
+            const aceite =
+                document.getElementById(
+                    "aceiteTermos"
+                ).checked;
+
+
+            const consentimentoBox =
+                document.getElementById(
+                    "consentimentoBox"
+                );
+
+
+            /* =========================
+               CAMPOS OBRIGATÓRIOS
+            ========================= */
+
+            if (
+                email === "" ||
+                aniversario === "" ||
+                senha === "" ||
+                confirmarSenha === ""
+            ) {
+
+                if (email === "") {
+
+                    marcarErroCampo(
+                        document.getElementById(
+                            "email"
+                        )
+                    );
+
+                }
+
+                if (aniversario === "") {
+
+                    marcarErroCampo(
+                        document.getElementById(
+                            "aniversario"
+                        )
+                    );
+
+                }
+
+                if (senha === "") {
+
+                    marcarErroCampo(
+                        document.getElementById(
+                            "senhaCadastro"
+                        )
+                    );
+
+                }
+
+                if (confirmarSenha === "") {
+
+                    marcarErroCampo(
+                        document.getElementById(
+                            "confirmarSenha"
+                        )
+                    );
+
+                }
+
+                mostrarNotificacao(
+                    "Preencha os campos",
+                    "Preencha todos os campos obrigatórios para criar a sua conta.",
+                    "PREENCHER AGORA",
+                    function () {
+
+                        fecharNotificacao();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               FORMATO DO E-MAIL
+            ========================= */
+
+            const emailValido =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                    .test(email);
+
+
+            if (!emailValido) {
+
+                marcarErroCampo(
+                    document.getElementById(
+                        "email"
+                    )
+                );
+
+                mostrarNotificacao(
+                    "E-mail inválido",
+                    "Digite um endereço de e-mail válido.",
+                    "CORRIGIR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        document.getElementById(
+                            "email"
+                        ).focus();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               DATA
+            ========================= */
+
+            const dataValida =
+                /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])$/
+                    .test(
+                        aniversario
+                    );
+
+
+            if (!dataValida) {
+
+                marcarErroCampo(
+                    document.getElementById(
+                        "aniversario"
+                    )
+                );
+
+                mostrarNotificacao(
+                    "Data inválida",
+                    "Digite a data de aniversário no formato DD/MM. Exemplo: 25/09.",
+                    "CORRIGIR DATA",
+                    function () {
+
+                        fecharNotificacao();
+
+                        document.getElementById(
+                            "aniversario"
+                        ).focus();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               PALAVRA-PASSE
+            ========================= */
+
+            if (senha.length < 6) {
+
+                marcarErroCampo(
+                    document.getElementById(
+                        "senhaCadastro"
+                    )
+                );
+
+                mostrarNotificacao(
+                    "Palavra-passe muito curta",
+                    "A palavra-passe deve ter pelo menos 6 caracteres.",
+                    "CORRIGIR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        document.getElementById(
+                            "senhaCadastro"
+                        ).focus();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               CONFIRMAÇÃO
+            ========================= */
+
+            if (senha !== confirmarSenha) {
+
+                marcarErroCampo(
+                    document.getElementById(
+                        "confirmarSenha"
+                    )
+                );
+
+                mostrarNotificacao(
+                    "As palavras-passe não coincidem",
+                    "Digite a mesma palavra-passe nos dois campos.",
+                    "CORRIGIR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        document.getElementById(
+                            "confirmarSenha"
+                        ).focus();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               CONSENTIMENTO
+            ========================= */
+
+            if (!aceite) {
+
+                consentimentoBox.classList.add(
+                    "erro"
+                );
+
+                setTimeout(
+                    function () {
+
+                        consentimentoBox.classList.remove(
+                            "erro"
+                        );
+
+                    },
+                    700
+                );
+
+                mostrarNotificacao(
+                    "Confirme a sua concordância",
+                    "Marque a caixa de concordância para concluir o cadastro.",
+                    "ACEITAR E CONTINUAR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        consentimentoBox.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               BUSCAR CLIENTES
+            ========================= */
+
+            let clientes =
+                JSON.parse(
+                    localStorage.getItem(
+                        "clientesFRAN7"
+                    )
+                ) || [];
+
+
+            /* =========================
+               VERIFICAR E-MAIL EXISTENTE
+            ========================= */
+
+            const emailExiste =
+                clientes.some(
+                    function(cliente) {
+
+                        return cliente.email === email;
+
+                    }
+                );
+
+
+            if (emailExiste) {
+
+                mostrarNotificacao(
+                    "Conta já existente",
+                    "Este e-mail já possui uma conta FRAN7. Entre utilizando a sua palavra-passe.",
+                    "ENTRAR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        mostrarFormularioLogin();
+
+                        document.getElementById(
+                            "loginEmail"
+                        ).value = email;
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               CRIAR UTILIZADOR
+            ========================= */
+
+            const cliente = {
+
+                id: Date.now(),
+
+                email: email,
+
+                telefone: telefone,
+
+                aniversario: aniversario,
+
+                senha: senha,
+
+                consentimento: true,
+
+                dataConsentimento:
+                    new Date().toLocaleString(
+                        "pt-PT"
+                    ),
+
+                dataCadastro:
+                    new Date().toLocaleString(
+                        "pt-PT"
+                    )
+
+            };
+
+
+            /* =========================
+               GUARDAR CONTA
+            ========================= */
+
+            clientes.push(
+                cliente
+            );
+
+            localStorage.setItem(
+                "clientesFRAN7",
+                JSON.stringify(
+                    clientes
+                )
+            );
+
+
+            /* =========================
+               LOGIN AUTOMÁTICO
+            ========================= */
+
+            localStorage.setItem(
+                "usuarioFRAN7",
+                JSON.stringify(
+                    cliente
+                )
+            );
+
+            localStorage.setItem(
+                "sessaoFRAN7",
+                "true"
+            );
+
+            localStorage.setItem(
+                "cadastroFRAN7Concluido",
+                "true"
+            );
+
+
+            /* =========================
+               LIMPAR CAMPOS
+            ========================= */
+
+            document.getElementById(
+                "email"
+            ).value = "";
+
+            document.getElementById(
+                "telefone"
+            ).value = "";
+
+            document.getElementById(
+                "aniversario"
+            ).value = "";
+
+            document.getElementById(
+                "senhaCadastro"
+            ).value = "";
+
+            document.getElementById(
+                "confirmarSenha"
+            ).value = "";
+
+            document.getElementById(
+                "aceiteTermos"
+            ).checked = false;
+
+
+            atualizarMenu();
+
+
+            /* =========================
+               SUCESSO
+            ========================= */
+
+            mostrarNotificacao(
+                "Conta criada com sucesso",
+                "Seja bem-vindo à FRAN7. A sua conta foi criada e você já está conectado.",
+                "IR PARA A FRAN7",
+                function () {
+
+                    fecharNotificacao();
+
+                    window.location.href =
+                        "inicio.html";
+
+                },
+                false
+            );
+
+        }
+
+
+        /* =========================
+           FAZER LOGIN
+        ========================= */
+
+        function fazerLogin(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document.getElementById(
+                    "loginEmail"
+                ).value.trim().toLowerCase();
+
+
+            const senha =
+                document.getElementById(
+                    "loginSenha"
+                ).value;
+
+
+            /* =========================
+               VERIFICAR CAMPOS
+            ========================= */
+
+            if (
+                email === "" ||
+                senha === ""
+            ) {
+
+                if (email === "") {
+
+                    marcarErroCampo(
+                        document.getElementById(
+                            "loginEmail"
+                        )
+                    );
+
+                }
+
+                if (senha === "") {
+
+                    marcarErroCampo(
+                        document.getElementById(
+                            "loginSenha"
+                        )
+                    );
+
+                }
+
+                mostrarNotificacao(
+                    "Preencha os campos",
+                    "Digite o seu e-mail e a sua palavra-passe para entrar.",
+                    "PREENCHER",
+                    function () {
+
+                        fecharNotificacao();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               BUSCAR CLIENTES
+            ========================= */
+
+            const clientes =
+                JSON.parse(
+                    localStorage.getItem(
+                        "clientesFRAN7"
+                    )
+                ) || [];
+
+
+            /* =========================
+               PROCURAR UTILIZADOR
+            ========================= */
+
+            const cliente =
+                clientes.find(
+                    function(usuario) {
+
+                        return (
+                            usuario.email === email &&
+                            usuario.senha === senha
+                        );
+
+                    }
+                );
+
+
+            /* =========================
+               LOGIN INCORRETO
+            ========================= */
+
+            if (!cliente) {
+
+                mostrarNotificacao(
+                    "Dados incorretos",
+                    "O e-mail ou a palavra-passe estão incorretos. Verifique os seus dados e tente novamente.",
+                    "TENTAR NOVAMENTE",
+                    function () {
+
+                        fecharNotificacao();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               GUARDAR SESSÃO
+            ========================= */
+
+            localStorage.setItem(
+                "usuarioFRAN7",
+                JSON.stringify(
+                    cliente
+                )
+            );
+
+            localStorage.setItem(
+                "sessaoFRAN7",
+                "true"
+            );
+
+            localStorage.setItem(
+                "cadastroFRAN7Concluido",
+                "true"
+            );
+
+
+            atualizarMenu();
+
+
+            /* =========================
+               LOGIN CONCLUÍDO
+            ========================= */
+
+            mostrarNotificacao(
+                "Login realizado",
+                "Bem-vindo de volta à FRAN7. A sua sessão foi iniciada com sucesso.",
+                "ENTRAR NA FRAN7",
+                function () {
+
+                    fecharNotificacao();
+
+                    window.location.href =
+                        "inicio.html";
+
+                },
+                false
+            );
+
+        }
+
+
+        /* =========================
+           ATUALIZAR MENU
+        ========================= */
+
+        function atualizarMenu() {
+
+            const sessao =
+                localStorage.getItem(
+                    "sessaoFRAN7"
+                ) === "true";
+
+
+            const botaoSair =
+                document.getElementById(
+                    "botaoSair"
+                );
+
+
+            if (botaoSair) {
+
+                botaoSair.style.display =
+                    sessao
+                        ? "block"
+                        : "none";
+
+            }
+
+        }
+
+
+        /* =========================
+           SAIR DA CONTA
+        ========================= */
+
+        function sairDaConta() {
+
+            localStorage.removeItem(
+                "usuarioFRAN7"
+            );
+
+            localStorage.removeItem(
+                "sessaoFRAN7"
+            );
+
+            localStorage.removeItem(
+                "cadastroFRAN7Concluido"
+            );
+
+
+            fecharMenu();
+
+
+            mostrarNotificacao(
+                "Sessão encerrada",
+                "Você saiu da sua conta FRAN7.",
+                "ENTRAR NOVAMENTE",
+                function () {
+
+                    fecharNotificacao();
+
+                    mostrarFormularioLogin();
+
+                },
+                false
+            );
+
+
+            atualizarMenu();
+
+        }
+
+
+        /* =========================
+           ABRIR INÍCIO
+        ========================= */
+
+        function abrirInicio(event) {
+
+            event.preventDefault();
+
+            const sessao =
+                localStorage.getItem(
+                    "sessaoFRAN7"
+                ) === "true";
+
+
+            if (!sessao) {
+
+                mostrarNotificacao(
+                    "Login necessário",
+                    "Entre na sua conta FRAN7 para acessar a página inicial.",
+                    "ENTRAR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        mostrarFormularioLogin();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            window.location.href =
+                "inicio.html";
+
+        }
+
+
+        /* =========================
+           ABRIR PRODUTOS
+        ========================= */
+
+        function abrirProdutos(event) {
+
+            event.preventDefault();
+
+            const sessao =
+                localStorage.getItem(
+                    "sessaoFRAN7"
+                ) === "true";
+
+
+            if (!sessao) {
+
+                mostrarNotificacao(
+                    "Login necessário",
+                    "Entre na sua conta FRAN7 para acessar os produtos e o catálogo.",
+                    "ENTRAR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        mostrarFormularioLogin();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            window.location.href =
+                "inicio.html";
+
+        }
+
+
+        /* =========================
+           CONTACTO
+        ========================= */
+
+        function abrirContacto(event) {
+
+            event.preventDefault();
+
+            const sessao =
+                localStorage.getItem(
+                    "sessaoFRAN7"
+                ) === "true";
+
+
+            if (!sessao) {
+
+                mostrarNotificacao(
+                    "Login necessário",
+                    "Entre na sua conta FRAN7 para acessar esta área.",
+                    "ENTRAR",
+                    function () {
+
+                        fecharNotificacao();
+
+                        mostrarFormularioLogin();
+
+                    },
+                    true
+                );
+
+                return;
+            }
+
+
+            document.getElementById(
+                "contacto"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+            fecharMenu();
+
+        }
+
+
+        /* =========================
+           FECHAR AO CLICAR FORA
+        ========================= */
+
+        const notificacao =
+            document.getElementById(
+                "notificacao"
+            );
+
+        if (notificacao) {
+
+            notificacao.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target ===
+                        this
+                    ) {
+
+                        fecharNotificacao();
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
+```
