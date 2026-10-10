@@ -1,0 +1,391 @@
+:root {
+    color-scheme: light dark;
+    --fran7-theme-bg: #fff;
+    --fran7-theme-surface: #fff;
+    --fran7-theme-text: #171717;
+    --fran7-theme-muted: #686868;
+    --fran7-theme-border: #dededb;
+    --fran7-theme-hover: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fran7-theme-bg: #090909;
+        --fran7-theme-surface: #090909;
+        --fran7-theme-text: #f4f4f1;
+        --fran7-theme-muted: #aaa9a4;
+        --fran7-theme-border: #30302e;
+        --fran7-theme-hover: #090909;
+    }
+}
+
+html {
+    color-scheme: light dark;
+}
+
+#fran7-ai {
+    --ai-bg: var(--fran7-theme-bg);
+    --ai-text: var(--fran7-theme-text);
+    --ai-border: var(--fran7-theme-border);
+    --ai-soft: color-mix(in srgb, var(--fran7-theme-text) 5%, var(--fran7-theme-bg));
+}
+
+#fran7-ai .fran7-ai-window .fran7-ai-header {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: auto;
+    width: 100%;
+    height: auto;
+    min-height: 72px;
+    flex: 0 0 auto;
+    border-bottom: 1px solid var(--ai-border);
+    background: var(--ai-bg) !important;
+    color: var(--ai-text) !important;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+#fran7-ai .fran7-ai-window .fran7-ai-title,
+#fran7-ai .fran7-ai-window .fran7-ai-title strong,
+#fran7-ai .fran7-ai-window .fran7-ai-status {
+    color: var(--ai-text);
+}
+
+#fran7-ai .fran7-ai-window .fran7-ai-close {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ai-text);
+    font: inherit;
+    font-size: 25px;
+    line-height: 1;
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+}
+
+#fran7-ai .fran7-ai-window .fran7-ai-close:hover,
+#fran7-ai .fran7-ai-window .fran7-ai-close:focus-visible {
+    border-radius: 50%;
+    background: var(--ai-soft);
+}
+
+#fran7-ai .fran7-ai-window .fran7-ai-message.bot,
+#fran7-ai .fran7-ai-window .fran7-ai-input {
+    background: var(--ai-soft);
+}
+
+body.fran7-subpage {
+    background: var(--fran7-theme-bg) !important;
+    color: var(--fran7-theme-text) !important;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+body:not(.fran7-subpage) {
+    background: var(--fran7-theme-bg) !important;
+    color: var(--fran7-theme-text) !important;
+}
+
+body:not(.fran7-subpage) > header {
+    border-color: var(--fran7-theme-border);
+    background: color-mix(in srgb, var(--fran7-theme-bg) 94%, transparent);
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .header-primary-nav a,
+body:not(.fran7-subpage) .header-tools .botao-carrinho,
+body:not(.fran7-subpage) .header-tools .botao-parceria,
+body:not(.fran7-subpage) .header-tools .menu-btn,
+body:not(.fran7-subpage) .header-search {
+    color: var(--fran7-theme-text) !important;
+}
+
+body:not(.fran7-subpage) .header-primary-nav a:hover {
+    color: var(--fran7-theme-muted) !important;
+}
+
+body:not(.fran7-subpage) .header-tools .icone-perfil {
+    color: #888 !important;
+}
+
+body:not(.fran7-subpage) .menu {
+    border-color: var(--fran7-theme-border);
+    background: var(--fran7-theme-surface);
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .menu a {
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .menu a:hover {
+    background: var(--fran7-theme-text);
+    color: var(--fran7-theme-bg);
+}
+
+body:not(.fran7-subpage) .announcement-bar {
+    border-color: var(--fran7-theme-border);
+    background: var(--fran7-theme-bg) !important;
+    color: var(--fran7-theme-muted) !important;
+}
+
+body:not(.fran7-subpage) .announcement-bar a {
+    color: var(--fran7-theme-text) !important;
+}
+
+body:not(.fran7-subpage) .hero {
+    background: radial-gradient(
+        circle at center,
+        var(--fran7-theme-surface) 0%,
+        var(--fran7-theme-bg) 60%
+    ) !important;
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .hero h1 {
+    color: var(--fran7-theme-text) !important;
+}
+
+body:not(.fran7-subpage) .hero-label,
+body:not(.fran7-subpage) .hero p {
+    color: var(--fran7-theme-muted) !important;
+}
+
+body:not(.fran7-subpage) .imagem-colecao {
+    border-color: var(--fran7-theme-border);
+    background-color: var(--fran7-theme-surface);
+    filter: none !important;
+    box-shadow: 0 25px 80px color-mix(in srgb, var(--fran7-theme-text) 12%, transparent);
+}
+
+body:not(.fran7-subpage) .produto-imagem,
+body:not(.fran7-subpage) .carrinho-item-imagem {
+    background: var(--fran7-theme-surface) !important;
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .produto-imagem .botao-favorito {
+    border-color: var(--fran7-theme-border);
+    background: color-mix(in srgb, var(--fran7-theme-surface) 90%, transparent);
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .produto {
+    border-color: var(--fran7-theme-border) !important;
+    background: var(--fran7-theme-bg) !important;
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .produto-info,
+body:not(.fran7-subpage) .produto-info h3,
+body:not(.fran7-subpage) .produto-info strong {
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .produto-info p,
+body:not(.fran7-subpage) .produto-tag {
+    color: var(--fran7-theme-muted);
+}
+
+body:not(.fran7-subpage) .botao-produto {
+    border-color: var(--fran7-theme-border);
+    background: var(--fran7-theme-bg);
+    color: var(--fran7-theme-text);
+}
+
+body:not(.fran7-subpage) .botao-produto:hover {
+    border-color: var(--fran7-theme-text);
+    background: var(--fran7-theme-text);
+    color: var(--fran7-theme-bg);
+}
+
+body:not(.fran7-subpage) .categorias,
+body:not(.fran7-subpage) .produtos,
+body:not(.fran7-subpage) .catalogo,
+body:not(.fran7-subpage) .redes {
+    border-color: var(--fran7-theme-border) !important;
+    background: var(--fran7-theme-bg) !important;
+    color: var(--fran7-theme-text) !important;
+}
+
+body:not(.fran7-subpage) .produtos,
+body:not(.fran7-subpage) .catalogo,
+body:not(.fran7-subpage) .redes,
+body:not(.fran7-subpage) footer {
+    border-top: 1px solid var(--fran7-theme-border) !important;
+}
+
+body:not(.fran7-subpage) .catalogo p,
+body:not(.fran7-subpage) .redes p {
+    color: var(--fran7-theme-muted) !important;
+}
+
+body:not(.fran7-subpage) .rede,
+body:not(.fran7-subpage) .rede-instagram,
+body:not(.fran7-subpage) .rede-whatsapp,
+body:not(.fran7-subpage) .rede-email,
+body:not(.fran7-subpage) .rede-youtube {
+    border-color: var(--fran7-theme-border);
+    background: var(--fran7-theme-surface) !important;
+    color: var(--fran7-theme-text) !important;
+}
+
+body:not(.fran7-subpage) .rede:hover {
+    background: var(--fran7-theme-hover) !important;
+}
+
+body:not(.fran7-subpage) footer {
+    border-color: var(--fran7-theme-border);
+    background: var(--fran7-theme-bg) !important;
+    color: var(--fran7-theme-muted) !important;
+}
+
+body:not(.fran7-subpage) footer .footer-brand img {
+    filter: brightness(0);
+}
+
+body:not(.fran7-subpage) footer .footer-brand p,
+body:not(.fran7-subpage) footer .footer-column h2,
+body:not(.fran7-subpage) footer .footer-column a,
+body:not(.fran7-subpage) footer .footer-legal {
+    border-color: var(--fran7-theme-border);
+    color: var(--fran7-theme-muted);
+}
+
+body:not(.fran7-subpage) footer .footer-column a:hover {
+    color: var(--fran7-theme-text);
+}
+
+.fran7-subpage .cabecalho,
+.fran7-subpage .cabecalho-catalogo,
+.fran7-subpage .rodape,
+.fran7-subpage .rodape-catalogo {
+    border-color: var(--fran7-theme-border);
+    background-color: var(--fran7-theme-bg);
+    color: var(--fran7-theme-muted);
+    opacity: 1;
+}
+
+.fran7-subpage .marca img {
+    filter: brightness(0);
+}
+
+.fran7-subpage .voltar,
+.fran7-subpage .voltar-loja,
+.fran7-subpage .intro,
+.fran7-subpage .intro *,
+.fran7-subpage .introducao-texto,
+.fran7-subpage .introducao-texto *,
+.fran7-subpage .aviso-disponibilidade {
+    color: var(--fran7-theme-text);
+}
+
+.fran7-subpage .intro p:last-child,
+.fran7-subpage .intro-label,
+.fran7-subpage .etiqueta,
+.fran7-subpage .aviso-disponibilidade,
+.fran7-subpage .favorito-card-price {
+    color: var(--fran7-theme-muted);
+}
+
+.fran7-subpage .modelo,
+.fran7-subpage .produto,
+.fran7-subpage .favorito-card {
+    border-color: var(--fran7-theme-border);
+    background: var(--fran7-theme-surface);
+    color: var(--fran7-theme-text);
+}
+
+.fran7-subpage .modelo-imagem,
+.fran7-subpage .produto-imagem,
+.fran7-subpage .favorito-card > img,
+.fran7-subpage .imagem-capa {
+    background-color: var(--fran7-theme-hover);
+}
+
+.fran7-subpage .modelo-imagem img,
+.fran7-subpage .produto-imagem img,
+.fran7-subpage .favorito-card img,
+.fran7-subpage .imagem-capa {
+    background-color: var(--fran7-theme-hover);
+}
+
+.fran7-subpage .modelo-imagem .botao-favorito,
+.fran7-subpage .produto-imagem .botao-favorito {
+    border-color: var(--fran7-theme-border);
+    background: color-mix(in srgb, var(--fran7-theme-surface) 90%, transparent);
+    color: var(--fran7-theme-text);
+}
+
+.fran7-subpage .navegacao-colecoes a {
+    border-color: var(--fran7-theme-border);
+    color: var(--fran7-theme-text);
+}
+
+.fran7-subpage .navegacao-colecoes a[aria-current="page"] {
+    background: var(--fran7-theme-text);
+    color: var(--fran7-theme-bg);
+}
+
+.fran7-subpage .voltar:hover,
+.fran7-subpage .voltar-loja:hover {
+    border-color: var(--fran7-theme-text);
+    background: var(--fran7-theme-text);
+    color: var(--fran7-theme-bg);
+}
+
+.fran7-subpage .favoritos-vazio {
+    border-color: var(--fran7-theme-border);
+    color: var(--fran7-theme-muted);
+}
+
+.fran7-subpage .favoritos-vazio a {
+    color: var(--fran7-theme-text);
+}
+
+#loading-screen {
+    background: var(--fran7-theme-bg) !important;
+    color: var(--fran7-theme-text);
+}
+
+.loading-logo {
+    filter: brightness(0) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .fran7-subpage .marca img,
+    body:not(.fran7-subpage) footer .footer-brand img,
+    .loading-logo {
+        filter: brightness(0) invert(1) !important;
+    }
+
+    body:not(.fran7-subpage) > header {
+        border-color: #151515;
+    }
+
+    body:not(.fran7-subpage) footer .footer-column a:hover {
+        color: var(--fran7-theme-text);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #loading-screen,
+    .loading-logo,
+    .fran7-subpage *,
+    .fran7-subpage *::before,
+    .fran7-subpage *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}

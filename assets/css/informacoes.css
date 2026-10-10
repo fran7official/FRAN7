@@ -1,0 +1,248 @@
+:root {
+    color-scheme: light dark;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #111;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    background: #fff;
+    color: #111;
+}
+
+a {
+    color: inherit;
+}
+
+.cabecalho-catalogo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(128, 128, 128, .28);
+}
+
+.marca img {
+    display: block;
+    width: 120px;
+    max-height: 46px;
+    object-fit: contain;
+}
+
+.voltar-loja {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.page-main {
+    width: min(920px, calc(100% - 40px));
+    min-height: 65vh;
+    margin: 0 auto;
+    padding: clamp(44px, 8vw, 88px) 0;
+}
+
+.page-kicker {
+    margin: 0 0 12px;
+    color: #707070;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+.page-main h1 {
+    margin: 0 0 18px;
+    font-size: clamp(34px, 7vw, 62px);
+    letter-spacing: .03em;
+}
+
+.page-lead {
+    max-width: 720px;
+    margin: 0 0 36px;
+    color: #6f6f6f;
+    font-size: clamp(15px, 2vw, 18px);
+    line-height: 1.75;
+}
+
+.info-card {
+    margin: 16px 0;
+    padding: clamp(20px, 4vw, 30px);
+    border: 1px solid rgba(128, 128, 128, .25);
+    border-radius: 20px;
+    background: rgba(128, 128, 128, .035);
+}
+
+.info-card h2 {
+    margin: 0 0 12px;
+    font-size: 19px;
+    letter-spacing: .02em;
+}
+
+.info-card p,
+.info-card li {
+    color: #686868;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.info-card p:last-child {
+    margin-bottom: 0;
+}
+
+.info-card ul {
+    display: grid;
+    gap: 8px;
+    padding-left: 20px;
+}
+
+.info-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.info-button {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #d6d6d6, #a6a6a6);
+    color: #111;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .07em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.feedback-form {
+    display: grid;
+    gap: 16px;
+}
+
+.feedback-field {
+    display: grid;
+    gap: 7px;
+}
+
+.feedback-field label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.feedback-field input,
+.feedback-field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid rgba(128, 128, 128, .35);
+    border-radius: 12px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+.feedback-field textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.feedback-note {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.page-footer {
+    padding: 24px 20px;
+    border-top: 1px solid rgba(128, 128, 128, .25);
+    color: #777;
+    font-size: 12px;
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root,
+    body {
+        background: #090909;
+        color: #f5f5f5;
+    }
+
+    .marca img {
+        filter: brightness(0) invert(1);
+    }
+
+    .cabecalho-catalogo,
+    .page-footer {
+        border-color: #292929;
+    }
+
+    .page-lead,
+    .info-card p,
+    .info-card li,
+    .feedback-note {
+        color: #aaa;
+    }
+
+    .info-card {
+        border-color: #292929;
+        background: #111;
+    }
+
+    .feedback-field input,
+    .feedback-field textarea {
+        border-color: #444;
+        background: #101010;
+    }
+}
+
+@media (max-width: 480px) {
+    .cabecalho-catalogo,
+    .page-main {
+        width: calc(100% - 28px);
+    }
+
+    .cabecalho-catalogo {
+        gap: 10px;
+    }
+
+    .marca img {
+        width: 94px;
+    }
+
+    .voltar-loja {
+        padding: 0 10px;
+        font-size: 9px;
+    }
+
+    .page-main {
+        padding-top: 44px;
+    }
+
+    .page-footer {
+        line-height: 1.6;
+    }
+}

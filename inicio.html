@@ -4,16 +4,21 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
 
     <!-- =====================================================
          ÍCONE DA ABA DO NAVEGADOR — FRAN7
     ===================================================== -->
 
-    <link rel="icon" type="image/png" href="logoo.png.png">
-    <link rel="shortcut icon" type="image/png" href="logoo.png.png">
-    <link rel="apple-touch-icon" href="logoo.png.png">
+    <link rel="icon" type="image/png" href="assets/images/logoo.png.png">
+    <link rel="shortcut icon" type="image/png" href="assets/images/logoo.png.png">
+    <link rel="apple-touch-icon" href="assets/images/logoo.png.png">
 
     <title>FRAN7 | LOJA</title>
+    <script src="assets/js/entrada-site.js"></script>
+    <link rel="stylesheet" href="assets/css/assistente.css">
+    <link rel="stylesheet" href="assets/css/detalhe-produto.css">
+    <link rel="stylesheet" href="assets/css/informacoes-modal.css">
 
     <style>
 
@@ -58,6 +63,10 @@
             visibility: hidden;
         }
 
+        .fran7-entrada-ja-feita #loading-screen {
+            display: none;
+        }
+
         .loading-logo {
             width: 180px;
             max-width: 65vw;
@@ -66,19 +75,14 @@
         }
 
         @keyframes logoZoom {
-            0% {
-                opacity: .70;
-                transform: scale(.88);
+            0%, 100% {
+                opacity: .7;
+                transform: scale(.92);
             }
 
             50% {
                 opacity: 1;
-                transform: scale(1.08);
-            }
-
-            100% {
-                opacity: .70;
-                transform: scale(.88);
+                transform: scale(1.04);
             }
         }
 
@@ -569,7 +573,7 @@
         ===================================================== */
 
         .logo {
-            content: url("images/logo.png.png");
+            content: url("assets/images/logo.png.png");
 
             position: absolute;
 
@@ -790,6 +794,11 @@
             cursor: pointer;
 
             z-index: 1002;
+        }
+
+        .botao-carrinho svg {
+            width: 24px;
+            height: 24px;
         }
 
         .contador-carrinho {
@@ -1152,14 +1161,42 @@
         ===================================================== */
 
         .comentarios-produto {
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(128,128,128,.28);
+            margin-top: 16px;
         }
 
-        .comentarios-produto h4 {
-            font-size: 14px;
-            margin-bottom: 12px;
+        .comentarios-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            font-size: 12px;
+            opacity: .7;
+            cursor: pointer;
+        }
+
+        .comentarios-toggle:hover,
+        .comentarios-toggle[aria-expanded="true"] {
+            opacity: 1;
+        }
+
+        .comentarios-toggle svg {
+            width: 17px;
+            height: 17px;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.6;
+        }
+
+        .comentarios-conteudo {
+            margin-top: 12px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(128,128,128,.28);
         }
 
         .comentario-form {
@@ -1250,6 +1287,7 @@
         }
 
         .produto-imagem {
+            position: relative;
             height: 300px;
 
             display: flex;
@@ -1267,6 +1305,25 @@
             height: 100%;
 
             object-fit: contain;
+        }
+
+        .produto-imagem .favorito-produto {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            margin: 0;
+        }
+
+        .produto-imagem .botao-favorito {
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(128, 128, 128, .35);
+            border-radius: 50%;
+            background: rgba(8, 8, 8, .76);
+            color: #fff;
+            font-size: 25px;
+            backdrop-filter: blur(8px);
         }
 
         .produto-info {
@@ -1325,10 +1382,8 @@
 
         .favorito-produto {
             display: flex;
-
             justify-content: center;
             align-items: center;
-
             margin-top: 16px;
         }
 
@@ -1476,6 +1531,44 @@
 
         .icone {
             font-size: 24px;
+        }
+
+        .icone svg {
+            display: block;
+            width: 26px;
+            height: 26px;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.8;
+        }
+
+        .rede-instagram .icone { color: #e1306c; }
+        .rede-whatsapp .icone { color: #25d366; }
+        .rede-youtube .icone svg { stroke: none; }
+        .rede-youtube .icone rect { fill: #ff0033; }
+        .rede-youtube .icone path { fill: #fff; }
+        .rede-email .icone svg { stroke: none; }
+
+        .rede-email .icone .gmail-left {
+            fill: none;
+            stroke: #ea4335;
+        }
+
+        .rede-email .icone .gmail-right {
+            fill: none;
+            stroke: #4285f4;
+        }
+
+        .rede-email .icone .gmail-green {
+            fill: none;
+            stroke: #34a853;
+        }
+
+        .rede-email .icone .gmail-yellow {
+            fill: none;
+            stroke: #fbbc04;
         }
 
         /* =====================================================
@@ -1631,6 +1724,7 @@
         }
 
         .carrinho-item {
+            position: relative;
             display: flex;
 
             gap: 15px;
@@ -1642,6 +1736,31 @@
             border: 1px solid;
 
             border-radius: 16px;
+        }
+
+        .carrinho-remover {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            z-index: 1;
+            display: grid;
+            width: 30px;
+            height: 30px;
+            place-items: center;
+            border: 1px solid rgba(128, 128, 128, .35);
+            border-radius: 50%;
+            background: transparent;
+            color: inherit;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+        }
+
+        .carrinho-remover:hover {
+            border-color: #d33;
+            background: #d33;
+            color: #fff;
         }
 
         .carrinho-item-imagem {
@@ -1665,6 +1784,13 @@
             height: 100%;
 
             object-fit: contain;
+        }
+
+        .carrinho-item-imagem.sem-imagem {
+            padding: 6px;
+            color: #888;
+            font-size: 9px;
+            text-align: center;
         }
 
         .carrinho-item-info {
@@ -1747,6 +1873,60 @@
 
             font-size: 18px;
             font-weight: bold;
+        }
+
+        .carrinho-total-nota {
+            margin: -16px 0 14px;
+            font-size: 11px;
+            opacity: .65;
+        }
+
+        .carrinho-dados-entrega {
+            display: grid;
+            gap: 7px;
+            margin-bottom: 12px;
+        }
+
+        .carrinho-dados-entrega label {
+            margin-top: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .carrinho-dados-entrega input,
+        .carrinho-dados-entrega textarea,
+        .carrinho-item-opcoes input {
+            width: 100%;
+            min-width: 0;
+            padding: 10px 12px;
+            border: 1px solid rgba(128, 128, 128, .45);
+            border-radius: 10px;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            font-size: 12px;
+        }
+
+        .carrinho-dados-entrega textarea {
+            resize: vertical;
+        }
+
+        .carrinho-item-opcoes {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .carrinho-item-opcoes label {
+            display: grid;
+            gap: 4px;
+            min-width: 0;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .botao-finalizar {
@@ -1956,10 +2136,508 @@
             .perfil-painel {
                 padding: 30px 20px;
             }
-
+        }
+        .announcement-bar {
+            min-height: 32px;
+            padding: 7px 4.5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: #090909;
+            color: #d0d0d0;
+            font-size: 9px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
         }
 
+        html,
+        body {
+            overflow-x: clip;
+        }
+
+            .announcement-bar a {
+                color: inherit;
+                text-decoration: none;
+                letter-spacing: .5px;
+            }
+
+            header {
+                position: sticky;
+                top: 0;
+                left: auto;
+                width: 100%;
+                height: 88px;
+                justify-content: space-between;
+                gap: 32px;
+                padding: 12px 4.5%;
+                background: rgba(8, 8, 8, .96);
+                border-bottom: 1px solid #202020;
+                color: #f5f5f5;
+                backdrop-filter: blur(15px);
+            }
+
+            .logo {
+                position: relative;
+                inset: auto;
+                flex: 0 0 auto;
+                width: 150px;
+                max-height: 54px;
+                object-fit: contain;
+            }
+
+            .header-primary-nav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: clamp(16px, 2.5vw, 34px);
+                margin: 0 auto;
+            }
+
+            .header-primary-nav a {
+                color: #dedede;
+                font-size: 13px;
+                text-decoration: none;
+                white-space: nowrap;
+                transition: color .2s ease;
+            }
+
+            .header-primary-nav a:hover {
+                color: #fff;
+            }
+
+            .header-tools {
+                display: flex;
+                flex: 0 0 auto;
+                align-items: center;
+                gap: 9px;
+            }
+
+            .header-tools .botao-carrinho,
+            .header-tools .botao-parceria,
+            .header-tools .botao-perfil,
+            .header-tools .menu-btn,
+            .header-search {
+                position: relative;
+                inset: auto;
+                display: flex;
+                flex: 0 0 38px;
+                width: 38px;
+                height: 42px;
+                align-items: center;
+                justify-content: center;
+                transform: none;
+                color: #f5f5f5;
+            }
+
+            .header-tools .menu-btn {
+                display: none;
+            }
+
+            .header-tools .botao-carrinho svg,
+            .header-search svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .header-search {
+                text-decoration: none;
+            }
+
+            .header-tools .contador-carrinho,
+            .header-tools .notificacao-parceria {
+                top: 0;
+                right: -1px;
+            }
+
+            .header-tools .icone-amigos {
+                animation: none;
+                font-size: 25px;
+            }
+
+            .header-tools .botao-perfil { order: 1; }
+            .header-search { order: 2; }
+            .header-tools .botao-parceria { order: 3; }
+            .header-tools .botao-carrinho { order: 4; }
+            .header-tools .menu-btn { order: 5; }
+
+            .menu {
+                top: calc(100% - 2px);
+            }
+
+            .hero {
+                min-height: 0;
+                padding: 60px 24px 88px;
+                background:
+                    radial-gradient(ellipse at 50% 24%, #171717 0%, #0a0a0a 54%, #080808 100%);
+                color: #f5f5f5;
+            }
+
+            .hero-content {
+                max-width: 1120px;
+            }
+
+            .hero-label {
+                margin-bottom: 22px;
+                color: #999;
+                font-size: 10px;
+                letter-spacing: 5px;
+            }
+
+            .hero-title {
+                margin: 0 auto 22px;
+                font-size: clamp(38px, 6vw, 66px);
+                font-weight: 800;
+                letter-spacing: -2.5px;
+                line-height: 1.08;
+                text-transform: uppercase;
+            }
+
+            .hero-title span {
+                display: block;
+                color: #858585;
+            }
+
+            .hero p {
+                max-width: 610px;
+                margin: 0 auto 32px;
+                color: #aaa;
+                font-size: 16px;
+                line-height: 1.8;
+            }
+
+            .imagem-colecao {
+                width: 100%;
+                max-width: 900px;
+                height: clamp(330px, 54vw, 620px);
+                margin: 0 auto;
+                border: 0;
+                border-radius: 24px;
+                filter: grayscale(1);
+                object-fit: cover;
+                object-position: center 35%;
+                box-shadow: 0 25px 80px rgba(0, 0, 0, .45);
+            }
+
+            .hero .botao {
+                margin-top: 28px;
+                border-color: #777;
+                color: #f5f5f5;
+            }
+
+            .hero .botao:hover {
+                background: #fff;
+                color: #080808;
+            }
+
+            .redes {
+                display: grid;
+                grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+                align-items: center;
+                gap: 70px;
+                padding: 110px max(6%, calc((100% - 1150px) / 2));
+                border: 0;
+                background: #080808;
+                color: #f4f4f4;
+                text-align: left;
+            }
+
+            .redes h2 {
+                max-width: 530px;
+                margin-bottom: 22px;
+                font-size: clamp(38px, 5vw, 58px);
+                letter-spacing: -2px;
+                line-height: 1.12;
+                text-transform: none;
+            }
+
+            .redes p {
+                max-width: 440px;
+                color: #888;
+                font-size: 15px;
+                line-height: 1.8;
+            }
+
+            .redes-grid {
+                width: 100%;
+                max-width: 480px;
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .rede {
+                min-height: 70px;
+                justify-content: flex-start;
+                gap: 20px;
+                padding: 0 24px;
+                border: 1px solid #363636;
+                border-radius: 18px;
+                background: #111;
+                color: #f4f4f4;
+                font-size: 15px;
+                font-weight: 500;
+            }
+
+            .rede::after {
+                margin-left: auto;
+                content: "↗";
+                font-size: 22px;
+            }
+
+            .rede-instagram,
+            .rede-whatsapp,
+            .rede-email {
+                background: #111;
+            }
+
+            .rede-instagram { border-color: #514653; }
+            .rede-whatsapp { border-color: #46554d; }
+            .rede-email { border-color: #574848; }
+
+            .rede:hover {
+                transform: translateY(-2px);
+                background: #171717;
+            }
+
+            .slogan-final {
+                display: none;
+            }
+
+            footer {
+                display: grid;
+                grid-template-columns: 1.5fr .8fr 1.1fr 1.35fr;
+                gap: 44px;
+                padding: 68px max(6%, calc((100% - 1150px) / 2)) 54px;
+                border: 0;
+                background: #111;
+                color: #bdbdbd;
+                font-size: 13px;
+                line-height: 1.7;
+                text-align: left;
+            }
+
+            .footer-brand img {
+                display: block;
+                width: 150px;
+                max-height: 54px;
+                object-fit: contain;
+                filter: brightness(0) invert(1);
+            }
+
+            .footer-brand p {
+                margin-top: 22px;
+                color: #999;
+                font-size: 9px;
+                letter-spacing: 3px;
+            }
+
+            .footer-column h2 {
+                margin-bottom: 20px;
+                color: #929292;
+                font-size: 10px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+
+            .footer-column a {
+                display: block;
+                width: fit-content;
+                margin: 0 0 10px;
+                color: #bdbdbd;
+                text-decoration: none;
+            }
+
+            .footer-column a:hover {
+                color: #fff;
+            }
+
+            .footer-social-links {
+                display: flex;
+                gap: 18px;
+                margin-top: 17px;
+            }
+
+            .footer-social-links a {
+                margin: 0;
+                font-size: 18px;
+            }
+
+            .footer-social-links svg {
+                display: block;
+                width: 20px;
+                height: 20px;
+                fill: none;
+                stroke: currentColor;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 1.8;
+            }
+
+            .footer-social-links a[aria-label="Instagram"] { color: #e1306c; }
+            .footer-social-links a[aria-label="WhatsApp"] { color: #25d366; }
+            .footer-social-links a[aria-label="Gmail"] { color: #ea4335; }
+            .footer-social-links a[aria-label="YouTube"] { color: #ff0033; }
+            .footer-social-links a[aria-label="YouTube"] svg { stroke: none; }
+            .footer-social-links a[aria-label="YouTube"] rect { fill: #ff0033; }
+            .footer-social-links a[aria-label="YouTube"] path { fill: #fff; }
+            .footer-social-links a[aria-label="Gmail"] svg { stroke: none; }
+            .footer-social-links .gmail-left {
+                fill: none;
+                stroke: #ea4335;
+            }
+            .footer-social-links .gmail-right {
+                fill: none;
+                stroke: #4285f4;
+            }
+            .footer-social-links .gmail-green {
+                fill: none;
+                stroke: #34a853;
+            }
+            .footer-social-links .gmail-yellow {
+                fill: none;
+                stroke: #fbbc04;
+            }
+
+            .footer-legal {
+                grid-column: 1 / -1;
+                padding-top: 20px;
+                border-top: 1px solid #292929;
+                color: #777;
+                font-size: 11px;
+            }
+
+            @media (max-width: 900px) {
+                header {
+                    gap: 18px;
+                }
+
+                .header-primary-nav {
+                    gap: 14px;
+                }
+
+                .header-primary-nav a {
+                    font-size: 11px;
+                }
+
+                .header-tools {
+                    gap: 2px;
+                }
+
+                .redes {
+                    gap: 38px;
+                }
+
+                footer {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 750px) {
+                .announcement-bar {
+                    padding-right: 18px;
+                    padding-left: 18px;
+                    font-size: 8px;
+                    letter-spacing: 1px;
+                }
+
+                header {
+                    height: 74px;
+                    padding: 10px 16px;
+                }
+
+                .logo {
+                    width: 112px;
+                    max-height: 46px;
+                }
+
+                .header-primary-nav {
+                    display: none;
+                }
+
+                .header-tools {
+                    margin-left: auto;
+                }
+
+                .header-tools .menu-btn {
+                    display: flex;
+                    font-size: 27px;
+                }
+
+                .redes {
+                    grid-template-columns: 1fr;
+                    gap: 36px;
+                    padding: 76px 24px;
+                }
+
+                .redes-grid {
+                    max-width: none;
+                }
+
+                footer {
+                    gap: 34px 24px;
+                    padding: 50px 24px 32px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .announcement-bar {
+                    align-items: flex-start;
+                    flex-direction: column;
+                    gap: 3px;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                }
+
+                .header-tools .botao-carrinho,
+                .header-tools .botao-parceria,
+                .header-tools .botao-perfil,
+                .header-tools .menu-btn,
+                .header-search {
+                    flex-basis: 32px;
+                    width: 32px;
+                }
+
+                .header-tools {
+                    gap: 0;
+                }
+
+                .hero {
+                    padding: 52px 18px 68px;
+                }
+
+                .hero-title {
+                    font-size: clamp(34px, 10vw, 46px);
+                    letter-spacing: -1.8px;
+                }
+
+                .hero p {
+                    font-size: 14px;
+                }
+
+                .imagem-colecao {
+                    height: 360px;
+                    border-radius: 18px;
+                }
+
+                .redes h2 {
+                    font-size: 40px;
+                }
+
+                footer {
+                    gap: 30px 18px;
+                    padding-right: 18px;
+                    padding-left: 18px;
+                }
+
+                .footer-brand img {
+                    width: 125px;
+                }
+
+            }
+
     </style>
+    <link rel="stylesheet" href="assets/css/tema-automatico.css">
 
 </head>
 
@@ -1972,13 +2650,17 @@
     <div id="loading-screen">
 
         <img
-            src="images/logo.png.png"
+            src="assets/images/logo.png.png"
             alt="FRAN7"
             class="loading-logo"
         >
 
     </div>
 
+    <div class="announcement-bar">
+        <span>FRAN7 — FEITA PARA O TEU PRÓXIMO PASSO.</span>
+        <a href="https://wa.me/244973560521" target="_blank" rel="noopener noreferrer">Contacta pelo WhatsApp ↗</a>
+    </div>
 
     <!-- =====================================================
          CABEÇALHO
@@ -1987,20 +2669,32 @@
     <header>
 
         <img
-            src="images/logo.png.png"
+            src="assets/images/logo.png.png"
             alt="FRAN7"
             class="logo"
         >
 
+        <nav class="header-primary-nav" aria-label="Navegação principal">
+            <a href="#produtos">Nova coleção</a>
+            <a href="colecao.html?categoria=mulheres">Mulheres</a>
+            <a href="colecao.html?categoria=homens">Homens</a>
+            <a href="colecao.html?categoria=criancas">Crianças</a>
+            <a href="#informacoes" data-info-page="sobre">A marca ↗</a>
+        </nav>
+
+        <div class="header-tools">
         <!-- CARRINHO -->
 
         <button
             class="botao-carrinho"
             onclick="abrirCarrinho()"
-            aria-label="Abrir carrinho"
+            aria-label="Abrir sacola"
         >
 
-            🛒
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 9h14l1 12H4L5 9Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 9V6a3 3 0 0 1 6 0v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
 
             <span
                 class="contador-carrinho"
@@ -2087,6 +2781,13 @@
 
         </button>
 
+        <a href="#produtos" class="header-search" aria-label="Ver produtos" title="Ver produtos">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.8" cy="10.8" r="6.3" stroke="currentColor" stroke-width="1.8"/>
+                <path d="m15.5 15.5 4.3 4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </a>
+
 
         <!-- MENU -->
 
@@ -2111,15 +2812,11 @@
                 Início
             </a>
 
-            <a href="#categorias">
-                Categorias
-            </a>
-
             <a href="#produtos">
                 Produtos
             </a>
 
-            <a href="#catalogo">
+            <a href="catalogo.html">
                 Catálogo
             </a>
 
@@ -2128,6 +2825,8 @@
             </a>
 
         </nav>
+            </div>
+
 
     </header>
 
@@ -2147,73 +2846,40 @@
                 FRAN7 — BUILD YOUR LEGACY
             </div>
 
+            <h1 class="hero-title">
+                O TEU ESTILO.
+                <span>O TEU LEGADO.</span>
+            </h1>
+
             <p>
                 Uma coleção criada para acompanhar
                 o teu estilo, a tua energia e a tua evolução.
             </p>
+     <video
+class="imagem-colecao"
+autoplay
+muted
+loop
+playsinline
+preload="auto"
+style="width:100%; height:auto; display:block; object-fit:cover;"
 
-            <img
-                src="images/colecao.jpg.jpeg"
-                alt="Coleção FRAN7"
-                class="imagem-colecao"
-            >
+>
 
-            <a
-                href="#produtos"
-                class="botao"
-            >
-                EXPLORAR COLEÇÃO
-            </a>
+```
+<source src="./VIDEOS%201.mp4" type="video/mp4">
+```
 
-        </div>
+```
+O teu navegador não suporta este vídeo.
+```
 
-    </section>
+</video>
 
-
-    <!-- =====================================================
-         CATEGORIAS
-    ===================================================== -->
-
-    <section
-        class="categorias"
-        id="categorias"
-    >
-
-        <h2 class="titulo">
-            CATEGORIAS
-        </h2>
-
-        <p class="subtitulo">
-            Encontra o teu próximo estilo.
-        </p>
-
-        <div class="categorias-grid">
-
-            <div class="categoria">
-                <div>
-                    <span>01</span>
-                    <h3>ROUPAS</h3>
-                </div>
-            </div>
-
-            <div class="categoria">
-                <div>
-                    <span>02</span>
-                    <h3>SAPATOS</h3>
-                </div>
-            </div>
-
-            <div class="categoria">
-                <div>
-                    <span>03</span>
-                    <h3>ACESSÓRIOS</h3>
-                </div>
-            </div>
 
         </div>
 
     </section>
-
 
     <!-- =====================================================
          PRODUTOS
@@ -2236,14 +2902,31 @@
 
             <!-- PRODUTO 1 -->
 
-            <div class="produto">
+            <div class="produto" data-product-name="Modelo FRAN7 01" data-product-price="11.000 Kz" data-ai-model="Modelo FRAN7 01" data-product-reserve="true" data-gallery-images="TRIBE.CASTANHA.jpeg|TRIBLE.BEIGE.jpeg|TIBLE.CINZA.jpeg" data-gallery-colors="Preto|Castanho|Bege|Cinza">
 
                 <div class="produto-imagem">
 
                     <img
-                        src="images/1.jpg.jpeg"
+                        src="assets/images/1.jpg.jpeg"
                         alt="T-shirt FRAN7"
                     >
+
+                    <div class="favorito-produto">
+                        <button
+                            class="botao-favorito"
+                            type="button"
+                            aria-label="Adicionar aos favoritos"
+                            aria-pressed="false"
+                            data-favorite-name="Modelo FRAN7 01"
+                            data-favorite-price="11000"
+                            data-favorite-image="assets/images/1.jpg.jpeg"
+                            data-favorite-reserve="true"
+                            data-favorite-images="TRIBE.CASTANHA.jpeg|TRIBLE.BEIGE.jpeg|TIBLE.CINZA.jpeg"
+                            data-favorite-colors="Preto|Castanho|Bege|Cinza"
+                        >
+                            <span class="coracao" aria-hidden="true">♡</span>
+                        </button>
+                    </div>
 
                 </div>
 
@@ -2254,7 +2937,7 @@
                     </div>
 
                     <h3>
-                        PRODUTO FRAN7
+                        MODELO FRAN7 01
                     </h3>
 
                     <p>
@@ -2262,64 +2945,30 @@
                     </p>
 
                     <div class="preco">
-                        8.500 Kz
+                        11.000 Kz
                     </div>
 
                     <a
                         href="#"
                         class="botao-produto"
-                        onclick="adicionarAoCarrinho(event,'PRODUTO FRAN7',8500,'images/1.jpg.jpeg')"
+                        onclick="adicionarAoCarrinho(event,'Modelo FRAN7 01',11000,'assets/images/1.jpg.jpeg')"
                     >
-                        COMPRAR
+                        RESERVAR
                     </a>
 
-                    <div class="favorito-produto">
-
-                        <button
-                            class="botao-favorito"
-                            onclick="alternarFavorito(this)"
-                            aria-label="Adicionar aos favoritos"
-                            aria-pressed="false"
-                        >
-
-                            <span class="coracao">
-                                ♡
-                            </span>
-
-                        </button>
-
-                    </div>
-
                     <div class="comentarios-produto">
-
-                        <h4>
-                            💬 COMENTÁRIOS
-                        </h4>
-
-                        <form
-                            class="comentario-form"
-                            onsubmit="adicionarComentario(event, 1); return false;"
-                        >
-
-                            <input
-                                id="comentarioInput1"
-                                type="text"
-                                maxlength="180"
-                                placeholder="O que achaste deste produto?"
-                                required
-                            >
-
-                            <button type="submit">
-                                PUBLICAR
-                            </button>
-
-                        </form>
-
-                        <div
-                            class="lista-comentarios"
-                            id="listaComentarios1"
-                        ></div>
-
+                        <button class="comentarios-toggle" type="button" aria-controls="comentariosConteudo1" aria-expanded="false" onclick="alternarComentarios(1)">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-5.2A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></svg>
+                            <span>Comentários</span>
+                            <span id="comentariosContagem1">0</span>
+                        </button>
+                        <div class="comentarios-conteudo" id="comentariosConteudo1" hidden>
+                            <form class="comentario-form" onsubmit="adicionarComentario(event, 1); return false;">
+                                <input id="comentarioInput1" type="text" maxlength="180" placeholder="O que achaste deste produto?" required>
+                                <button type="submit">PUBLICAR</button>
+                            </form>
+                            <div class="lista-comentarios" id="listaComentarios1"></div>
+                        </div>
                     </div>
 
                 </div>
@@ -2329,14 +2978,28 @@
 
             <!-- PRODUTO 2 -->
 
-            <div class="produto">
+            <div class="produto" data-product-name="Modelo FRAN7 02" data-product-price="7.000 Kz" data-ai-model="Modelo FRAN7 02" data-gallery-images="" data-gallery-colors="">
 
                 <div class="produto-imagem">
 
                     <img
-                        src="images/2.jpg.jpeg"
+                        src="assets/images/2.jpg.jpeg"
                         alt="T-shirt FRAN7"
                     >
+
+                    <div class="favorito-produto">
+                        <button
+                            class="botao-favorito"
+                            type="button"
+                            aria-label="Adicionar aos favoritos"
+                            aria-pressed="false"
+                            data-favorite-name="PRODUTO FRAN7 2"
+                            data-favorite-price="7000"
+                            data-favorite-image="assets/images/2.jpg.jpeg"
+                        >
+                            <span class="coracao" aria-hidden="true">♡</span>
+                        </button>
+                    </div>
 
                 </div>
 
@@ -2361,58 +3024,24 @@
                     <a
                         href="#"
                         class="botao-produto"
-                        onclick="adicionarAoCarrinho(event,'PRODUTO FRAN7 2',7000,'images/2.jpg.jpeg')"
+                        onclick="adicionarAoCarrinho(event,'PRODUTO FRAN7 2',7000,'assets/images/2.jpg.jpeg')"
                     >
                         COMPRAR
                     </a>
 
-                    <div class="favorito-produto">
-
-                        <button
-                            class="botao-favorito"
-                            onclick="alternarFavorito(this)"
-                            aria-label="Adicionar aos favoritos"
-                            aria-pressed="false"
-                        >
-
-                            <span class="coracao">
-                                ♡
-                            </span>
-
-                        </button>
-
-                    </div>
-
                     <div class="comentarios-produto">
-
-                        <h4>
-                            💬 COMENTÁRIOS
-                        </h4>
-
-                        <form
-                            class="comentario-form"
-                            onsubmit="adicionarComentario(event, 2); return false;"
-                        >
-
-                            <input
-                                id="comentarioInput2"
-                                type="text"
-                                maxlength="180"
-                                placeholder="O que achaste deste produto?"
-                                required
-                            >
-
-                            <button type="submit">
-                                PUBLICAR
-                            </button>
-
-                        </form>
-
-                        <div
-                            class="lista-comentarios"
-                            id="listaComentarios2"
-                        ></div>
-
+                        <button class="comentarios-toggle" type="button" aria-controls="comentariosConteudo2" aria-expanded="false" onclick="alternarComentarios(2)">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-5.2A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></svg>
+                            <span>Comentários</span>
+                            <span id="comentariosContagem2">0</span>
+                        </button>
+                        <div class="comentarios-conteudo" id="comentariosConteudo2" hidden>
+                            <form class="comentario-form" onsubmit="adicionarComentario(event, 2); return false;">
+                                <input id="comentarioInput2" type="text" maxlength="180" placeholder="O que achaste deste produto?" required>
+                                <button type="submit">PUBLICAR</button>
+                            </form>
+                            <div class="lista-comentarios" id="listaComentarios2"></div>
+                        </div>
                     </div>
 
                 </div>
@@ -2422,14 +3051,28 @@
 
             <!-- PRODUTO 3 -->
 
-            <div class="produto">
+            <div class="produto" data-product-name="Modelo FRAN7 03" data-product-price="7.000 Kz" data-ai-model="Modelo FRAN7 03" data-gallery-images="" data-gallery-colors="">
 
                 <div class="produto-imagem">
 
                     <img
-                        src="images/3.jpg.jpeg"
+                        src="assets/images/3.jpg.jpeg"
                         alt="T-shirt FRAN7"
                     >
+
+                    <div class="favorito-produto">
+                        <button
+                            class="botao-favorito"
+                            type="button"
+                            aria-label="Adicionar aos favoritos"
+                            aria-pressed="false"
+                            data-favorite-name="PRODUTO FRAN7 3"
+                            data-favorite-price="7000"
+                            data-favorite-image="assets/images/3.jpg.jpeg"
+                        >
+                            <span class="coracao" aria-hidden="true">♡</span>
+                        </button>
+                    </div>
 
                 </div>
 
@@ -2459,53 +3102,19 @@
                         COMPRAR
                     </a>
 
-                    <div class="favorito-produto">
-
-                        <button
-                            class="botao-favorito"
-                            onclick="alternarFavorito(this)"
-                            aria-label="Adicionar aos favoritos"
-                            aria-pressed="false"
-                        >
-
-                            <span class="coracao">
-                                ♡
-                            </span>
-
-                        </button>
-
-                    </div>
-
                     <div class="comentarios-produto">
-
-                        <h4>
-                            💬 COMENTÁRIOS
-                        </h4>
-
-                        <form
-                            class="comentario-form"
-                            onsubmit="adicionarComentario(event, 3); return false;"
-                        >
-
-                            <input
-                                id="comentarioInput3"
-                                type="text"
-                                maxlength="180"
-                                placeholder="O que achaste deste produto?"
-                                required
-                            >
-
-                            <button type="submit">
-                                PUBLICAR
-                            </button>
-
-                        </form>
-
-                        <div
-                            class="lista-comentarios"
-                            id="listaComentarios3"
-                        ></div>
-
+                        <button class="comentarios-toggle" type="button" aria-controls="comentariosConteudo3" aria-expanded="false" onclick="alternarComentarios(3)">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-5.2A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></svg>
+                            <span>Comentários</span>
+                            <span id="comentariosContagem3">0</span>
+                        </button>
+                        <div class="comentarios-conteudo" id="comentariosConteudo3" hidden>
+                            <form class="comentario-form" onsubmit="adicionarComentario(event, 3); return false;">
+                                <input id="comentarioInput3" type="text" maxlength="180" placeholder="O que achaste deste produto?" required>
+                                <button type="submit">PUBLICAR</button>
+                            </form>
+                            <div class="lista-comentarios" id="listaComentarios3"></div>
+                        </div>
                     </div>
 
                 </div>
@@ -2536,7 +3145,7 @@
         </p>
 
         <a
-            href="#produtos"
+            href="catalogo.html"
             class="botao"
         >
             VER CATÁLOGO
@@ -2555,11 +3164,12 @@
     >
 
         <h2>
-            INFORMAÇÕES E CONTACTO
+            O legado continua.<br>Contigo.
         </h2>
 
         <p>
-            Encontra a FRAN7 nas nossas plataformas.
+            Novidades, inspiração e os próximos lançamentos.<br>
+            Encontra-nos nas nossas plataformas.
         </p>
 
         <div class="redes-grid">
@@ -2572,7 +3182,11 @@
             >
 
                 <span class="icone">
-                    ◎
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.5" cy="6.8" r=".8" fill="currentColor" stroke="none"/>
+                    </svg>
                 </span>
 
                 <span>
@@ -2589,7 +3203,10 @@
             >
 
                 <span class="icone">
-                    ◉
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.8a8.2 8.2 0 1 1 16-3.5Z"/>
+                        <path d="M8.4 7.8c.3-.5.7-.5 1-.5.2 0 .4 0 .5.4l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.4.8 1.2 1.5 2 1.9.3.2.5.2.7-.1l.8-.9c.2-.3.4-.3.7-.2l1.7.8c.3.2.5.2.5.5 0 .3-.2 1.2-.8 1.6-.5.4-1.2.6-2 .4-1-.2-2.2-.8-3.6-2-1.2-1.1-2-2.4-2.3-3.3-.3-.9.1-1.8.7-2.5Z"/>
+                    </svg>
                 </span>
 
                 <span>
@@ -2599,16 +3216,41 @@
             </a>
 
             <a
-                href="mailto:fran7officiall@EMAIL.COM"
+                href="mailto:fran7officiall@gmail.com"
                 class="rede rede-email"
             >
 
                 <span class="icone">
-                    ✉
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path class="gmail-yellow" d="M4 18V7"/>
+                        <path class="gmail-left" d="m4 7 8 6"/>
+                        <path class="gmail-green" d="m12 13 8-6"/>
+                        <path class="gmail-right" d="M20 7v11"/>
+                    </svg>
                 </span>
 
                 <span>
-                    E-mail
+                    Gmail
+                </span>
+
+            </a>
+
+            <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rede rede-youtube"
+            >
+
+                <span class="icone">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="2.5" y="5" width="19" height="14" rx="4"/>
+                        <path d="m10 9 5 3-5 3z"/>
+                    </svg>
+                </span>
+
+                <span>
+                    YouTube
                 </span>
 
             </a>
@@ -2627,12 +3269,66 @@
     </div>
 
     <footer>
+        <div class="footer-brand">
+            <img src="assets/images/logo.png.png" alt="FRAN7">
+            <p>BUILD YOUR LEGACY.</p>
+        </div>
 
-        © 2026
-        <strong>FRAN7</strong>
-        —
-        Todos os direitos reservados.
+        <div class="footer-column">
+            <h2>Explora</h2>
+            <a href="colecao.html?categoria=mulheres">Mulheres</a>
+            <a href="colecao.html?categoria=homens">Homens</a>
+            <a href="colecao.html?categoria=criancas">Crianças</a>
+        </div>
 
+        <div class="footer-column">
+            <h2>Informações</h2>
+            <a href="#informacoes" data-info-page="informacoes">Entregas e trocas</a>
+            <a href="#informacoes" data-info-page="privacidade">Privacidade</a>
+            <a href="#informacoes" data-info-page="termos">Termos e condições</a>
+            <a href="#informacoes" data-info-page="sobre">Sobre a FRAN7</a>
+            <a href="#informacoes" data-info-page="parcerias">Parcerias</a>
+            <a href="#informacoes" data-info-page="feedback">Feedback</a>
+        </div>
+
+        <div class="footer-column">
+            <h2>Fala connosco</h2>
+            <a href="mailto:fran7officiall@gmail.com">fran7officiall@gmail.com</a>
+            <a href="https://wa.me/244973560521" target="_blank" rel="noopener noreferrer">+244 973 560 521</a>
+            <div class="footer-social-links" aria-label="Redes sociais">
+                <a href="https://instagram.com/fran7.official" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.5" cy="6.8" r=".8" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/244973560521" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.8a8.2 8.2 0 1 1 16-3.5Z"/>
+                        <path d="M8.4 7.8c.3-.5.7-.5 1-.5.2 0 .4 0 .5.4l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.4.8 1.2 1.5 2 1.9.3.2.5.2.7-.1l.8-.9c.2-.3.4-.3.7-.2l1.7.8c.3.2.5.2.5.5 0 .3-.2 1.2-.8 1.6-.5.4-1.2.6-2 .4-1-.2-2.2-.8-3.6-2-1.2-1.1-2-2.4-2.3-3.3-.3-.9.1-1.8.7-2.5Z"/>
+                    </svg>
+                </a>
+                <a href="mailto:fran7officiall@gmail.com" aria-label="Gmail">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path class="gmail-yellow" d="M4 18V7"/>
+                        <path class="gmail-left" d="m4 7 8 6"/>
+                        <path class="gmail-green" d="m12 13 8-6"/>
+                        <path class="gmail-right" d="M20 7v11"/>
+                    </svg>
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="2.5" y="5" width="19" height="14" rx="4"/>
+                        <path d="m10 9 5 3-5 3z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            © 2026 FRAN7 — Todos os direitos reservados.
+        </div>
     </footer>
 
 
@@ -2688,14 +3384,24 @@
 
                 <div class="carrinho-total">
 
-                    <span>
-                        TOTAL
-                    </span>
+                    <span>TOTAL INDICADO</span>
 
                     <span id="carrinhoTotal">
                         0 Kz
                     </span>
 
+                </div>
+                <p class="carrinho-total-nota">Estimativa sujeita a confirmação.</p>
+
+                <div class="carrinho-dados-entrega">
+                    <label for="carrinhoCidade">Cidade <span aria-hidden="true">*</span></label>
+                    <input id="carrinhoCidade" type="text" placeholder="Ex.: Luanda" autocomplete="address-level2" required>
+
+                    <label for="carrinhoLocalizacao">Bairro / localização <span aria-hidden="true">*</span></label>
+                    <input id="carrinhoLocalizacao" type="text" placeholder="Ex.: Benfica, Maianga..." autocomplete="street-address" required>
+
+                    <label for="carrinhoComentario">Comentário <span>(opcional)</span></label>
+                    <textarea id="carrinhoComentario" rows="2" maxlength="300" placeholder="Alguma indicação para o teu pedido?"></textarea>
                 </div>
 
                 <button
@@ -2711,6 +3417,73 @@
 
     </div>
 
+    <div id="fran7-ai">
+        <button
+            class="fran7-ai-button"
+            id="fran7AiOpen"
+            type="button"
+            aria-label="Abrir assistente FRAN7"
+            aria-controls="fran7AiWindow"
+            aria-expanded="false"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H6l-3 2v-5.2A7.5 7.5 0 1 1 20 11.5Z"/>
+                <path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/>
+            </svg>
+        </button>
+
+        <section
+            class="fran7-ai-window"
+            id="fran7AiWindow"
+            role="dialog"
+            aria-modal="false"
+            aria-labelledby="fran7AiTitle"
+            hidden
+        >
+            <header class="fran7-ai-header">
+                <div class="fran7-ai-brand">
+                    <div class="fran7-ai-logo" aria-hidden="true">
+                        <span class="fran7-ai-avatar">
+                            <span class="fran7-ai-avatar-hand fran7-ai-avatar-hand-left"></span>
+                            <span class="fran7-ai-avatar-hand fran7-ai-avatar-hand-right"></span>
+                            <span class="fran7-ai-avatar-face"><span></span><span></span></span>
+                        </span>
+                    </div>
+                    <div class="fran7-ai-title">
+                        <strong id="fran7AiTitle">FRAN7 AI</strong>
+                        <span class="fran7-ai-status">
+                            <span class="fran7-ai-status-dot"></span>
+                            Assistente FRAN7
+                        </span>
+                    </div>
+                </div>
+                <button class="fran7-ai-close" id="fran7AiClose" type="button" aria-label="Fechar assistente">×</button>
+            </header>
+
+            <div class="fran7-ai-messages" id="fran7AiMessages" aria-live="polite">
+                <div class="fran7-ai-message bot">Olá! Sou o assistente automático da FRAN7. Posso ajudar com produtos, tamanhos, favoritos e pedidos.</div>
+            </div>
+
+            <div class="fran7-ai-quick" aria-label="Perguntas rápidas">
+                <button type="button" data-assistant-prompt="Quero ver os produtos">Produtos</button>
+                <button type="button" data-assistant-prompt="Apresenta todos os produtos do catálogo FRAN7">Catálogo completo</button>
+                <button type="button" data-assistant-prompt="Quais são os tamanhos?">Tamanhos</button>
+                <button type="button" data-assistant-prompt="Como funcionam as entregas?">Entregas</button>
+            </div>
+
+            <form class="fran7-ai-input-area" id="fran7AiForm">
+                <input
+                    type="text"
+                    id="fran7AiInput"
+                    class="fran7-ai-input"
+                    placeholder="Escreve uma mensagem..."
+                    autocomplete="off"
+                    aria-label="Mensagem para o assistente"
+                >
+                <button class="fran7-ai-send" id="fran7AiSend" type="submit" aria-label="Enviar mensagem">↑</button>
+            </form>
+        </section>
+    </div>
 
     <!-- =====================================================
          PERFIL
@@ -2817,6 +3590,21 @@
 
                 </div>
 
+                <div class="perfil-dado">
+
+                    <span class="perfil-dado-label">
+                        Aniversário
+                    </span>
+
+                    <span
+                        class="perfil-dado-valor"
+                        id="perfilAniversario"
+                    >
+                        Não informado
+                    </span>
+
+                </div>
+
             </div>
 
         </div>
@@ -2907,6 +3695,13 @@
             const comentarios =
                 obterComentarios(id);
 
+            const count =
+                document.getElementById("comentariosContagem" + id);
+
+            if (count) {
+                count.textContent = String(comentarios.length);
+            }
+
             if (!comentarios.length) {
 
                 lista.innerHTML =
@@ -2962,134 +3757,34 @@
 
         }
 
+        function alternarComentarios(id) {
+            const content = document.getElementById("comentariosConteudo" + id);
+            const toggle = document.querySelector(
+                '[aria-controls="comentariosConteudo' + id + '"]'
+            );
+            if (!content || !toggle) return;
+
+            const abrir = content.hidden;
+            content.hidden = !abrir;
+            toggle.setAttribute("aria-expanded", String(abrir));
+            if (abrir) {
+                const input = document.getElementById("comentarioInput" + id);
+                if (input) input.focus();
+            }
+        }
 
         [1, 2, 3].forEach(mostrarComentarios);
 
+        function atualizarFavoritosCabecalho() {
+            window.dispatchEvent(new Event("fran7-favorites-updated"));
+        }
 
         /* =====================================================
            FAVORITOS
         ===================================================== */
 
-        function obterQuantidadeFavoritos() {
-
-            return document.querySelectorAll(
-                ".botao-favorito.ativo"
-            ).length;
-
-        }
-
-
-        function atualizarFavoritosCabecalho() {
-
-            const contador =
-                document.getElementById(
-                    "contadorFavoritos"
-                );
-
-            const icone =
-                document.getElementById(
-                    "iconeCoracaoTopo"
-                );
-
-            if (!contador || !icone) return;
-
-            const quantidade =
-                obterQuantidadeFavoritos();
-
-            contador.textContent =
-                quantidade;
-
-            if (quantidade > 0) {
-
-                contador.classList.add(
-                    "visivel"
-                );
-
-                icone.textContent = "♥";
-
-            } else {
-
-                contador.classList.remove(
-                    "visivel"
-                );
-
-                icone.textContent = "♡";
-
-            }
-
-        }
-
-
-        function alternarFavorito(botao) {
-
-            const ativo =
-                botao.classList.toggle("ativo");
-
-            const coracao =
-                botao.querySelector(".coracao");
-
-            botao.setAttribute(
-                "aria-pressed",
-                ativo
-            );
-
-            if (ativo) {
-
-                coracao.textContent = "♥";
-
-                botao.setAttribute(
-                    "aria-label",
-                    "Remover dos favoritos"
-                );
-
-            } else {
-
-                coracao.textContent = "♡";
-
-                botao.setAttribute(
-                    "aria-label",
-                    "Adicionar aos favoritos"
-                );
-
-            }
-
-            atualizarFavoritosCabecalho();
-
-        }
-
-
         function abrirFavoritos() {
-
-            const primeiroFavorito =
-                document.querySelector(
-                    ".botao-favorito.ativo"
-                );
-
-            if (primeiroFavorito) {
-
-                primeiroFavorito.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
-
-            } else {
-
-                const produtos =
-                    document.getElementById(
-                        "produtos"
-                    );
-
-                if (produtos) {
-
-                    produtos.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                }
-
-            }
-
+            window.location.href = "favoritos.html";
         }
 
 
@@ -3115,14 +3810,65 @@
            CARRINHO
         ===================================================== */
 
-        let carrinho = [];
+        const CHAVE_CARRINHO = "fran7_cart_v1";
+        const CHAVE_CIDADE = "fran7_cart_city_v1";
+        const CHAVE_LOCALIZACAO = "fran7_cart_location_v1";
+        const CHAVE_COMENTARIO_PEDIDO = "fran7_cart_note_v1";
+
+        function tamanhoAutomatico(nome) {
+            return /\b(bon[eé]|chap[eé]u|meias?|socks?)\b/i.test(nome);
+        }
+
+        function carregarCarrinho() {
+            try {
+                const guardado = JSON.parse(
+                    localStorage.getItem(CHAVE_CARRINHO) || "[]"
+                );
+                if (!Array.isArray(guardado)) {
+                    throw new TypeError("O carrinho guardado não é uma lista.");
+                }
+                return guardado.filter(function(item) {
+                    return item &&
+                        typeof item.nome === "string" &&
+                        typeof item.imagem === "string" &&
+                        Number.isFinite(Number(item.preco)) &&
+                        Number.isInteger(Number(item.quantidade)) &&
+                        Number(item.quantidade) > 0;
+                }).map(function(item) {
+                    return {
+                        nome: item.nome,
+                        preco: Number(item.preco),
+                        imagem: item.imagem,
+                        quantidade: Number(item.quantidade),
+                        cor: typeof item.cor === "string" ? item.cor : "",
+                        tamanho: tamanhoAutomatico(item.nome)
+                            ? "X"
+                            : (typeof item.tamanho === "string" ? item.tamanho : "")
+                    };
+                });
+            } catch (erro) {
+                console.error("Não foi possível ler o carrinho guardado:", erro);
+                return [];
+            }
+        }
+
+        let carrinho = carregarCarrinho();
+
+        function guardarCarrinho() {
+            localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
+            atualizarCarrinho();
+            window.dispatchEvent(new CustomEvent("fran7-cart-updated", {
+                detail: { items: carrinho }
+            }));
+        }
 
 
         function adicionarAoCarrinho(
             event,
             nome,
             preco,
-            imagem
+            imagem,
+            cor
         ) {
 
             event.preventDefault();
@@ -3130,7 +3876,7 @@
             const produtoExistente =
                 carrinho.find(
                     item =>
-                        item.nome === nome
+                        item.nome === nome && item.imagem === imagem
                 );
 
             if (produtoExistente) {
@@ -3144,18 +3890,41 @@
                     nome: nome,
                     preco: preco,
                     imagem: imagem,
-                    quantidade: 1
+                    quantidade: 1,
+                    cor: cor || "",
+                    tamanho: tamanhoAutomatico(nome) ? "X" : ""
 
                 });
 
             }
 
-            atualizarCarrinho();
+            guardarCarrinho();
 
             abrirCarrinho();
 
             mostrarNotificacao();
+            window.setTimeout(focarOpcaoEmFalta, 350);
 
+        }
+
+        function focarOpcaoEmFalta() {
+            const faltante = carrinho.find(function(item) {
+                return !item.cor || (!tamanhoAutomatico(item.nome) && !item.tamanho);
+            });
+            if (faltante) {
+                const card = Array.from(
+                    document.querySelectorAll(".carrinho-item")
+                ).find(function(item) {
+                    return item.dataset.itemKey === faltante.nome + "|" + faltante.imagem;
+                });
+                const input = card && card.querySelector(
+                    !faltante.cor ? '[data-cart-option="cor"]' : '[data-cart-option="tamanho"]'
+                );
+                if (input) input.focus();
+                return;
+            }
+            const city = document.getElementById("carrinhoCidade");
+            if (city && !city.value.trim()) city.focus();
         }
 
 
@@ -3216,6 +3985,12 @@
                 );
 
             conteudo.innerHTML = "";
+            document.getElementById("carrinhoCidade").value =
+                localStorage.getItem(CHAVE_CIDADE) || "";
+            document.getElementById("carrinhoLocalizacao").value =
+                localStorage.getItem(CHAVE_LOCALIZACAO) || "";
+            document.getElementById("carrinhoComentario").value =
+                localStorage.getItem(CHAVE_COMENTARIO_PEDIDO) || "";
 
             if (carrinho.length === 0) {
 
@@ -3227,8 +4002,7 @@
                     "visivel"
                 );
 
-                totalElemento.textContent =
-                    "0 Kz";
+                totalElemento.textContent = "0 Kz";
 
                 return;
 
@@ -3255,73 +4029,91 @@
                     produto.className =
                         "carrinho-item";
 
-                    let imagemHTML = "";
-
+                    produto.dataset.itemKey = item.nome + "|" + item.imagem;
+                    const caixaImagem = document.createElement("div");
+                    caixaImagem.className = "carrinho-item-imagem";
                     if (item.imagem) {
-
-                        imagemHTML = `
-                            <img
-                                src="${item.imagem}"
-                                alt="${item.nome}"
-                            >
-                        `;
-
+                        const imagem = document.createElement("img");
+                        imagem.src = item.imagem;
+                        imagem.alt = item.nome;
+                        caixaImagem.appendChild(imagem);
                     } else {
-
-                        imagemHTML = `
-                            IMAGEM
-                        `;
-
+                        caixaImagem.classList.add("sem-imagem");
+                        caixaImagem.textContent = "Imagem indisponível";
                     }
 
-                    produto.innerHTML = `
+                    const detalhes = document.createElement("div");
+                    detalhes.className = "carrinho-item-info";
+                    const nome = document.createElement("h3");
+                    nome.textContent = item.nome;
+                    nome.style.paddingRight = "30px";
+                    const preco = document.createElement("p");
+                    preco.textContent = item.preco
+                        ? formatarPreco(item.preco)
+                        : "Consultar preço";
+                    const quantidade = document.createElement("div");
+                    quantidade.className = "quantidade";
 
-                        <div class="carrinho-item-imagem">
-                            ${imagemHTML}
-                        </div>
+                    const diminuir = document.createElement("button");
+                    diminuir.type = "button";
+                    diminuir.setAttribute("aria-label", "Diminuir quantidade");
+                    diminuir.textContent = "−";
+                    diminuir.addEventListener("click", function() {
+                        alterarQuantidade(index, -1);
+                    });
 
-                        <div class="carrinho-item-info">
+                    const quantidadeTexto = document.createElement("span");
+                    quantidadeTexto.textContent = String(item.quantidade);
 
-                            <h3>
-                                ${item.nome}
-                            </h3>
+                    const aumentar = document.createElement("button");
+                    aumentar.type = "button";
+                    aumentar.setAttribute("aria-label", "Aumentar quantidade");
+                    aumentar.textContent = "+";
+                    aumentar.addEventListener("click", function() {
+                        alterarQuantidade(index, 1);
+                    });
+                    quantidade.append(diminuir, quantidadeTexto, aumentar);
 
-                            <p>
-                                ${formatarPreco(item.preco)}
-                            </p>
+                    const opcoes = document.createElement("div");
+                    opcoes.className = "carrinho-item-opcoes";
+                    ["cor", "tamanho"].forEach(function(opcao) {
+                        const label = document.createElement("label");
+                        label.textContent = opcao === "cor" ? "Cor" : "Tamanho";
+                        const input = document.createElement("input");
+                        input.type = "text";
+                        input.dataset.cartOption = opcao;
+                        input.value = item[opcao] || "";
+                        input.placeholder = opcao === "cor" ? "Ex.: Preto" : "Ex.: M, L, XL";
+                        input.required = true;
+                        if (opcao === "tamanho" && tamanhoAutomatico(item.nome)) {
+                            input.value = "X";
+                            input.disabled = true;
+                            input.setAttribute("aria-label", "Tamanho X (aplicado automaticamente)");
+                        }
+                        input.addEventListener("input", function() {
+                            carrinho[index][opcao] = input.value.trim();
+                            localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
+                        });
+                        label.appendChild(input);
+                        opcoes.appendChild(label);
+                    });
+                    detalhes.append(nome, preco, quantidade, opcoes);
 
-                            <div class="quantidade">
-
-                                <button
-                                    onclick="alterarQuantidade(${index},-1)"
-                                >
-                                    −
-                                </button>
-
-                                <span>
-                                    ${item.quantidade}
-                                </span>
-
-                                <button
-                                    onclick="alterarQuantidade(${index},1)"
-                                >
-                                    +
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                        <div class="carrinho-item-preco">
-
-                            ${formatarPreco(
-                                item.preco *
-                                item.quantidade
-                            )}
-
-                        </div>
-
-                    `;
+                    const totalItem = document.createElement("div");
+                    totalItem.className = "carrinho-item-preco";
+                    totalItem.textContent = item.preco
+                        ? formatarPreco(item.preco * item.quantidade)
+                        : "Consultar preço";
+                    const remover = document.createElement("button");
+                    remover.type = "button";
+                    remover.className = "carrinho-remover";
+                    remover.textContent = "×";
+                    remover.setAttribute("aria-label", "Remover " + item.nome + " da sacola");
+                    remover.addEventListener("click", function() {
+                        carrinho.splice(index, 1);
+                        guardarCarrinho();
+                    });
+                    produto.append(caixaImagem, detalhes, totalItem, remover);
 
                     conteudo.appendChild(
                         produto
@@ -3362,7 +4154,7 @@
 
             }
 
-            atualizarCarrinho();
+            guardarCarrinho();
 
         }
 
@@ -3436,8 +4228,47 @@
 
             }
 
-            alert(
-                "Os produtos estão no teu carrinho. Vamos preparar a finalização da compra."
+            const cidade = document.getElementById("carrinhoCidade").value.trim();
+            const localizacao = document.getElementById("carrinhoLocalizacao").value.trim();
+            const comentario = document.getElementById("carrinhoComentario").value.trim();
+            const itemEmFalta = carrinho.find(function(item) {
+                return !item.cor || (!tamanhoAutomatico(item.nome) && !item.tamanho);
+            });
+
+            if (itemEmFalta) {
+                alert("Preenche a cor e o tamanho de cada produto. Chapéus e meias usam tamanho X.");
+                focarOpcaoEmFalta();
+                return;
+            }
+            if (!cidade || !localizacao) {
+                alert("Preenche a cidade e o bairro/localização de entrega.");
+                (cidade ? document.getElementById("carrinhoLocalizacao") : document.getElementById("carrinhoCidade")).focus();
+                return;
+            }
+
+            const total = carrinho.reduce(function(soma, item) {
+                return soma + item.preco * item.quantidade;
+            }, 0);
+            const quantidade = carrinho.reduce(function(soma, item) {
+                return soma + item.quantidade;
+            }, 0);
+            const resumo = carrinho.map(function(item) {
+                return item.nome + " x" + item.quantidade +
+                    " (cor: " + item.cor + ", tamanho: " + item.tamanho + ")";
+            }).join(" | ");
+            const mensagem = [
+                "Olá! Quero finalizar este pedido.",
+                "- Produtos: " + resumo,
+                "- Cidade: " + cidade,
+                "- Bairro/localização: " + localizacao,
+                "- Quantidade total: " + quantidade,
+                "- Total indicado: " + formatarPreco(total)
+            ];
+            if (comentario) mensagem.push("- Comentário: " + comentario);
+            window.open(
+                "https://wa.me/244973560521?text=" + encodeURIComponent(mensagem.join("\n")),
+                "_blank",
+                "noopener,noreferrer"
             );
 
         }
@@ -3472,13 +4303,22 @@
 
         function atualizarDadosPerfil() {
 
-            /*
-             * Aceita vários nomes de chaves para facilitar
-             * a ligação com a página de cadastro.
-             */
+            let cliente = {};
+            try {
+                cliente = JSON.parse(localStorage.getItem("usuarioFRAN7") || "{}") || {};
+            } catch (error) {
+                console.error("Não foi possível ler os dados guardados do perfil:", error);
+            }
+
+            const valorPerfil = function(chave, alternativas) {
+                if (typeof cliente[chave] === "string" && cliente[chave].trim()) {
+                    return cliente[chave].trim();
+                }
+                return obterDadoPerfil(alternativas);
+            };
 
             const nome =
-                obterDadoPerfil([
+                valorPerfil("nome", [
                     "fran7_nome",
                     "nome",
                     "nomeUsuario",
@@ -3488,7 +4328,7 @@
                 ]);
 
             const email =
-                obterDadoPerfil([
+                valorPerfil("email", [
                     "fran7_email",
                     "email",
                     "usuarioEmail",
@@ -3496,7 +4336,7 @@
                 ]);
 
             const telefone =
-                obterDadoPerfil([
+                valorPerfil("telefone", [
                     "fran7_telefone",
                     "telefone",
                     "numero",
@@ -3504,6 +4344,11 @@
                     "telefoneUsuario",
                     "userPhone"
                 ]);
+
+            const aniversario =
+                typeof cliente.aniversario === "string" && cliente.aniversario.trim()
+                    ? cliente.aniversario.trim()
+                    : "Não informado";
 
 
             const elementoNome =
@@ -3519,6 +4364,11 @@
             const elementoTelefone =
                 document.getElementById(
                     "perfilTelefone"
+                );
+
+            const elementoAniversario =
+                document.getElementById(
+                    "perfilAniversario"
                 );
 
 
@@ -3543,6 +4393,13 @@
 
             }
 
+            if (elementoAniversario) {
+
+                elementoAniversario.textContent =
+                    aniversario;
+
+            }
+
 
             const titulo =
                 document.getElementById(
@@ -3557,6 +4414,7 @@
 
             if (
                 titulo &&
+                nome &&
                 nome !== "Não informado"
             ) {
 
@@ -3573,6 +4431,7 @@
 
             if (
                 mensagem &&
+                nome &&
                 nome !== "Não informado"
             ) {
 
@@ -3766,8 +4625,39 @@
             }
         );
 
+        ["carrinhoCidade", "carrinhoLocalizacao", "carrinhoComentario"].forEach(function(id) {
+            const input = document.getElementById(id);
+            const storageKey = id === "carrinhoCidade"
+                ? CHAVE_CIDADE
+                : (id === "carrinhoLocalizacao" ? CHAVE_LOCALIZACAO : CHAVE_COMENTARIO_PEDIDO);
+            input.addEventListener("input", function() {
+                localStorage.setItem(storageKey, input.value);
+            });
+        });
+
+        window.addEventListener("storage", function(event) {
+            if (event.key === CHAVE_CARRINHO) {
+                carrinho = carregarCarrinho();
+                atualizarCarrinho();
+            }
+            if (event.key === CHAVE_CIDADE) {
+                document.getElementById("carrinhoCidade").value = event.newValue || "";
+            }
+            if (event.key === CHAVE_LOCALIZACAO) {
+                document.getElementById("carrinhoLocalizacao").value = event.newValue || "";
+            }
+            if (event.key === CHAVE_COMENTARIO_PEDIDO) {
+                document.getElementById("carrinhoComentario").value = event.newValue || "";
+            }
+        });
+
+        atualizarCarrinho();
+
     </script>
+    <script src="assets/js/favoritos.js"></script>
+    <script src="assets/js/detalhe-produto.js"></script>
+    <script src="assets/js/informacoes-modal.js"></script>
+    <script src="assets/js/assistente.js"></script>
 
 </body>
 </html>
-```
